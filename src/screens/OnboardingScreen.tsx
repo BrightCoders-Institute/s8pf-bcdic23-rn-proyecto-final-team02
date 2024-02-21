@@ -1,18 +1,27 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+
+import OnboardingScreen from '../components/OnboardingBody';
+import OnboardingNavigation from '../components/OnboardingNavigation';
 
 function Onboarding() {
-  const [activePage, setActivePage] = useState(1);
+  const [activeScreen, setActiveScreen] = useState(0);
 
-  const jumpScreen = () => {
-    setActivePage(activePage + 1);
+  const setScreen = () => {
+    setActiveScreen(activeScreen + 1);
+  };
+
+  const navigateToSignUp = () => {
+    console.log('Go to Sign Up');
   };
 
   return (
     <View style={styles.OnboardingContainer}>
-      <Text>Content</Text>
-      <Text>Active Screen = {activePage}</Text>
-      <Button title="Next" onPress={jumpScreen} />
+      <OnboardingScreen activeScreen={activeScreen} />
+      <OnboardingNavigation
+        activeScreen={activeScreen}
+        onPress={activeScreen === 2 ? navigateToSignUp : setScreen}
+      />
     </View>
   );
 }
