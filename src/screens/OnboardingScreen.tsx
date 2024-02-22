@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import OnboardingScreen from '../components/OnboardingBody';
+import OnboardingBody from '../components/OnboardingBody';
 import OnboardingNavigation from '../components/OnboardingNavigation';
 
 function Onboarding() {
@@ -17,7 +17,7 @@ function Onboarding() {
 
   return (
     <View style={styles.OnboardingContainer}>
-      <OnboardingScreen activeScreen={activeScreen} />
+      <OnboardingBody activeScreen={activeScreen} />
       <OnboardingNavigation
         activeScreen={activeScreen}
         onPress={activeScreen === 2 ? navigateToSignUp : setScreen}

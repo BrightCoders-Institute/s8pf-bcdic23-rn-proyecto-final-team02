@@ -23,7 +23,7 @@ const screensList = [
   },
 ];
 
-const OnboardingScreen = ({activeScreen}: {activeScreen: any}) => {
+const OnboardingBody = ({activeScreen}: {activeScreen: any}) => {
   const component = screensList[activeScreen];
   const {orderStyle, textStyle} =
     activeScreen === 1
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OnboardingScreen;
+export default OnboardingBody;

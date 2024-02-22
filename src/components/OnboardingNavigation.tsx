@@ -32,30 +32,31 @@ const OnboardingNavigation = ({
 
 const styles = StyleSheet.create({
   navigation: {
-    justifyContent: 'flex-end',
-    width: '100%',
+    width: '90%',
     bottom: 25,
   },
   navContainer: {
     alignItems: 'center',
+    columnGap: 50,
   },
   flexRow: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   circle: {
-    width: 30,
-    height: 30,
+    width: 26,
+    height: 26,
     borderRadius: 100,
-    backgroundColor: 'gray',
+    backgroundColor: '#AFAFAF',
   },
   circle_active: {
-    backgroundColor: 'purple',
+    backgroundColor: '#6a63f6',
   },
   button: {
-    width: 40,
-    height: 40,
-    backgroundColor: 'purple',
+    width: 38,
+    height: 38,
+    backgroundColor: '#6a63f6',
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
