@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 import OnboardingScreen from '../components/OnboardingBody';
 import OnboardingNavigation from '../components/OnboardingNavigation';
@@ -29,7 +29,8 @@ function Onboarding() {
 const styles = StyleSheet.create({
   OnboardingContainer: {
     flex: 1,
-    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
