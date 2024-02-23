@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView} from 'react-native';
-import {SplashScreen, LoginScreen} from './src/screens';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {SplashScreen} from './src/screens';
+import Onboarding from './src/screens/OnboardingScreen';
 
 function App(): React.JSX.Element {
   const [visible, setVisible] = useState<boolean>(true);
@@ -12,11 +13,16 @@ function App(): React.JSX.Element {
   }, []);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.app}>
       {visible && <SplashScreen />}
-      <LoginScreen />
+      <Onboarding />
     </SafeAreaView>
   );
 }
 
+const styles = StyleSheet.create({
+  app: {
+    flex: 1,
+  },
+});
 export default App;
