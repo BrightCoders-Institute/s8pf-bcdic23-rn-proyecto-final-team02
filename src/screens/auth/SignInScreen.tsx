@@ -1,10 +1,12 @@
-import {View, Text} from 'react-native';
+import {View, Image} from 'react-native';
 import React from 'react';
+
+import LogoComponent from '../../components/LogoComponent';
 
 const SignInScreen = () => {
   return (
     <View>
-      <Text>SignInScreen</Text>
+      <LogoComponent />
     </View>
   );
 };

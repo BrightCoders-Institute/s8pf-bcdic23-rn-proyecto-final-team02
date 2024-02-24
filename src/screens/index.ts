@@ -1,8 +1,8 @@
 import SignInScreen from './auth/SignInScreen';
-import LoginScreen from './auth/LoginScreen';
+import SignUpScreen from './auth/SignUpScreen';
 import SplashScreen from './SplashScreen';
 export {
   SplashScreen,
   SignInScreen,
-  LoginScreen,
+  SignUpScreen as LoginScreen,
 }

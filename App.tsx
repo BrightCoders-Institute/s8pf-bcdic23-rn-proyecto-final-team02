@@ -1,28 +1,32 @@
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import {SplashScreen} from './src/screens';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+
+import React from 'react';
+import type {PropsWithChildren} from 'react';
+import {View, StyleSheet} from 'react-native';
+
 import Onboarding from './src/screens/OnboardingScreen';
 
+type SectionProps = PropsWithChildren<{
+  title: string;
+}>;
+
 function App(): React.JSX.Element {
-  const [visible, setVisible] = useState<boolean>(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setVisible(false);
-    }, 2000);
-  }, []);
-
   return (
-    <SafeAreaView style={styles.app}>
-      {visible && <SplashScreen />}
+    <View style={styles.App}>
       <Onboarding />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  app: {
+  App: {
     flex: 1,
   },
 });
+
 export default App;
