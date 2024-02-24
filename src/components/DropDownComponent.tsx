@@ -8,7 +8,7 @@ const genders = [
   {label: 'Nonbinary', value: '3'},
 ];
 
-const DropdownField = ({title}: {title: string}) => {
+const DropDownComponent = ({title}: {title: string}) => {
   const [value, setValue] = useState('');
   const [isFocus, setIsFocus] = useState(false);
 
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DropdownField;
+export default DropDownComponent;

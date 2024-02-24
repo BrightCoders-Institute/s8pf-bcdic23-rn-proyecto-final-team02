@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Button, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 import LogoComponent from '../../components/LogoComponent';
-import InputField from '../../components/InputField';
-import DropdownField from '../../components/DropDownField';
+import InputField from '../../components/InputComponent';
+import DropdownField from '../../components/DropDownComponent';
 import ButtonComponent from '../../components/ButtonComponent';
 
 const SignUpScreen = () => {

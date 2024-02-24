@@ -7,7 +7,7 @@ import {
   KeyboardTypeOptions,
 } from 'react-native';
 
-const InputField = ({
+const InputComponent = ({
   title,
   type,
   security,
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputField;
+export default InputComponent;
