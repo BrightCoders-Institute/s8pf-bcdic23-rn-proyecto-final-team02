@@ -15,7 +15,7 @@ const ButtonComponent = ({
 }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.title}>{title.toUpperCase()}</Text>
+      <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    textTransform: 'uppercase',
   },
 });
 
