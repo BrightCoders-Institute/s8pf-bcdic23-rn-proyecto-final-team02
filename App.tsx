@@ -1,22 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView} from 'react-native';
-import {SplashScreen, LoginScreen} from './src/screens';
+import 'react-native-gesture-handler';
+import React from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import StackNavigation from './src/routes/StackNavigation';
 
 function App(): React.JSX.Element {
-  const [visible, setVisible] = useState<boolean>(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setVisible(false);
-    }, 2000);
-  }, []);
-
   return (
-    <SafeAreaView style={{flex: 1}}>
-      {visible && <SplashScreen />}
-      <LoginScreen />
+    <SafeAreaView style={styles.app}>
+      <StackNavigation />
     </SafeAreaView>
   );
 }
 
+const styles = StyleSheet.create({
+  app: {
+    flex: 1,
+  },
+});
 export default App;
