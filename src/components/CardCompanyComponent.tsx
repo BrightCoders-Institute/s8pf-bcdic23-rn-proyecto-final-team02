@@ -10,16 +10,15 @@ interface Props {
 const CardWorkCompoment = ({company}:Props) => {
     return (
     <View style={styles.card}>
-     <Image style={styles.imagen} source={company.picture}/>
-     <View style={styles.content}>
-     <TextComponent  text={company.name}  color='black' font="500" size={16} />
-     <TextComponent  text={company.distancing}  color='#514D4D' font="300" size={14} />
+       <Image style={styles.imagen} source={company.picture}/>
 
-     </View>
+       <View style={styles.content}>
+         <TextComponent  text={company.name}  color='black' font="500" size={16} />
+         <TextComponent  text={company.distancing}  color='#514D4D' font="300" size={14} />
+      </View>
+
     </View>
-
     )
-
 }
 
 const styles = StyleSheet.create({
@@ -55,7 +54,6 @@ const styles = StyleSheet.create({
       paddingTop:7,
       gap:6,
     }
-
-  });
+});
 
 export default CardWorkCompoment;

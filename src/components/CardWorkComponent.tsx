@@ -10,20 +10,22 @@ interface Props {
 const CardWorkCompoment = ({work}:Props) => {
     return (
     <View style={styles.card}>
-     <Image style={styles.imagen} source={work.picture}/>
+
+      <Image style={styles.imagen} source={work.picture}/>
+
      <View style={styles.separator} />
+
      <View style={styles.content}>
-     <TextComponent  text={work.work}  color='black' font="500" size={16} />
-     <TextComponent  text={work.salary}  color='black' font="500" size={14} />
+       <TextComponent  text={work.work}  color='black' font="500" size={16} />
+       <TextComponent  text={work.salary}  color='black' font="500" size={14} />
+
      <View style={styles.apply}> 
-      <TextComponent color='white' text='apply to' font='bold' size={10}/>
+       <TextComponent color='white' text='apply to' font='bold' size={10}/>
      </View>
 
-     </View>
+      </View>
     </View>
-
     )
-
 }
 
 const styles = StyleSheet.create({
@@ -67,7 +69,6 @@ const styles = StyleSheet.create({
       paddingBottom:14,
       paddingTop:4,
     }
-
-  });
+});
 
 export default CardWorkCompoment;
