@@ -3,16 +3,19 @@ import {View, StyleSheet} from 'react-native';
 
 import OnboardingBody from '../components/OnboardingBody';
 import OnboardingNavigation from '../components/OnboardingNavigation';
+import {useNavigation} from '@react-navigation/native';
 
-function Onboarding() {
+function OnboardingScreen() {
+  const navigation = useNavigation();
   const [activeScreen, setActiveScreen] = useState(0);
 
   const setScreen = () => {
     setActiveScreen(activeScreen + 1);
   };
 
+  // Remove onboarding after the navigate
   const navigateToSignUp = () => {
-    console.log('Go to Sign Up');
+    navigation.navigate('SignUp');
   };
 
   return (
@@ -34,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Onboarding;
+export default OnboardingScreen;

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#9F99FF',
     width: 361,
     height: 50,
-    padding: 5,
+    padding: 10,
   },
   selectedTextStyle: {
     fontSize: 18,

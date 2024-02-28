@@ -1,8 +1,12 @@
 import {View, Text, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {TextComponent} from '../components';
 
+import {NavigationAction, useNavigation} from '@react-navigation/native';
+
 const SplashScreen = () => {
+  const logo = require('../assets/logo-transparent.png');
+
   return (
     <View
       style={{
@@ -11,7 +15,7 @@ const SplashScreen = () => {
         alignItems: 'center',
       }}>
       <Image
-        source={require('../assets/logo-transparent.png')}
+        source={logo}
         style={{width: '100%', height: '60%', resizeMode: 'contain'}}
       />
       <View style={{flex: 1, alignItems: 'center'}}>

@@ -1,30 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
+import 'react-native-gesture-handler';
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {View, StyleSheet} from 'react-native';
-
-import Onboarding from './src/screens/OnboardingScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import {SafeAreaView, StyleSheet} from 'react-native';
+import StackNavigation from './src/routes/StackNavigation';
 
 function App(): React.JSX.Element {
   return (
-    <View style={styles.App}>
-      <Onboarding />
-    </View>
+    <SafeAreaView style={styles.app}>
+      <StackNavigation />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  App: {
+  app: {
     flex: 1,
   },
 });

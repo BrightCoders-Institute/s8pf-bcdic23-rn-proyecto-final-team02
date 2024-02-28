@@ -1,50 +1,50 @@
-import React from 'react';
 import {
-  View,
-  Text,
-  TextInput,
+  TextInput as NativeTextInput,
   StyleSheet,
-  KeyboardTypeOptions,
+  TextInputProps,
+  TouchableOpacity,
 } from 'react-native';
+import React, {useState} from 'react';
+import {RowComponent, IconComponent} from '../components';
 
-const InputComponent = ({
-  title,
-  type,
-  security,
-}: {
-  title: string;
-  type: KeyboardTypeOptions;
-  security?: true;
-}) => {
+const InputComponent = (props: TextInputProps) => {
+  const [secureTextEntry, setSecureTextEntry] = useState(props.secureTextEntry);
+
+  const handleShowHide = () => {
+    setSecureTextEntry(!secureTextEntry);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <TextInput
-        keyboardType={type}
-        style={styles.input}
-        secureTextEntry={security}
+    <RowComponent styles={stylesInput.inputContainer}>
+      <NativeTextInput
+        {...props}
+        secureTextEntry={secureTextEntry}
+        style={stylesInput.input}
       />
-    </View>
+      {props.secureTextEntry ? (
+        <TouchableOpacity activeOpacity={0.8} onPress={handleShowHide}>
+          {secureTextEntry ? (
+            <IconComponent name="eye-off-outline" size={20} />
+          ) : (
+            <IconComponent name="eye-outline" size={20} />
+          )}
+        </TouchableOpacity>
+      ) : null}
+    </RowComponent>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: 'center',
-  },
-  title: {
-    fontSize: 20,
-    color: '#161616',
+export const stylesInput = StyleSheet.create({
+  inputContainer: {
+    backgroundColor: '#fafafa',
+    borderRadius: 10,
+    padding: 10,
+    justifyContent: 'space-between',
+    marginBottom: 12,
   },
   input: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#9F99FF',
-
-    width: 361,
-    height: 50,
-    padding: 5,
-
-    fontSize: 18,
+    flex: 1,
+    padding: 0,
     color: 'black',
   },
 });

@@ -3,7 +3,7 @@ import {Image, StyleSheet} from 'react-native';
 
 import logo from '../assets/logo-blanco.png';
 
-const LogoComponent = () => {
+const AppLogoComponent = () => {
   return <Image source={logo} style={styles.image} />;
 };
 
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogoComponent;
+export default AppLogoComponent;
