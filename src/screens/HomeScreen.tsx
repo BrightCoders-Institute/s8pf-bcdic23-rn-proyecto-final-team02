@@ -10,7 +10,7 @@ import {
 } from '../components';
 
 const HomeScreen = () => {
-  const user_male = require('../assets/img/user-male-avatar.webp');
+  const user_male = require('../assets/user-male-avatar.webp');
   return (
     <View style={styles.container}>
       <View style={{marginLeft: 14, marginTop: 77}}>
