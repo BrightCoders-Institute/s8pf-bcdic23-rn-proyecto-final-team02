@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 
-import onlineCV from '../../img/onlineCV.webp';
-import jobOffers from '../../img/jobOffers.webp';
-import myLocattion from '../../img/myLocattion.webp';
+import onlineCV from '../assets/img/onlineCV.webp';
+import jobOffers from '../assets/img/jobOffers.webp';
+import myLocattion from '../assets/img/myLocattion.webp';
 
 const screensList = [
   {

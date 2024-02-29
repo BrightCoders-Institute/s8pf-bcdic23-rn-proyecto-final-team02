@@ -1,7 +1,12 @@
 import React, {useEffect} from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
-import {Onboarding, SplashScreen} from '../screens';
+import {
+  OnboardingScreen,
+  SplashScreen,
+  SignInScreen,
+  SignUpScreen,
+} from '../screens';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 
 const Stack = createStackNavigator();
@@ -14,11 +19,14 @@ const StackNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName="SignIn"
         screenOptions={{
           headerShown: false,
         }}>
         <Stack.Screen name="Home" component={SplashScreen} />
-        <Stack.Screen name="SignIn" component={Onboarding} />
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

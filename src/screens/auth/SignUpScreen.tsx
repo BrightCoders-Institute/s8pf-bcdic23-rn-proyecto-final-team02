@@ -1,21 +1,20 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
-import {
-  ContainerComponent,
-  InputComponent,
-  TextComponent,
-  AuthLogoComponent,
-  ButtonComponent,
-} from '../../components';
+import InputComponent from '../../components/InputComponent';
+import DropdownField from '../../components/DropDownComponent';
+import ButtonComponent from '../../components/ButtonComponent';
 
-const SignInScreen = () => {
+import {ContainerComponent, TextComponent} from '../../components';
+import AuthLogoComponent from '../../components/AuthLogoComponent';
+
+const SignUpScreen = () => {
   const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
 
-  const signInFunction = () => {
-    console.log('Auth data');
+  const signUpFunction = () => {
+    console.log('Send data to firebase');
   };
   const google = () => {
     console.log('Google');
@@ -25,21 +24,20 @@ const SignInScreen = () => {
   };
 
   return (
-    <ContainerComponent styles={styles.screen}>
+    <ContainerComponent isScroll styles={styles.screen}>
       <AppLogoComponent />
-      <InputComponent placeholder="Email or Phone" keyboardType="default" />
+      <InputComponent placeholder="Full name" keyboardType="default" />
+      <InputComponent
+        placeholder="Email or Phone"
+        keyboardType="email-address"
+      />
       <InputComponent
         placeholder="Password"
         keyboardType="default"
         secureTextEntry
       />
-      <TextComponent
-        text="Forgot password?"
-        color="black"
-        size={20}
-        font="bold"
-      />
-      <ButtonComponent title="Sign Up" onPress={signInFunction} />
+      <DropdownField title="Gender" />
+      <ButtonComponent title="Sign Up" onPress={signUpFunction} />
       <TextComponent text="Or continue with" styles={styles.text} />
 
       <View style={styles.iconGroup}>
@@ -76,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignInScreen;
+export default SignUpScreen;
