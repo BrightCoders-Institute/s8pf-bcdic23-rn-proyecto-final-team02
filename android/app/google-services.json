@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "456361211536",
+    "project_id": "workmatch-68206",
+    "storage_bucket": "workmatch-68206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456361211536:android:169e1fb7805be0796cca15",
+        "android_client_info": {
+          "package_name": "com.workmatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-gq7dtTx4PfbxrYgqLsrI52SmDfF-w4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
