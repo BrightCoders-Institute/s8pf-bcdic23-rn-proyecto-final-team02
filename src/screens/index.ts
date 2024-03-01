@@ -7,11 +7,17 @@ import OnboardingScreen from './OnboardingScreen';
 
 import HomeScreen from './HomeScreen';
 import Onboarding from './OnboardingScreen';
+import NotificationScreen from './NotificationScreen';
+import MessagesScreen from './MessagesScreen';
+import ProfileScreen from './ProfileScreen';
 export {
   HomeScreen,
   SplashScreen,
   SignInScreen,
   OnboardingScreen,
-  SignUpScreen
+  SignUpScreen,
+  NotificationScreen,
+  MessagesScreen,
+  ProfileScreen,
 }
 
