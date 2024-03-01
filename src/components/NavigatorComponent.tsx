@@ -7,18 +7,16 @@ const NavigatorComponent = ({}) => {
     <View style={styles.card}>
       <View style={styles.container}>
         <View style={styles.content}>
-          <TextComponent styles={styles.text} text="Home"></TextComponent>
+          <TextComponent styles={styles.text} text="Home" />
         </View>
         <View style={styles.content}>
-          <TextComponent
-            styles={styles.text}
-            text="Notifications"></TextComponent>
+          <TextComponent styles={styles.text} text="Notifications" />
         </View>
         <View style={styles.content}>
-          <TextComponent styles={styles.text} text="Messages"></TextComponent>
+          <TextComponent styles={styles.text} text="Messages" />
         </View>
         <View style={styles.content}>
-          <TextComponent styles={styles.text} text="Profile"></TextComponent>
+          <TextComponent styles={styles.text} text="Profile" />
         </View>
       </View>
     </View>

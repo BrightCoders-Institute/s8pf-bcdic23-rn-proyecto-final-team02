@@ -1,13 +1,19 @@
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
-
-import logo from '../assets/logo-blanco.png';
+import {Image, StyleSheet, View} from 'react-native';
 
 const AppLogoComponent = () => {
-  return <Image source={logo} style={styles.image} />;
+  const logo = require('../assets/logo-transparent.png');
+  return (
+    <View style={styles.container}>
+      <Image source={logo} style={styles.image} />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
   image: {
     width: 360,
     height: 203,

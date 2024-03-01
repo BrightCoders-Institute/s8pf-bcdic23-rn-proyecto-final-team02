@@ -1,13 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import InputComponent from '../../components/InputComponent';
 import DropdownField from '../../components/DropDownComponent';
 import ButtonComponent from '../../components/ButtonComponent';
 
-import {ContainerComponent, TextComponent} from '../../components';
+import {
+  ContainerComponent,
+  RowComponent,
+  SectionComponent,
+  TextComponent,
+} from '../../components';
 import AuthLogoComponent from '../../components/AuthLogoComponent';
+import {useNavigation} from '@react-navigation/native';
 
 const SignUpScreen = () => {
   const googleLogo = require('../../assets/img/google.webp');
@@ -23,19 +29,24 @@ const SignUpScreen = () => {
     console.log('Facebook');
   };
 
+  const navigation = useNavigation();
+
   return (
     <ContainerComponent isScroll styles={styles.screen}>
       <AppLogoComponent />
-      <InputComponent placeholder="Full name" keyboardType="default" />
-      <InputComponent
-        placeholder="Email or Phone"
-        keyboardType="email-address"
-      />
-      <InputComponent
-        placeholder="Password"
-        keyboardType="default"
-        secureTextEntry
-      />
+
+      <SectionComponent>
+        <InputComponent placeholder="Full name" keyboardType="default" />
+        <InputComponent
+          placeholder="Email or Phone"
+          keyboardType="email-address"
+        />
+        <InputComponent
+          placeholder="Password"
+          keyboardType="default"
+          secureTextEntry
+        />
+      </SectionComponent>
       <DropdownField title="Gender" />
       <ButtonComponent title="Sign Up" onPress={signUpFunction} />
       <TextComponent text="Or continue with" styles={styles.text} />
@@ -45,9 +56,15 @@ const SignUpScreen = () => {
         <AuthLogoComponent src={facebookLogo} onPress={facebook} />
       </View>
 
-      <Text style={styles.text}>
-        Already have an account? <Text style={styles.span}>sign in</Text>
-      </Text>
+      <RowComponent styles={{marginTop: 30}}>
+        <TextComponent text="Already have an account? " />
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={{marginLeft: 5}}
+          onPress={() => navigation.navigate('SignIn')}>
+          <TextComponent text="Sign In" font="bold" />
+        </TouchableOpacity>
+      </RowComponent>
     </ContainerComponent>
   );
 };
