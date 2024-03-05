@@ -29,7 +29,7 @@ const TextComponent = (props: Props) => {
     <Text
       style={[
         {
-          color: color ?? 'red',
+          color: color ?? 'black',
           fontSize: size ?? 15,
           flex: flex ?? 0,
           fontWeight: font,

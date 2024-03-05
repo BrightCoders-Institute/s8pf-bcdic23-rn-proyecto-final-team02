@@ -20,6 +20,7 @@ const InputComponent = (props: TextInputProps) => {
         {...props}
         secureTextEntry={secureTextEntry}
         style={stylesInput.input}
+        placeholderTextColor="#8a8a8a"
       />
       {props.secureTextEntry ? (
         <TouchableOpacity activeOpacity={0.8} onPress={handleShowHide}>

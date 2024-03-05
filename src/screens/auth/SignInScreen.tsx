@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import {
@@ -8,7 +8,10 @@ import {
   TextComponent,
   AuthLogoComponent,
   ButtonComponent,
+  RowComponent,
+  SectionComponent,
 } from '../../components';
+import {useNavigation} from '@react-navigation/native';
 
 const SignInScreen = () => {
   const googleLogo = require('../../assets/img/google.webp');
@@ -24,22 +27,26 @@ const SignInScreen = () => {
     console.log('Facebook');
   };
 
+  const navigation = useNavigation();
+
   return (
     <ContainerComponent styles={styles.screen}>
       <AppLogoComponent />
-      <InputComponent placeholder="Email or Phone" keyboardType="default" />
-      <InputComponent
-        placeholder="Password"
-        keyboardType="default"
-        secureTextEntry
-      />
+      <SectionComponent styles={{marginTop: 10}}>
+        <InputComponent placeholder="Email or Phone" keyboardType="default" />
+        <InputComponent
+          placeholder="Password"
+          keyboardType="default"
+          secureTextEntry
+        />
+      </SectionComponent>
       <TextComponent
         text="Forgot password?"
         color="black"
         size={20}
         font="bold"
       />
-      <ButtonComponent title="Sign Up" onPress={signInFunction} />
+      <ButtonComponent title="Sign In" onPress={signInFunction} />
       <TextComponent text="Or continue with" styles={styles.text} />
 
       <View style={styles.iconGroup}>
@@ -47,9 +54,15 @@ const SignInScreen = () => {
         <AuthLogoComponent src={facebookLogo} onPress={facebook} />
       </View>
 
-      <Text style={styles.text}>
-        Already have an account? <Text style={styles.span}>sign in</Text>
-      </Text>
+      <RowComponent styles={{marginTop: 30}}>
+        <TextComponent text="Already have an account? " />
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={{marginLeft: 5}}
+          onPress={() => navigation.navigate('SignUp')}>
+          <TextComponent text="SignUp" font="bold" />
+        </TouchableOpacity>
+      </RowComponent>
     </ContainerComponent>
   );
 };
