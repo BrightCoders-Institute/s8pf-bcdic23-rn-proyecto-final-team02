@@ -13,8 +13,6 @@ const CardWorkCompoment = ({work}:Props) => {
 
       <Image style={styles.imagen} source={work.picture}/>
 
-     <View style={styles.separator} />
-
      <View style={styles.content}>
        <TextComponent  text={work.work}  color='black' font="500" size={16} />
        <TextComponent  text={work.salary}  color='black' font="500" size={14} />
@@ -48,7 +46,8 @@ const styles = StyleSheet.create({
     imagen:{
       width:152,
       height:98,
-      borderRadius:10,
+      borderTopLeftRadius: 10, 
+      borderTopRightRadius: 10, 
     },
     separator:{
       marginTop: -10,

@@ -1,19 +1,19 @@
 import React from 'react';
 import { View, Image, StyleSheet,  FlatList } from 'react-native';
-import { NavegatorComponent, TextComponent } from '../components';
+import { NavigatorComponent, TextComponent } from '../components';
 import {CardWorkCompoment,CardCompanyCompoment} from '../components';
 import { WorkData } from '../data/WorkData';
 import { CompanyData } from '../data/CompanyData';
 
 const HomeScreen = () => {
-  const user_male=require('../assets/user-male-avatar.png')
+  const user_male=require('../assets/user-male-avatar.webp')
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: 14, marginTop: 77 }}>
         
         <TextComponent
           text="Hello Jonathan,"
-          font="100"
+          font="bold"
           color="black"
           size={22}
         />
@@ -21,7 +21,7 @@ const HomeScreen = () => {
         <TextComponent
           styles={{ marginTop: 9 }}
           text="Jobs wait for you"
-          font="bold"
+          font="normal"
           color="black"
           size={22}
         />
@@ -31,8 +31,8 @@ const HomeScreen = () => {
           style={{ width: 73, height: 75, marginLeft: 276, position: 'absolute' }}
         />
 
-        <View style={{ height: 10, width: 196, backgroundColor: '#3825AE', marginBottom: 14, marginTop: 3 }} />
-        <View style={{ height: 10, width: 103, backgroundColor: '#3825AE', marginBottom: 23 }} />
+        <View style={{ height: 10, width: 196, backgroundColor: '#3825AE', marginBottom: 14, marginTop: 3 ,borderRadius:10}} />
+        <View style={{ height: 10, width: 103, backgroundColor: '#3825AE', marginBottom: 23, borderRadius:10 }} />
 
         <TextComponent
         styles={{marginBottom:16}}
@@ -67,7 +67,7 @@ const HomeScreen = () => {
 
          <View style={{marginTop:11}}>
 
-          <NavegatorComponent  />
+          <NavigatorComponent  />
 
          </View>
       </View>
