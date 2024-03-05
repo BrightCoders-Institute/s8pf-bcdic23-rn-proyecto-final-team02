@@ -7,11 +7,14 @@ import OnboardingScreen from './OnboardingScreen';
 
 import HomeScreen from './HomeScreen';
 import Onboarding from './OnboardingScreen';
+import CompanyJobsScreen from './CompanyJobsScreen';
 export {
   HomeScreen,
   SplashScreen,
   SignInScreen,
   OnboardingScreen,
-  SignUpScreen
+  SignUpScreen,
+  CompanyJobsScreen,
+  Onboarding,
 }
 

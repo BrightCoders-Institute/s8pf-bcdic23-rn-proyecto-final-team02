@@ -1,12 +1,14 @@
 import TextComponent from './TextComponent';
 import CardWorkCompoment from './CardWorkComponent';
+import CardCompanyCompoment from './CardCompanyComponent';
 import ContainerComponent from './ContainerComponent';
 import InputComponent from './InputComponent';
 import AuthLogoComponent from './AuthLogoComponent';
 import ButtonComponent from './ButtonComponent';
 import IconComponent from './IconComponent';
 import RowComponent from './RowComponent';
-import NavegatorComponent from './NavegatorComponent';
+import NavigatorComponent from './NavigatorComponent';
+import CardCompanyJobsComponent from './CardCompanyJobsComponent';
 
 export {
   TextComponent,
@@ -16,8 +18,9 @@ export {
   ButtonComponent,
   IconComponent,
   RowComponent,
-   CardWorkCompoment,
+  CardWorkCompoment,
   CardCompanyCompoment,
-   NavegatorComponent,
+  NavigatorComponent,
+  CardCompanyJobsComponent,
 };
 
