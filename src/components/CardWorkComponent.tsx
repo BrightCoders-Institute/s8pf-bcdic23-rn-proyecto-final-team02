@@ -14,9 +14,15 @@ const CardWorkComponent = ({work}: Props) => {
 
       <View style={styles.separator} />
 
-      <View style={styles.content}>
-        <TextComponent text={work.work} color="black" font="500" size={16} />
-        <TextComponent text={work.salary} color="black" font="500" size={14} />
+
+     <View style={styles.content}>
+       <TextComponent  text={work.work}  color='black' font="500" size={16} />
+       <TextComponent  text={work.salary}  color='black' font="500" size={14} />
+
+     <View style={styles.apply}> 
+       <TextComponent color='white' text='apply to' font='bold' size={10}/>
+     </View>
+
 
         <View style={styles.apply}>
           <TextComponent color="white" text="apply to" font="bold" size={10} />
@@ -27,16 +33,29 @@ const CardWorkComponent = ({work}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    marginRight: 32,
-    width: 152,
-    height: 182,
-    shadowOffset: {
-      width: 0,
-      height: 0,
+
+    card: {
+      backgroundColor: '#fff',
+      borderRadius: 10,
+      shadowColor: '#000',
+      marginRight:32,
+      width:152,
+      height:182,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      
+      elevation: 0,
+    },
+    imagen:{
+      width:152,
+      height:98,
+      borderTopLeftRadius: 10, 
+      borderTopRightRadius: 10, 
+
     },
     shadowOpacity: 0,
     shadowRadius: 0,
