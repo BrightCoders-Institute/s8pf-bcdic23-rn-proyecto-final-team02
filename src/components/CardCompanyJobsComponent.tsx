@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { TextComponent } from '../components';
+import { RowComponent, TextComponent } from '../components';
 import { CompanyWork } from '../interface/companyworkinterface';
 
 interface Props {
@@ -24,9 +24,10 @@ const CardWorkComponent = ({ companyWork }: Props) => {
         <TextComponent styles={styles.textContent} text={companyWork.salary} />
         <TextComponent styles={styles.textContent} text={companyWork.date} />
         <TextComponent styles={styles.textContent} text={companyWork.time} />
-        <View style={styles.button}>
-          <TextComponent text='See more >' color='white' size={10} font='bold'/>
-        </View>
+        <RowComponent styles={styles.button} onPress={() => {}}>
+          <TextComponent   text='See more >' color='white' size={10} font='bold'/>
+        </RowComponent>
+
       </View>
 
       </View>
@@ -93,7 +94,6 @@ const styles = StyleSheet.create({
     width: 134,
     height: 16,
     borderRadius: 5,
-    paddingLeft:40,
   },
 
 });
