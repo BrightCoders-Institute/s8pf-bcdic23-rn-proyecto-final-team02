@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import {globalStyles} from '../theme/globalTheme';
 
 interface Props {
   children: ReactNode;
@@ -19,7 +20,7 @@ const RowComponent = (props: Props) => {
   return onPress ? (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={[stylesRow.rowCenter, stylesRow.shadow, styles]}
+      style={[stylesRow.rowCenter, globalStyles.shadow, styles]}
       onPress={onPress}>
       {children}
     </TouchableOpacity>
@@ -33,16 +34,6 @@ export const stylesRow = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-  },
-  shadow: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    shadowOpacity: 0.63,
-    shadowRadius: 5,
-    elevation: 6,
   },
 });
 

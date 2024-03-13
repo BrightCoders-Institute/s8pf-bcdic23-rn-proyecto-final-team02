@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {TextComponent} from '../components';
 import {Company} from '../interface/companyinterface';
+import {globalStyles} from '../theme/globalTheme';
 
 interface Props {
   company: Company;
@@ -9,7 +10,7 @@ interface Props {
 
 const CardCompanyComponent = ({company}: Props) => {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, globalStyles.shadow]}>
       <Image style={styles.imagen} source={company.picture} />
 
       <View style={styles.content}>
@@ -29,20 +30,10 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    shadowColor: '#000',
-    marginRight: 32,
-    marginLeft: 11,
+    marginRight: 16,
     marginBottom: 13,
-    width: 338,
+    width: 330,
     height: 65,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0,
-    shadowRadius: 0,
-
-    elevation: 0,
   },
   imagen: {
     width: 43,

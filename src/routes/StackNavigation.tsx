@@ -52,14 +52,13 @@ const UserBottomTab = () => {
     headerShown: false,
 
     tabBarStyle: {
-      alignSelf: 'center', // Centra los elementos del tabBar
-      width: '90%', // Establece el ancho al 90% del contenedor padre
-      bottom: 20, // Espacio de 20 unidades desde la parte inferior
+      //alignSelf: 'center', // Centra los elementos del tabBar
+      marginHorizontal: 16,
+      bottom: Platform.OS === 'ios' ? 30 : 20, // Espacio de 20 unidades desde la parte inferior
       backgroundColor: '#1e164d', // Color de fondo del tabBar
       borderRadius: 20, // establece un radio de borde
-
+      alignContent: 'center',
       alignItems: 'center', // Alinea los elementos del tabBar en el centro
-      paddingHorizontal: 10, // Opcional: agrega relleno horizontal
       height: Platform.OS === 'ios' ? 60 : 60,
     },
   };
@@ -92,7 +91,7 @@ const UserBottomTab = () => {
                   color={focused ? 'red' : 'white'}
                 />
                 <TextComponent
-                  text="notifications"
+                  text="Alerts"
                   color={focused ? 'red' : 'white'}
                 />
               </View>
@@ -148,6 +147,11 @@ export const styles = StyleSheet.create({
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    ...Platform.select({
+      ios: {
+        top: 15,
+      },
+    }),
   },
 });
 
