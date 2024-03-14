@@ -12,18 +12,28 @@ interface Props {
   children: ReactNode;
   styles?: StyleProp<ViewStyle>;
   onPress?: () => void;
+  isCenter?: boolean;
 }
 
 const RowComponent = (props: Props) => {
-  const {children, styles, onPress} = props;
+  const {children, styles, onPress, isCenter} = props;
 
   return onPress ? (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      style={[stylesRow.rowCenter, globalStyles.shadow, styles]}
-      onPress={onPress}>
-      {children}
-    </TouchableOpacity>
+    isCenter ? (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[stylesRow.rowCenter, globalStyles.shadow, styles]}
+        onPress={onPress}>
+        {children}
+      </TouchableOpacity>
+    ) : (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[stylesRow.rowSpace, globalStyles.shadow, styles]}
+        onPress={onPress}>
+        {children}
+      </TouchableOpacity>
+    )
   ) : (
     <View style={[stylesRow.rowCenter, styles]}>{children}</View>
   );
@@ -34,6 +44,10 @@ export const stylesRow = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  rowSpace: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
