@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import InputComponent from '../../components/InputComponent';
@@ -14,6 +14,7 @@ import {
 } from '../../components';
 import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const SignUpScreen = () => {
   const googleLogo = require('../../assets/img/google.webp');
@@ -30,41 +31,44 @@ const SignUpScreen = () => {
   };
 
   const navigation = useNavigation();
+  const {top} = useSafeAreaInsets();
 
   return (
     <ContainerComponent isScroll styles={styles.screen}>
-      <AppLogoComponent />
+      <View style={Platform.OS === 'ios' ? {top: top} : {}}>
+        <AppLogoComponent />
 
-      <SectionComponent>
-        <InputComponent placeholder="Full name" keyboardType="default" />
-        <InputComponent
-          placeholder="Email or Phone"
-          keyboardType="email-address"
-        />
-        <InputComponent
-          placeholder="Password"
-          keyboardType="default"
-          secureTextEntry
-        />
-      </SectionComponent>
-      <DropdownField title="Gender" />
-      <ButtonComponent title="Sign Up" onPress={signUpFunction} />
-      <TextComponent text="Or continue with" styles={styles.text} />
+        <SectionComponent>
+          <InputComponent placeholder="Full name" keyboardType="default" />
+          <InputComponent
+            placeholder="Email or Phone"
+            keyboardType="email-address"
+          />
+          <InputComponent
+            placeholder="Password"
+            keyboardType="default"
+            secureTextEntry
+          />
+        </SectionComponent>
+        <DropdownField title="Gender" />
+        <ButtonComponent title="Sign Up" onPress={signUpFunction} />
+        <TextComponent text="Or continue with" styles={styles.text} />
 
-      <View style={styles.iconGroup}>
-        <AuthLogoComponent src={googleLogo} onPress={google} />
-        <AuthLogoComponent src={facebookLogo} onPress={facebook} />
+        <View style={styles.iconGroup}>
+          <AuthLogoComponent src={googleLogo} onPress={google} />
+          <AuthLogoComponent src={facebookLogo} onPress={facebook} />
+        </View>
+
+        <RowComponent styles={{marginTop: 30}}>
+          <TextComponent text="Already have an account? " />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={{marginLeft: 5}}
+            onPress={() => navigation.navigate('SignIn')}>
+            <TextComponent text="Sign In" font="bold" />
+          </TouchableOpacity>
+        </RowComponent>
       </View>
-
-      <RowComponent styles={{marginTop: 30}}>
-        <TextComponent text="Already have an account? " />
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={{marginLeft: 5}}
-          onPress={() => navigation.navigate('SignIn')}>
-          <TextComponent text="Sign In" font="bold" />
-        </TouchableOpacity>
-      </RowComponent>
     </ContainerComponent>
   );
 };
