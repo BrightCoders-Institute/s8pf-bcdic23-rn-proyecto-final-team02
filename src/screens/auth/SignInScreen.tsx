@@ -12,14 +12,14 @@ import {
   SectionComponent,
 } from '../../components';
 import {useNavigation} from '@react-navigation/native';
+import useAuth from '../../hook/useAuth';
 
 const SignInScreen = () => {
+  const {handleSigInWithEmail, email, setEmail, password, setPassword} = useAuth();
+
   const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
 
-  const signInFunction = () => {
-    console.log('Auth data');
-  };
   const google = () => {
     console.log('Google');
   };
@@ -33,8 +33,15 @@ const SignInScreen = () => {
     <ContainerComponent styles={styles.screen}>
       <AppLogoComponent />
       <SectionComponent styles={{marginTop: 10}}>
-        <InputComponent placeholder="Email or Phone" keyboardType="default" />
         <InputComponent
+          value={email}
+          onChangeText={val => setEmail(val)}
+          placeholder="Email or Phone"
+          keyboardType="default"
+        />
+        <InputComponent
+          value={password}
+          onChangeText={val => setPassword(val)}
           placeholder="Password"
           keyboardType="default"
           secureTextEntry
@@ -46,7 +53,7 @@ const SignInScreen = () => {
         size={20}
         font="bold"
       />
-      <ButtonComponent title="Sign In" onPress={signInFunction} />
+      <ButtonComponent title="Sign In" onPress={handleSigInWithEmail} />
       <TextComponent text="Or continue with" styles={styles.text} />
 
       <View style={styles.iconGroup}>
