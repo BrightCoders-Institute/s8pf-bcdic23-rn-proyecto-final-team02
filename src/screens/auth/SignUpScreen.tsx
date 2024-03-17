@@ -14,14 +14,15 @@ import {
 } from '../../components';
 import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
+import useAuth from '../../hook/useAuth';
 
 const SignUpScreen = () => {
+  const {handleCreateUserWithEmail, email, setEmail, password, setPassword} =
+    useAuth();
+
   const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
 
-  const signUpFunction = () => {
-    console.log('Send data to firebase');
-  };
   const google = () => {
     console.log('Google');
   };
@@ -38,17 +39,21 @@ const SignUpScreen = () => {
       <SectionComponent>
         <InputComponent placeholder="Full name" keyboardType="default" />
         <InputComponent
+          value={email}
+          onChangeText={val => setEmail(val)}
           placeholder="Email or Phone"
           keyboardType="email-address"
         />
         <InputComponent
+          value={password}
+          onChangeText={val => setPassword(val)}
           placeholder="Password"
           keyboardType="default"
           secureTextEntry
         />
       </SectionComponent>
       <DropdownField title="Gender" />
-      <ButtonComponent title="Sign Up" onPress={signUpFunction} />
+      <ButtonComponent title="Sign Up" onPress={handleCreateUserWithEmail} />
       <TextComponent text="Or continue with" styles={styles.text} />
 
       <View style={styles.iconGroup}>
