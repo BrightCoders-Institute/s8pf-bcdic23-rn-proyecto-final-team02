@@ -13,6 +13,8 @@ import {
   MessagesScreen,
   ProfileScreen,
   NotificationScreen,
+  UserAplicationsScreen,
+  CompanyAplicationsScreen,
 } from '../screens';
 import {
   BottomTabNavigationConfig,
@@ -73,7 +75,6 @@ const UserBottomTab = () => {
             return (
               <View style={styles.iconContainer}>
                 <IconComponent name="home" color={focused ? 'red' : 'white'} />
-                <TextComponent text="Home" color={focused ? 'red' : 'white'} />
               </View>
             );
           },
@@ -90,8 +91,20 @@ const UserBottomTab = () => {
                   name="notifications"
                   color={focused ? 'red' : 'white'}
                 />
-                <TextComponent
-                  text="Alerts"
+              </View>
+            );
+          },
+        }}
+      />
+      <TabButtonUser.Screen
+        name="Mapa"
+        component={UserAplicationsScreen}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View style={styles.iconContainer}>
+                <IconComponent
+                  name="map-outline"
                   color={focused ? 'red' : 'white'}
                 />
               </View>
@@ -110,10 +123,6 @@ const UserBottomTab = () => {
                   name="chatbubble"
                   color={focused ? 'red' : 'white'}
                 />
-                <TextComponent
-                  text="Messages"
-                  color={focused ? 'red' : 'white'}
-                />
               </View>
             );
           },
@@ -128,10 +137,6 @@ const UserBottomTab = () => {
               <View style={styles.iconContainer}>
                 <IconComponent
                   name="person"
-                  color={focused ? 'red' : 'white'}
-                />
-                <TextComponent
-                  text="Profile"
                   color={focused ? 'red' : 'white'}
                 />
               </View>
