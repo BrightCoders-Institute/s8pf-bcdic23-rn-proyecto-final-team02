@@ -1,7 +1,7 @@
 import {View, Text, Alert} from 'react-native';
 import React, {useState} from 'react';
 import auth from '@react-native-firebase/auth';
-
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 const useAuth = () => {
   // Variables para registrar al usuario
   const [email, setEmail] = useState<string>('');
@@ -11,7 +11,7 @@ const useAuth = () => {
   // Estado para dar tiempo a cargar los datos
   const [changeLoading, setChangeLoading] = useState(false);
 
-  const handleSigInWithEmail = async () => {
+  const handleSigInWithEmail = async (navigation: any) => {
     if (email.length > 0 && password.length > 0) {
       setChangeLoading(true);
 
@@ -19,7 +19,7 @@ const useAuth = () => {
         .signInWithEmailAndPassword(email.trim(), password)
         .then(userCredential => {
           const user = userCredential.user;
-
+          navigation.navigate('Home');
           setChangeLoading(false);
         })
         .catch((err: any) => {
@@ -76,9 +76,16 @@ const useAuth = () => {
   };
 
   const handleGoogleLogin = async () => {
-    setChangeLoading(true);
-    Alert.alert('Advertencia', 'Servicio actualmente en mantenimiento');
-    setChangeLoading(false);
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+    // Get the users ID token
+    const {idToken} = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
   };
 
   return {
