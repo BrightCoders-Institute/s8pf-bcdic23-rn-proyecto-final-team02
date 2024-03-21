@@ -139,6 +139,25 @@ const ProfileScreen = () => {
           ]}
           onPress={() => {}}>
           <TextComponent
+            text="Sign out"
+            font="bold"
+            size={16}
+            styles={{marginLeft: 16}}
+          />
+          <IconComponent
+            name="log-out-outline"
+            color="black"
+            styles={{marginRight: 16}}
+          />
+        </RowComponent>
+
+        <RowComponent
+          styles={[
+            styles.sections,
+            {height: 50, alignContent: 'center', alignItems: 'center'},
+          ]}
+          onPress={() => {}}>
+          <TextComponent
             text="Delate account"
             font="bold"
             size={16}
