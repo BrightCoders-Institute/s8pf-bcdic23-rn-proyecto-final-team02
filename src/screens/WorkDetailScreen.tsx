@@ -1,24 +1,29 @@
 import React from 'react';
-import { View, Image, StyleSheet,  FlatList } from 'react-native';
-import { NavigatorComponent, TextComponent } from '../components';
-import {CardWorkCompoment,CardCompanyCompoment} from '../components';
-import { WorkData } from '../data/WorkData';
-import { CompanyData } from '../data/CompanyData';
-import { WorkDetails } from '../data/WorkDetails';
+import {
+  View,
+  Platform,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import {WorkDetailsComponent} from '../components';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {globalStyles} from '../theme/globalTheme';
+import {WorkDetails} from '../data/WorkDetails';
+import {FlatList} from 'react-native-gesture-handler';
 
 const WorkDetailScreen = () => {
     return (
         <View style={styles.container}>
             <View  style={{ marginLeft: 12, marginTop: 30 }}>
-    
              <FlatList
                 data = {WorkDetails}
-                keyExtractor={work => work.id}
-                renderItem={({ item }) => <CardWorkCompoment work = {item} />}
+                keyExtractor={workdetails => workdetails.id}
+                renderItem={({ item }) => <WorkDetailsComponent workdetails = {item} />
+            }
                 />
-    
-            <NavigatorComponent  />
             </View>
+            
     
     
     

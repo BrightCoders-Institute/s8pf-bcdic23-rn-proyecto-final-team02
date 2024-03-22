@@ -1,14 +1,15 @@
 export interface WorkDetails {
     id:string;
+    logo:any;
     company:string;
-    work:string;
-    picture:any;
+    work:any;
+    job:string;
     location:string;
     jobType:string;
     salary:string;
     companyOverview:string;
     jobDescription:string;
-    keyResponsibilities:string[];
-    qualifications:string[];
-    benefits:string[];
+    keyResponsibilities:string[any];
+    qualifications:string[any];
+    benefits:string[any];
 }
