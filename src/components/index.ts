@@ -9,6 +9,8 @@ import CardCompanyJobsComponent from './CardCompanyJobsComponent';
 import CardWorkComponent from './CardWorkComponent';
 import CardCompanyComponent from './CardCompanyComponent';
 import SectionComponent from './SectionComponent';
+import CardUserAplicationComponent from './CardUserAplicationComponent';
+import CardCompanyAplicationComponent from './CardCompanyAplicationComponent';
 
 
 
@@ -24,5 +26,7 @@ export {
   CardWorkComponent,
   CardCompanyComponent,
   SectionComponent,
+  CardUserAplicationComponent,
+  CardCompanyAplicationComponent,
 };
 
