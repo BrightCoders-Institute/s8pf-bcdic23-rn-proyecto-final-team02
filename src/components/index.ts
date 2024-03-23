@@ -5,10 +5,13 @@ import AuthLogoComponent from './AuthLogoComponent';
 import ButtonComponent from './ButtonComponent';
 import IconComponent from './IconComponent';
 import RowComponent from './RowComponent';
-import NavigatorComponent from './NavigatorComponent';
+import CardCompanyJobsComponent from './CardCompanyJobsComponent';
 import CardWorkComponent from './CardWorkComponent';
 import CardCompanyComponent from './CardCompanyComponent';
 import SectionComponent from './SectionComponent';
+import CardUserAplicationComponent from './CardUserAplicationComponent';
+import CardCompanyAplicationComponent from './CardCompanyAplicationComponent';
+
 
 
 export {
@@ -19,9 +22,11 @@ export {
   ButtonComponent,
   IconComponent,
   RowComponent,
+  CardCompanyJobsComponent,
   CardWorkComponent,
   CardCompanyComponent,
-  NavigatorComponent,
   SectionComponent,
+  CardUserAplicationComponent,
+  CardCompanyAplicationComponent,
 };
 

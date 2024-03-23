@@ -14,8 +14,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-
-// 456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const SignInScreen = () => {
   const {
@@ -42,51 +41,51 @@ const SignInScreen = () => {
   };
 
   const navigation = useNavigation();
+  const {top} = useSafeAreaInsets();
 
   return (
     <ContainerComponent styles={styles.screen}>
-      <AppLogoComponent />
-      <SectionComponent styles={{marginTop: 10}}>
-        <InputComponent
-          value={email}
-          onChangeText={val => setEmail(val)}
-          placeholder="Email or Phone"
-          keyboardType="default"
+      <View style={Platform.OS === 'ios' ? {top: top} : {}}>
+        <AppLogoComponent />
+        <SectionComponent styles={{marginTop: 10}}>
+          <InputComponent
+            value={email}
+            onChangeText={val => setEmail(val)}
+            placeholder="Email or Phone"
+            keyboardType="default"
+           />
+          <InputComponent
+            value={password}
+            onChangeText={val => setPassword(val)}
+            placeholder="Password"
+            keyboardType="default"
+            secureTextEntry
+          />
+        </SectionComponent>
+        <TextComponent
+          text="Forgot password?"
+          color="black"
+          size={20}
+          font="bold"
         />
-        <InputComponent
-          value={password}
-          onChangeText={val => setPassword(val)}
-          placeholder="Password"
-          keyboardType="default"
-          secureTextEntry
-        />
-      </SectionComponent>
-      <TextComponent
-        text="Forgot password?"
-        color="black"
-        size={20}
-        font="bold"
-      />
-      <ButtonComponent
-        title="Sign In"
-        onPress={() => handleSigInWithEmail(navigation)}
-      />
-      <TextComponent text="Or continue with" styles={styles.text} />
+        <ButtonComponent title="Sign In" onPress={() => handleSigInWithEmail(navigation)} />
+        <TextComponent text="Or continue with" styles={styles.text} />
 
-      <View style={styles.iconGroup}>
-        <AuthLogoComponent src={googleLogo} onPress={handleGoogleLogin} />
-        <AuthLogoComponent src={facebookLogo} onPress={facebook} />
+        <View style={styles.iconGroup}>
+          <AuthLogoComponent src={googleLogo} onPress={handleGoogleLogin} />
+          <AuthLogoComponent src={facebookLogo} onPress={facebook} />
+        </View>
+
+        <RowComponent styles={{marginTop: 30}}>
+          <TextComponent text="Already have an account? " />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={{marginLeft: 5}}
+            onPress={() => navigation.navigate('SignUp')}>
+            <TextComponent text="SignUp" font="bold" />
+          </TouchableOpacity>
+        </RowComponent>
       </View>
-
-      <RowComponent styles={{marginTop: 30}}>
-        <TextComponent text="Already have an account? " />
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={{marginLeft: 5}}
-          onPress={() => navigation.navigate('SignUp')}>
-          <TextComponent text="SignUp" font="bold" />
-        </TouchableOpacity>
-      </RowComponent>
     </ContainerComponent>
   );
 };

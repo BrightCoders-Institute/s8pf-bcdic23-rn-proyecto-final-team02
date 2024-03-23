@@ -2,8 +2,6 @@ import {View, Text, Image} from 'react-native';
 import React, {useEffect} from 'react';
 import {TextComponent} from '../components';
 
-import {NavigationAction, useNavigation} from '@react-navigation/native';
-
 const SplashScreen = () => {
   const logo = require('../assets/logo-transparent.png');
 

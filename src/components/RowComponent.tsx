@@ -6,23 +6,34 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import {globalStyles} from '../theme/globalTheme';
 
 interface Props {
   children: ReactNode;
   styles?: StyleProp<ViewStyle>;
   onPress?: () => void;
+  isCenter?: boolean;
 }
 
 const RowComponent = (props: Props) => {
-  const {children, styles, onPress} = props;
+  const {children, styles, onPress, isCenter} = props;
 
   return onPress ? (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      style={[stylesRow.rowCenter, stylesRow.shadow, styles]}
-      onPress={onPress}>
-      {children}
-    </TouchableOpacity>
+    isCenter ? (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[stylesRow.rowCenter, globalStyles.shadow, styles]}
+        onPress={onPress}>
+        {children}
+      </TouchableOpacity>
+    ) : (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[stylesRow.rowSpace, globalStyles.shadow, styles]}
+        onPress={onPress}>
+        {children}
+      </TouchableOpacity>
+    )
   ) : (
     <View style={[stylesRow.rowCenter, styles]}>{children}</View>
   );
@@ -34,15 +45,9 @@ export const stylesRow = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  shadow: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    shadowOpacity: 0.63,
-    shadowRadius: 5,
-    elevation: 6,
+  rowSpace: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
