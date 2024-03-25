@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Platform} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import {
@@ -12,18 +12,30 @@ import {
   SectionComponent,
 } from '../../components';
 import {useNavigation} from '@react-navigation/native';
+import useAuth from '../../hook/useAuth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const SignInScreen = () => {
+  const {
+    handleSigInWithEmail,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    handleGoogleLogin,
+  } = useAuth();
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com',
+    });
+  }, []);
+
   const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
 
-  const signInFunction = () => {
-    console.log('Auth data');
-  };
-  const google = () => {
-    console.log('Google');
-  };
   const facebook = () => {
     console.log('Facebook');
   };
@@ -36,8 +48,15 @@ const SignInScreen = () => {
       <View style={Platform.OS === 'ios' ? {top: top} : {}}>
         <AppLogoComponent />
         <SectionComponent styles={{marginTop: 10}}>
-          <InputComponent placeholder="Email or Phone" keyboardType="default" />
           <InputComponent
+            value={email}
+            onChangeText={val => setEmail(val)}
+            placeholder="Email or Phone"
+            keyboardType="default"
+           />
+          <InputComponent
+            value={password}
+            onChangeText={val => setPassword(val)}
             placeholder="Password"
             keyboardType="default"
             secureTextEntry
@@ -49,11 +68,11 @@ const SignInScreen = () => {
           size={20}
           font="bold"
         />
-        <ButtonComponent title="Sign In" onPress={signInFunction} />
+        <ButtonComponent title="Sign In" onPress={() => handleSigInWithEmail(navigation)} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
-          <AuthLogoComponent src={googleLogo} onPress={google} />
+          <AuthLogoComponent src={googleLogo} onPress={handleGoogleLogin} />
           <AuthLogoComponent src={facebookLogo} onPress={facebook} />
         </View>
 
