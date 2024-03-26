@@ -54,9 +54,15 @@ const useAuth = () => {
   };
 
   const handleSignOut = async () => {
-    await auth()
-      .signOut()
-      .then(() => Alert.alert('Información', 'Se ha cerrado la sesión'));
+    try {
+      await GoogleSignin.signOut();
+      await auth()
+        .signOut()
+        .then(() => Alert.alert('Información', 'Se ha cerrado la sesión'));
+      console.log('Succesful');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleForgetPassword = async () => {
@@ -76,6 +82,7 @@ const useAuth = () => {
   };
 
   const handleGoogleLogin = async () => {
+    setChangeLoading(true);
     // Check if your device supports Google Play
     await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
     // Get the users ID token
@@ -85,6 +92,7 @@ const useAuth = () => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
+    setChangeLoading(false);
     return auth().signInWithCredential(googleCredential);
   };
 
