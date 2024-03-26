@@ -16,7 +16,10 @@ import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from '@react-native-google-signin/google-signin';
 import {WEBCLIENT_ID} from '@env';
 
 const SignUpScreen = () => {
@@ -27,6 +30,7 @@ const SignUpScreen = () => {
     password,
     setPassword,
     handleGoogleLogin,
+    changeLoading,
   } = useAuth();
 
   const googleLogo = require('../../assets/img/google.webp');
@@ -71,7 +75,12 @@ const SignUpScreen = () => {
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
-          <AuthLogoComponent src={googleLogo} onPress={handleGoogleLogin} />
+          <GoogleSigninButton
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Dark}
+            onPress={handleGoogleLogin}
+            disabled={changeLoading}
+          />
           <AuthLogoComponent src={facebookLogo} onPress={facebook} />
         </View>
 
@@ -95,8 +104,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   iconGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginTop: 20,
   },
   text: {

@@ -13,7 +13,10 @@ import {
 } from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from '@react-native-google-signin/google-signin';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {WEBCLIENT_ID} from '@env';
 
@@ -25,6 +28,7 @@ const SignInScreen = () => {
     password,
     setPassword,
     handleGoogleLogin,
+    changeLoading,
   } = useAuth();
 
   useEffect(() => {
@@ -33,7 +37,6 @@ const SignInScreen = () => {
     });
   }, []);
 
-  const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
 
   const facebook = () => {
@@ -68,11 +71,16 @@ const SignInScreen = () => {
           size={20}
           font="bold"
         />
-        <ButtonComponent title="Sign In" onPress={() => handleSigInWithEmail(navigation)} />
+        <ButtonComponent title="Sign In" onPress={handleSigInWithEmail} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
-          <AuthLogoComponent src={googleLogo} onPress={handleGoogleLogin} />
+        <GoogleSigninButton
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Dark}
+            onPress={handleGoogleLogin}
+            disabled={changeLoading}
+          />
           <AuthLogoComponent src={facebookLogo} onPress={facebook} />
         </View>
 
@@ -96,8 +104,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   iconGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginTop: 20,
   },
   text: {

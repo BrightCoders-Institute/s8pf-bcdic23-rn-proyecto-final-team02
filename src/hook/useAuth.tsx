@@ -1,7 +1,10 @@
 import {View, Text, Alert} from 'react-native';
 import React, {useState} from 'react';
 import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 const useAuth = () => {
   // Variables para registrar al usuario
   const [email, setEmail] = useState<string>('');
@@ -11,7 +14,7 @@ const useAuth = () => {
   // Estado para dar tiempo a cargar los datos
   const [changeLoading, setChangeLoading] = useState(false);
 
-  const handleSigInWithEmail = async (navigation: any) => {
+  const handleSigInWithEmail = async () => {
     if (email.length > 0 && password.length > 0) {
       setChangeLoading(true);
 
@@ -19,7 +22,6 @@ const useAuth = () => {
         .signInWithEmailAndPassword(email.trim(), password)
         .then(userCredential => {
           const user = userCredential.user;
-          navigation.navigate('Home');
           setChangeLoading(false);
         })
         .catch((err: any) => {
@@ -81,18 +83,27 @@ const useAuth = () => {
   };
 
   const handleGoogleLogin = async () => {
-    setChangeLoading(true);
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
+    try {
+      setChangeLoading(true);
 
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-    // Sign-in the user with the credential
-    setChangeLoading(false);
-    return auth().signInWithCredential(googleCredential);
+      setChangeLoading(false);
+      return auth().signInWithCredential(googleCredential);
+    } catch (error: any) {
+      setChangeLoading(false);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        Alert.alert('Alerta', 'Inicio de sesión interrumpido');
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        Alert.alert('Alerta', 'Inicio de sesión en progreso');
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        Alert.alert('Alerta', 'Servicios de google NO DISPLINIBLES');
+      } else {
+        Alert.alert('Alerta', 'Inicio de sesión fallido');
+      }
+    }
   };
 
   return {
