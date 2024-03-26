@@ -52,7 +52,7 @@ const StackNavigation = () => {
         }}>
         {user ? (
           <>
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Inicio" component={UserBottomTab} />
           </>
         ) : (
           <>
