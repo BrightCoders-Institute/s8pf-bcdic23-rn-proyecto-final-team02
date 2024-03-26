@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
@@ -16,17 +16,28 @@ import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {WEBCLIENT_ID} from '@env';
 
 const SignUpScreen = () => {
-  const {handleCreateUserWithEmail, email, setEmail, password, setPassword} =
-    useAuth();
+  const {
+    handleCreateUserWithEmail,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    handleGoogleLogin,
+  } = useAuth();
 
   const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
 
-  const google = () => {
-    console.log('Google');
-  };
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: WEBCLIENT_ID,
+    });
+  }, []);
+
   const facebook = () => {
     console.log('Facebook');
   };
@@ -60,7 +71,7 @@ const SignUpScreen = () => {
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
-          <AuthLogoComponent src={googleLogo} onPress={google} />
+          <AuthLogoComponent src={googleLogo} onPress={handleGoogleLogin} />
           <AuthLogoComponent src={facebookLogo} onPress={facebook} />
         </View>
 

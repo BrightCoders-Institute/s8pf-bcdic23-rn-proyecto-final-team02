@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {WEBCLIENT_ID} from '@env';
 
 const SignInScreen = () => {
   const {
@@ -28,8 +29,7 @@ const SignInScreen = () => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId:
-        '456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com',
+      webClientId: WEBCLIENT_ID,
     });
   }, []);
 
@@ -53,7 +53,7 @@ const SignInScreen = () => {
             onChangeText={val => setEmail(val)}
             placeholder="Email or Phone"
             keyboardType="default"
-           />
+          />
           <InputComponent
             value={password}
             onChangeText={val => setPassword(val)}

@@ -1,7 +1,7 @@
 import {View, Text, Alert} from 'react-native';
 import React, {useState} from 'react';
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 const useAuth = () => {
   // Variables para registrar al usuario
   const [email, setEmail] = useState<string>('');
@@ -59,7 +59,6 @@ const useAuth = () => {
       await auth()
         .signOut()
         .then(() => Alert.alert('Información', 'Se ha cerrado la sesión'));
-      console.log('Succesful');
     } catch (error) {
       console.error(error);
     }
