@@ -6,13 +6,18 @@ const AuthLogoComponent = ({
   src,
   onPress,
   text,
+  disabled,
 }: {
   src: any;
   onPress: any;
   text: string;
+  disabled?: boolean;
 }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={onPress}
+      disabled={disabled}>
       <View style={styles.square}>
         <Image style={styles.icon} source={src} />
       </View>
@@ -20,7 +25,7 @@ const AuthLogoComponent = ({
         styles={styles.text}
         size={14}
         font="bold"
-        text={`Sign In with ${text}`}
+        text={`Sign ${text}`}
       />
     </TouchableOpacity>
   );

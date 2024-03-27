@@ -16,10 +16,7 @@ import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {WEBCLIENT_ID} from '@env';
 
 const SignUpScreen = () => {
@@ -77,13 +74,15 @@ const SignUpScreen = () => {
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
-            text="Google"
+            text="Up with Google"
             onPress={handleGoogleLogin}
+            disabled={changeLoading}
           />
           <AuthLogoComponent
             src={facebookLogo}
-            text="Facebook"
+            text="Up with Facebook"
             onPress={facebook}
+            disabled={changeLoading}
           />
         </View>
 

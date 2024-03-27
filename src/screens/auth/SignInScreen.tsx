@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Platform} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import {
@@ -78,13 +78,15 @@ const SignInScreen = () => {
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
-            text="Google"
+            text="In with Google"
             onPress={handleGoogleLogin}
+            disabled={changeLoading}
           />
           <AuthLogoComponent
             src={facebookLogo}
-            text="Facebook"
+            text="In with Facebook"
             onPress={facebook}
+            disabled={changeLoading}
           />
         </View>
 
