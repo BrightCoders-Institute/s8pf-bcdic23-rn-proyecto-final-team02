@@ -1,8 +1,16 @@
 import React from 'react';
-import { TouchableOpacity, Image, StyleSheet, View } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View} from 'react-native';
 import TextComponent from './TextComponent';
 
-const AuthLogoComponent = ({src, onPress}: {src: any; onPress: any}) => {
+const AuthLogoComponent = ({
+  src,
+  onPress,
+  text,
+}: {
+  src: any;
+  onPress: any;
+  text: string;
+}) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.square}>
@@ -12,7 +20,7 @@ const AuthLogoComponent = ({src, onPress}: {src: any; onPress: any}) => {
         styles={styles.text}
         size={14}
         font="bold"
-        text="Sign in with Facebook"
+        text={`Sign In with ${text}`}
       />
     </TouchableOpacity>
   );
@@ -24,7 +32,7 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 2,
     borderRadius: 5,
-    backgroundColor: 'blue',
+    backgroundColor: '#6C63FF',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

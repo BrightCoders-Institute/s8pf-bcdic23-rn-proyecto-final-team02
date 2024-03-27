@@ -38,6 +38,7 @@ const SignInScreen = () => {
   }, []);
 
   const facebookLogo = require('../../assets/img/facebook.webp');
+  const googleLogo = require('../../assets/img/google.webp');
 
   const facebook = () => {
     console.log('Facebook');
@@ -75,13 +76,16 @@ const SignInScreen = () => {
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
-        <GoogleSigninButton
-            size={GoogleSigninButton.Size.Wide}
-            color={GoogleSigninButton.Color.Dark}
+          <AuthLogoComponent
+            src={googleLogo}
+            text="Google"
             onPress={handleGoogleLogin}
-            disabled={changeLoading}
           />
-          <AuthLogoComponent src={facebookLogo} onPress={facebook} />
+          <AuthLogoComponent
+            src={facebookLogo}
+            text="Facebook"
+            onPress={facebook}
+          />
         </View>
 
         <RowComponent styles={{marginTop: 30}}>
@@ -107,6 +111,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: 20,
+    rowGap: 10,
   },
   text: {
     fontSize: 20,
