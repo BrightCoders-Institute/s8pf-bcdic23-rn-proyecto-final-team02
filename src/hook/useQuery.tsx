@@ -12,6 +12,7 @@ const useQuery = () => {
     email: '',
     password: '',
     phone: '',
+    gender: '',
     address: '',
     photo: '',
     working: false,
@@ -21,12 +22,12 @@ const useQuery = () => {
   });
 
   // Estado para dar tiempo a cargar los datos
-  const [changeLoading, setChangeLoading] = useState(false);
+  // const [changeLoading, setChangeLoading] = useState(false);
 
   const createUser = async () => {
     try {
       const userId = auth().currentUser?.uid;
-      await firestore().collection('users_data').doc(userId).set(user);
+      await firestore().collection('users_data').add(user);
     } catch (error) {
       console.error(error);
     }

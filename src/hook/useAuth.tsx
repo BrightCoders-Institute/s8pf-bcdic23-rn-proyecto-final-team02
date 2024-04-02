@@ -8,6 +8,7 @@ import {
 const useAuth = () => {
   // Variables para registrar al usuario
   const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPass, setConfirmPass] = useState<string>('');
 
@@ -109,6 +110,8 @@ const useAuth = () => {
   return {
     email,
     setEmail,
+    phone,
+    setPhone,
     password,
     setPassword,
     confirmPass,

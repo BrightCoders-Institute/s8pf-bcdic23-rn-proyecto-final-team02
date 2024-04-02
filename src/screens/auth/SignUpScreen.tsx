@@ -15,20 +15,26 @@ import {
 import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
+import useQuery from '../../hook/useQuery';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {WEBCLIENT_ID} from '@env';
+import auth from '@react-native-firebase/auth';
 
 const SignUpScreen = () => {
   const {
-    handleCreateUserWithEmail,
     email,
     setEmail,
+    phone,
+    setPhone,
     password,
     setPassword,
+    handleCreateUserWithEmail,
     handleGoogleLogin,
     changeLoading,
   } = useAuth();
+
+  const {user, setUser, createUser} = useQuery();
 
   const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
@@ -43,6 +49,22 @@ const SignUpScreen = () => {
     console.log('Facebook');
   };
 
+  const signUp = () => {
+    // Create user in firebase
+    handleCreateUserWithEmail();
+
+    // Save user data in react useState (Object)
+    setUser({
+      ...user,
+      email: email,
+      password: password,
+      phone: phone,
+    });
+
+    // Send user Object to firestore
+    createUser();
+  };
+
   const navigation = useNavigation();
   const {top} = useSafeAreaInsets();
 
@@ -52,7 +74,12 @@ const SignUpScreen = () => {
         <AppLogoComponent />
 
         <SectionComponent>
-          <InputComponent placeholder="Full name" keyboardType="default" />
+          <InputComponent
+            placeholder="Full name"
+            keyboardType="default"
+            value={user.name}
+            onChangeText={val => setUser({...user, name: val})}
+          />
           <InputComponent
             value={email}
             onChangeText={val => setEmail(val)}
@@ -67,8 +94,8 @@ const SignUpScreen = () => {
             secureTextEntry
           />
         </SectionComponent>
-        <DropdownField title="Gender" />
-        <ButtonComponent title="Sign Up" onPress={handleCreateUserWithEmail} />
+        <DropdownField title="Gender" user={user} />
+        <ButtonComponent title="Sign Up" onPress={signUp} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
