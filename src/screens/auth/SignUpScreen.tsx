@@ -54,12 +54,9 @@ const SignUpScreen = () => {
     handleCreateUserWithEmail();
 
     // Save user data in react useState (Object)
-    setUser({
-      ...user,
-      email: email,
-      password: password,
-      phone: phone,
-    });
+    user.email = email;
+    user.password = password;
+    user.phone = phone;
 
     // Send user Object to firestore
     createUser();
