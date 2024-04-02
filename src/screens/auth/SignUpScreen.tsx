@@ -18,7 +18,6 @@ import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {WEBCLIENT_ID} from '@env';
-import firestore from '@react-native-firebase/firestore';
 
 const SignUpScreen = () => {
   const {
