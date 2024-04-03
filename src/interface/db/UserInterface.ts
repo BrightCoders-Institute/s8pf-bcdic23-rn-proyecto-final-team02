@@ -15,10 +15,10 @@ export interface User {
 
 export interface Application {
   company: string;
-  state: 'Pending' | 'Rejected' | 'Accepted';
+  state: 'pending' | 'rejected' | 'accepted';
 }
 
 export interface Document {
-  name: 'Curriculum' | 'Aditional';
+  name: 'curriculum' | 'aditional';
   route: string;
 }
