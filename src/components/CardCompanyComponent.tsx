@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {TextComponent} from '../components';
 import {Company} from '../interface/companyinterface';
 import {globalStyles} from '../theme/globalTheme';
@@ -10,7 +10,7 @@ interface Props {
 
 const CardCompanyComponent = ({company}: Props) => {
   return (
-    <View style={[styles.card, globalStyles.shadow]}>
+    <TouchableOpacity style={[styles.card, globalStyles.shadow]}>
       <Image style={styles.imagen} source={company.picture} />
 
       <View style={styles.content}>
@@ -22,7 +22,7 @@ const CardCompanyComponent = ({company}: Props) => {
           size={14}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

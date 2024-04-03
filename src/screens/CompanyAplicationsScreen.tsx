@@ -17,13 +17,13 @@ import {
 } from '../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {globalStyles} from '../theme/globalTheme';
-import { CompanyAplicationsData } from '../data/CompanyAplicationsData';
+import {CompanyAplicationsData} from '../data/CompanyAplicationsData';
 
 const UserAplicationsScreen = () => {
   const {top} = useSafeAreaInsets();
 
   return (
-    <ContainerComponent >
+    <ContainerComponent>
       <View style={Platform.OS === 'ios' ? {top: top + 15} : {}}>
         <SectionComponent styles={{alignItems: 'center'}}>
           <TextComponent
@@ -34,14 +34,13 @@ const UserAplicationsScreen = () => {
           />
         </SectionComponent>
 
-          <FlatList 
+        <FlatList
           data={CompanyAplicationsData}
           keyExtractor={company => company.id}
           renderItem={({item}) => (
             <CardCompanyAplicationComponent CompanyAplications={item} />
           )}
         />
-
       </View>
     </ContainerComponent>
   );
