@@ -14,6 +14,7 @@ import {
   NotificationScreen,
   UserAplicationsScreen,
   CompanyAplicationsScreen,
+  MapScreen,
 } from '../screens';
 import {
   BottomTabNavigationConfig,
@@ -52,7 +53,7 @@ const StackNavigation = () => {
         }}>
         {user ? (
           <>
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Inicio" component={UserBottomTab} />
           </>
         ) : (
           <>
@@ -117,7 +118,7 @@ const UserBottomTab = () => {
       />
       <TabButtonUser.Screen
         name="Mapa"
-        component={UserAplicationsScreen}
+        component={MapScreen}
         options={{
           tabBarIcon: ({focused}) => {
             return (

@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import InputComponent from '../../components/InputComponent';
@@ -15,18 +15,48 @@ import {
 import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
+import useQuery from '../../hook/useQuery';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {WEBCLIENT_ID} from '@env';
 
 const SignUpScreen = () => {
-  const {handleCreateUserWithEmail, email, setEmail, password, setPassword} =
-    useAuth();
+  const {
+    email,
+    setEmail,
+    phone,
+    setPhone,
+    password,
+    setPassword,
+    handleCreateUserWithEmail,
+    handleGoogleSignUp,
+    changeLoading,
+  } = useAuth();
+
+  const {user, setUser, createUser} = useQuery();
 
   const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
 
-  const google = () => {
-    console.log('Google');
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: WEBCLIENT_ID,
+    });
+  }, []);
+
+  const signUp = () => {
+    // Create user in firebase
+    handleCreateUserWithEmail().finally(() => {
+      // Save user data in react useState (Object)
+      user.email = email;
+      user.password = password;
+      user.phone = phone;
+
+      // Send user Object to firestore
+      createUser();
+    });
   };
+
   const facebook = () => {
     console.log('Facebook');
   };
@@ -40,7 +70,12 @@ const SignUpScreen = () => {
         <AppLogoComponent />
 
         <SectionComponent>
-          <InputComponent placeholder="Full name" keyboardType="default" />
+          <InputComponent
+            placeholder="Full name"
+            keyboardType="default"
+            value={user.name}
+            onChangeText={val => setUser({...user, name: val})}
+          />
           <InputComponent
             value={email}
             onChangeText={val => setEmail(val)}
@@ -55,13 +90,23 @@ const SignUpScreen = () => {
             secureTextEntry
           />
         </SectionComponent>
-        <DropdownField title="Gender" />
-        <ButtonComponent title="Sign Up" onPress={handleCreateUserWithEmail} />
+        <DropdownField title="Gender" user={user} />
+        <ButtonComponent title="Sign Up" onPress={signUp} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
-          <AuthLogoComponent src={googleLogo} onPress={google} />
-          <AuthLogoComponent src={facebookLogo} onPress={facebook} />
+          <AuthLogoComponent
+            src={googleLogo}
+            text="Up with Google"
+            onPress={handleGoogleSignUp}
+            disabled={changeLoading}
+          />
+          <AuthLogoComponent
+            src={facebookLogo}
+            text="Up with Facebook"
+            onPress={facebook}
+            disabled={changeLoading}
+          />
         </View>
 
         <RowComponent styles={{marginTop: 30}}>
@@ -84,9 +129,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   iconGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginTop: 20,
+    rowGap: 10,
   },
   text: {
     fontSize: 20,

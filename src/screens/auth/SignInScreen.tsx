@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Platform} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import {
@@ -13,8 +13,12 @@ import {
 } from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from '@react-native-google-signin/google-signin';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {WEBCLIENT_ID} from '@env';
 
 const SignInScreen = () => {
   const {
@@ -24,17 +28,17 @@ const SignInScreen = () => {
     password,
     setPassword,
     handleGoogleLogin,
+    changeLoading,
   } = useAuth();
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId:
-        '456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com',
+      webClientId: WEBCLIENT_ID,
     });
   }, []);
 
-  const googleLogo = require('../../assets/img/google.webp');
   const facebookLogo = require('../../assets/img/facebook.webp');
+  const googleLogo = require('../../assets/img/google.webp');
 
   const facebook = () => {
     console.log('Facebook');
@@ -53,7 +57,7 @@ const SignInScreen = () => {
             onChangeText={val => setEmail(val)}
             placeholder="Email or Phone"
             keyboardType="default"
-           />
+          />
           <InputComponent
             value={password}
             onChangeText={val => setPassword(val)}
@@ -68,12 +72,22 @@ const SignInScreen = () => {
           size={20}
           font="bold"
         />
-        <ButtonComponent title="Sign In" onPress={() => handleSigInWithEmail(navigation)} />
+        <ButtonComponent title="Sign In" onPress={handleSigInWithEmail} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
-          <AuthLogoComponent src={googleLogo} onPress={handleGoogleLogin} />
-          <AuthLogoComponent src={facebookLogo} onPress={facebook} />
+          <AuthLogoComponent
+            src={googleLogo}
+            text="In with Google"
+            onPress={handleGoogleLogin}
+            disabled={changeLoading}
+          />
+          <AuthLogoComponent
+            src={facebookLogo}
+            text="In with Facebook"
+            onPress={facebook}
+            disabled={changeLoading}
+          />
         </View>
 
         <RowComponent styles={{marginTop: 30}}>
@@ -96,9 +110,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   iconGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginTop: 20,
+    rowGap: 10,
   },
   text: {
     fontSize: 20,
