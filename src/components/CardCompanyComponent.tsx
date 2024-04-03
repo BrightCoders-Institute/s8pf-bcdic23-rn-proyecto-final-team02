@@ -1,9 +1,8 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {TextComponent} from '../components';
 import {Company} from '../interface/companyinterface';
 import {globalStyles} from '../theme/globalTheme';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 interface Props {
   company: Company;

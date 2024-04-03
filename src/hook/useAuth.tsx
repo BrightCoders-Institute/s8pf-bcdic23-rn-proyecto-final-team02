@@ -64,7 +64,7 @@ const useAuth = () => {
         .signOut()
         .then(() => Alert.alert('Información', 'Se ha cerrado la sesión'));
     } catch (error) {
-      console.error(error);
+      Alert.alert('Error', `${error}`);
     }
   };
 
@@ -79,7 +79,7 @@ const useAuth = () => {
         })
         .catch((err: any) => {
           setChangeLoading(false);
-          console.log(err.message);
+          Alert.alert('Error', `${err.message}`);
         });
     } else Alert.alert('Alerta', 'Ingresa tu correo electrónico');
   };

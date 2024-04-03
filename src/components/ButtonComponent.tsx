@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Text,
   TouchableOpacity,
   StyleSheet,
   GestureResponderEvent,
 } from 'react-native';
+import {TextComponent} from '.';
 
 const ButtonComponent = ({
   title,
@@ -15,7 +15,7 @@ const ButtonComponent = ({
 }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.title}>{title}</Text>
+      <TextComponent styles={styles.title} text={title} />
     </TouchableOpacity>
   );
 };

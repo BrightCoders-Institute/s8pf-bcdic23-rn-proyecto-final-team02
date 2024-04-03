@@ -1,5 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import {User} from '../../interface/db/UserInterface';
+import {Alert} from 'react-native';
 
 interface UserGoogle {
   email: string;
@@ -36,6 +37,6 @@ export const createUserGoogle = async (
 
     await firestore().collection('users_data').doc(userId).set(user);
   } catch (error) {
-    console.error(error);
+    Alert.alert('Error', `${error}`);
   }
 };

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import {User} from '../interface/db/UserInterface';
+import { TextComponent } from '.';
 
 const genders = [
   {label: 'male', value: '1'},
@@ -15,7 +16,7 @@ const DropDownComponent = ({title, user}: {title: string; user: User}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      <TextComponent styles={styles.title} text={title} />
       <Dropdown
         style={styles.input}
         itemTextStyle={{textTransform: 'capitalize'}}

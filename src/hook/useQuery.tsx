@@ -27,10 +27,9 @@ const useQuery = () => {
   const createUser = async () => {
     try {
       const userId = auth().currentUser?.uid;
-      console.log(auth().currentUser?.uid);
       await firestore().collection('users_data').doc(userId).set(user);
     } catch (error) {
-      console.error(error);
+      Alert.alert('Error', `${error}`);
     }
   };
 

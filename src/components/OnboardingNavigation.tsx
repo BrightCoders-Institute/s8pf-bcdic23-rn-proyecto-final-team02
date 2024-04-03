@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet, Touchable, TouchableOpacity} from 'react-native';
+import { TextComponent } from '.';
 
 const Nav = ({activeScreen}: {activeScreen: number}) => {
   return (
@@ -24,7 +25,7 @@ const OnboardingNavigation = ({
     <View style={[styles.navigation, styles.flexRow]}>
       <Nav activeScreen={activeScreen} />
       <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonText}>--></Text>
+        <TextComponent styles={styles.buttonText} text="-->" />
       </TouchableOpacity>
     </View>
   );
