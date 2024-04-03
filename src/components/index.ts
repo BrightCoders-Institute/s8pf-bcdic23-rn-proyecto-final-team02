@@ -11,6 +11,8 @@ import CardCompanyComponent from './CardCompanyComponent';
 import SectionComponent from './SectionComponent';
 import CardUserAplicationComponent from './CardUserAplicationComponent';
 import CardCompanyAplicationComponent from './CardCompanyAplicationComponent';
+import MapComponent from './MapComponent';
+import FabComponent from './FabComponent';
 
 
 
@@ -28,5 +30,7 @@ export {
   SectionComponent,
   CardUserAplicationComponent,
   CardCompanyAplicationComponent,
+  MapComponent,
+  FabComponent,
 };
 
