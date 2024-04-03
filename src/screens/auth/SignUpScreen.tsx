@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import InputComponent from '../../components/InputComponent';
@@ -19,7 +19,6 @@ import useQuery from '../../hook/useQuery';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {WEBCLIENT_ID} from '@env';
-import auth from '@react-native-firebase/auth';
 
 const SignUpScreen = () => {
   const {
@@ -30,7 +29,7 @@ const SignUpScreen = () => {
     password,
     setPassword,
     handleCreateUserWithEmail,
-    handleGoogleLogin,
+    handleGoogleSignUp,
     changeLoading,
   } = useAuth();
 
@@ -45,21 +44,21 @@ const SignUpScreen = () => {
     });
   }, []);
 
-  const facebook = () => {
-    console.log('Facebook');
-  };
-
   const signUp = () => {
     // Create user in firebase
-    handleCreateUserWithEmail();
+    handleCreateUserWithEmail().finally(() => {
+      // Save user data in react useState (Object)
+      user.email = email;
+      user.password = password;
+      user.phone = phone;
 
-    // Save user data in react useState (Object)
-    user.email = email;
-    user.password = password;
-    user.phone = phone;
+      // Send user Object to firestore
+      createUser();
+    });
+  };
 
-    // Send user Object to firestore
-    createUser();
+  const facebook = () => {
+    console.log('Facebook');
   };
 
   const navigation = useNavigation();
@@ -99,7 +98,7 @@ const SignUpScreen = () => {
           <AuthLogoComponent
             src={googleLogo}
             text="Up with Google"
-            onPress={handleGoogleLogin}
+            onPress={handleGoogleSignUp}
             disabled={changeLoading}
           />
           <AuthLogoComponent

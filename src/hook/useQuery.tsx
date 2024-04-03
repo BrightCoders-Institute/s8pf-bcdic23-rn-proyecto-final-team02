@@ -5,7 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 import {User} from '../interface/db/UserInterface';
 
 const useQuery = () => {
-  // Variables para registrar al usuario
+  // User data
   const [user, setUser] = useState<User>({
     name: '',
     last_name: '',
@@ -18,16 +18,17 @@ const useQuery = () => {
     working: false,
 
     applications: [],
-    docuemtens: [],
+    documents: [],
   });
 
-  // Estado para dar tiempo a cargar los datos
+  // Loading state
   // const [changeLoading, setChangeLoading] = useState(false);
 
   const createUser = async () => {
     try {
       const userId = auth().currentUser?.uid;
-      await firestore().collection('users_data').add(user);
+      console.log(auth().currentUser?.uid);
+      await firestore().collection('users_data').doc(userId).set(user);
     } catch (error) {
       console.error(error);
     }

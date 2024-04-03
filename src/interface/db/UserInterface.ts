@@ -10,7 +10,7 @@ export interface User {
   working: boolean;
 
   applications: Application[];
-  docuemtens: Document[];
+  documents: Document[];
 }
 
 export interface Application {

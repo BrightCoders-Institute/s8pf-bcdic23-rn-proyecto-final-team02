@@ -5,6 +5,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import {createUserGoogle} from '../helpers/db/createUserGoogle';
 const useAuth = () => {
   // Variables para registrar al usuario
   const [email, setEmail] = useState<string>('');
@@ -107,6 +108,36 @@ const useAuth = () => {
     }
   };
 
+  const handleGoogleSignUp = async () => {
+    try {
+      setChangeLoading(true);
+
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      const {idToken, user} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+      setChangeLoading(false);
+
+      return auth()
+        .signInWithCredential(googleCredential)
+        .finally(() => {
+          // Use helper to create user in the firestore
+          createUserGoogle(user, auth().currentUser?.uid);
+        });
+    } catch (error: any) {
+      setChangeLoading(false);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        Alert.alert('Alerta', 'Registro interrumpido');
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        Alert.alert('Alerta', 'Registro en progreso');
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        Alert.alert('Alerta', 'Servicios de google NO DISPLINIBLES');
+      } else {
+        Alert.alert('Alerta', 'Registro fallido');
+      }
+    }
+  };
+
   return {
     email,
     setEmail,
@@ -121,6 +152,7 @@ const useAuth = () => {
     handleCreateUserWithEmail,
     handleForgetPassword,
     handleGoogleLogin,
+    handleGoogleSignUp,
     handleSignOut,
   };
 };
