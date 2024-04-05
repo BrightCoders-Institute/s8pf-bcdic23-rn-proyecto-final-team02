@@ -4,7 +4,7 @@ export const WorkDetails =[
         logo: require('../assets/pepsi-logo.jpg'),
         company:'PepsiCo',
         work: require('../assets/img/PepsiCo-work-1.webp'),
-        job: 'Truck Driver',
+        job: 'Pepsi Truck Driver',
         location: 'Colima/Villa de Alvarez',
         jobType: 'Full Time',
         salary:'Competitive',

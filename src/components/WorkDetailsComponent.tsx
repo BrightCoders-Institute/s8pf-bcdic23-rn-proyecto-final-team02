@@ -19,12 +19,19 @@ const WorkDetailsComponent = ({workdetails}: Props) => {
         </View>
       </RowComponent>
       <View style={styles.content}>
-        <TextComponent text={workdetails.work} color="black" font="600" size={14} />
-        <TextComponent text={workdetails.location} color="black" font="400" size={11} />
-        <TextComponent text={workdetails.jobType} color="black" font="400" size={11} />
+      <View
+          style={{
+            height: 2,
+            width: 296,
+            backgroundColor: '#3825AE',
+            marginBottom: 10,
+            borderRadius: 10,
+          }}
+        />
         <TextComponent text={workdetails.job} color="black" font="600" size={14} />
-        <TextComponent text={workdetails.location} color="black" font="400" size={11} />
-        <TextComponent text={workdetails.jobType} color="black" font="400" size={11} />
+        <TextComponent text={`Location: ${workdetails.location}`} color="black" font="400" size={11} />
+        <TextComponent text={`Job Type: ${workdetails.jobType}`} color="black" font="400" size={11} />
+        <TextComponent text={`Salary: ${workdetails.salary}`} color="black" font="400" size={11} />
         <TextComponent text="Company Overview" color="black" font="600" size={14} />    
         <TextComponent text={workdetails.companyOverview} color="black" font="400" size={11} />
         <TextComponent text="Job Description" color="black" font="600" size={14} />
@@ -82,8 +89,8 @@ const styles = StyleSheet.create({
       width: 338,
     },
     logo: {
-      width: 43,
-      height: 43,
+      width: 25,
+      height: 25,
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
     },
