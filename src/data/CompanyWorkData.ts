@@ -1,8 +1,9 @@
 export const CompanyWorkData = [
     {
         id:'1',
+        company:' PepsiCo',
         logo: require('../assets/pepsi-logo.jpg'),
-        branch:'Colimas Branch',
+        branch:'Colima',
         work: require('../assets/img/PepsiCo-work-1.webp'),
         job:'Truck driver',
         salary:'MX 2000',
@@ -11,8 +12,9 @@ export const CompanyWorkData = [
     },
     {
         id:'2',
+        company:' PepsiCo',
         logo:require('../assets/pepsi-logo.jpg'),
-        branch:'Villa de Alvarezs Branch',
+        branch:'Villa de Alvarez',
         work: require('../assets/img/PepsiCo-work-2.webp'),
         job:'Truck driver',
         salary:'MX 1800',
@@ -21,8 +23,9 @@ export const CompanyWorkData = [
     },
     {
         id:'3',
+        company:' PepsiCo',
         logo:require('../assets/pepsi-logo.jpg'),
-        branch:'Manzanillos Branch',
+        branch:'Manzanillo',
         work: require('../assets/img/PepsiCo-work-3.webp'),
         job:'Seller',
         salary:'MX 2200',

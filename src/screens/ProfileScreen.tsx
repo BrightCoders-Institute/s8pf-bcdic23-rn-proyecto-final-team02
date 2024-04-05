@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Platform,
@@ -15,10 +15,20 @@ import {
 } from '../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {globalStyles} from '../theme/globalTheme';
+import useAuth from '../hook/useAuth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const ProfileScreen = () => {
   const {top} = useSafeAreaInsets();
   const photo = require('../assets/user-male-avatar.webp');
+  const {handleSignOut} = useAuth();
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com',
+    });
+  }, []);
 
   return (
     <ContainerComponent isScroll>
@@ -131,6 +141,25 @@ const ProfileScreen = () => {
             </RowComponent>
           </TouchableOpacity>
         </SectionComponent>
+
+        <RowComponent
+          styles={[
+            styles.sections,
+            {height: 50, alignContent: 'center', alignItems: 'center'},
+          ]}
+          onPress={handleSignOut}>
+          <TextComponent
+            text="Sign out"
+            font="bold"
+            size={16}
+            styles={{marginLeft: 16}}
+          />
+          <IconComponent
+            name="log-out-outline"
+            color="black"
+            styles={{marginRight: 16}}
+          />
+        </RowComponent>
 
         <RowComponent
           styles={[

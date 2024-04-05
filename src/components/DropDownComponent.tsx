@@ -1,32 +1,36 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
+import {User} from '../interface/db/UserInterface';
+import { TextComponent } from '.';
 
 const genders = [
-  {label: 'Male', value: '1'},
-  {label: 'Female', value: '2'},
-  {label: 'Nonbinary', value: '3'},
+  {label: 'male', value: '1'},
+  {label: 'female', value: '2'},
+  {label: 'nonbinary', value: '3'},
 ];
 
-const DropDownComponent = ({title}: {title: string}) => {
-  const [value, setValue] = useState('');
+const DropDownComponent = ({title, user}: {title: string; user: User}) => {
   const [isFocus, setIsFocus] = useState(false);
+  let genderValue = '';
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      <TextComponent styles={styles.title} text={title} />
       <Dropdown
         style={styles.input}
+        itemTextStyle={{textTransform: 'capitalize'}}
         selectedTextStyle={styles.selectedTextStyle}
         data={genders}
         labelField="label"
         valueField="value"
         placeholder=""
-        value={value}
+        value={genderValue}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={item => {
-          setValue(item.value);
+          genderValue = item.value;
+          user.gender = item.label;
           setIsFocus(false);
         }}
       />
@@ -52,6 +56,7 @@ const styles = StyleSheet.create({
   selectedTextStyle: {
     fontSize: 18,
     color: 'black',
+    textTransform: 'capitalize',
   },
 });
 

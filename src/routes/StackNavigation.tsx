@@ -1,18 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
 import {
-  OnboardingScreen,
-  SplashScreen,
+  // OnboardingScreen,
   SignInScreen,
   SignUpScreen,
   HomeScreen,
   MessagesScreen,
   ProfileScreen,
   NotificationScreen,
+  UserAplicationsScreen,
+  CompanyAplicationsScreen,
+  MapScreen,
 } from '../screens';
 import {
   BottomTabNavigationConfig,
@@ -25,22 +27,42 @@ const Stack = createStackNavigator();
 const TabButtonUser = createBottomTabNavigator();
 
 const StackNavigation = () => {
+  const [initializing, setInitializing] = useState<Boolean>(true);
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>();
+
+  function onAuthStateChanged(
+    user: React.SetStateAction<FirebaseAuthTypes.User | null | undefined>,
+  ): void {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
   useEffect(() => {
-    setTimeout(() => {}, 2000);
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
   }, []);
+
+  if (initializing) return null;
 
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Inicio"
+        // initialRouteName="Inicio"
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Inicio" component={UserBottomTab} />
+        {user ? (
+          <>
+            <Stack.Screen name="Inicio" component={UserBottomTab} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+          </>
+        )}
+
+        {/* <Stack.Screen name="Onboarding" component={OnboardingScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -73,7 +95,6 @@ const UserBottomTab = () => {
             return (
               <View style={styles.iconContainer}>
                 <IconComponent name="home" color={focused ? 'red' : 'white'} />
-                <TextComponent text="Home" color={focused ? 'red' : 'white'} />
               </View>
             );
           },
@@ -90,8 +111,20 @@ const UserBottomTab = () => {
                   name="notifications"
                   color={focused ? 'red' : 'white'}
                 />
-                <TextComponent
-                  text="Alerts"
+              </View>
+            );
+          },
+        }}
+      />
+      <TabButtonUser.Screen
+        name="Mapa"
+        component={MapScreen}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View style={styles.iconContainer}>
+                <IconComponent
+                  name="map-outline"
                   color={focused ? 'red' : 'white'}
                 />
               </View>
@@ -110,10 +143,6 @@ const UserBottomTab = () => {
                   name="chatbubble"
                   color={focused ? 'red' : 'white'}
                 />
-                <TextComponent
-                  text="Messages"
-                  color={focused ? 'red' : 'white'}
-                />
               </View>
             );
           },
@@ -128,10 +157,6 @@ const UserBottomTab = () => {
               <View style={styles.iconContainer}>
                 <IconComponent
                   name="person"
-                  color={focused ? 'red' : 'white'}
-                />
-                <TextComponent
-                  text="Profile"
                   color={focused ? 'red' : 'white'}
                 />
               </View>
