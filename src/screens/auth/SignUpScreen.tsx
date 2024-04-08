@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
@@ -44,6 +44,12 @@ const SignUpScreen = () => {
     });
   }, []);
 
+  const [showCompanyForm, setShowCompanyForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowCompanyForm(!showCompanyForm);
+  };
+
   const signUp = () => {
     // Create user in firebase
     handleCreateUserWithEmail().finally(() => {
@@ -70,54 +76,144 @@ const SignUpScreen = () => {
         <AppLogoComponent />
 
         <SectionComponent>
+          <RowComponent styles={styles.row}>
+            <RowComponent
+              styles={showCompanyForm ? styles.workerInactive : styles.worker}
+              onPress={toggleForm}
+              isCenter>
+              <TextComponent text="Worker" color="white" size={24} font="bold" />
+            </RowComponent>
+
+            <RowComponent
+              styles={showCompanyForm ? styles.company : styles.companyInactive}
+              onPress={toggleForm}
+              isCenter>
+              <TextComponent text="Company" color="white" size={24} font="bold" />
+            </RowComponent>
+          </RowComponent>
+
+          {showCompanyForm ? (
+            // Aquí va el formulario para la empresa
+            <View>
+          <TextComponent styles = {styles.input}
+            text="Name"
+          />
           <InputComponent
-            placeholder="Full name"
             keyboardType="default"
             value={user.name}
             onChangeText={val => setUser({...user, name: val})}
           />
+
+          <TextComponent styles = {styles.input}
+              text="Email"
+            />
+
           <InputComponent
             value={email}
             onChangeText={val => setEmail(val)}
-            placeholder="Email or Phone"
             keyboardType="email-address"
           />
+
+          <TextComponent styles = {styles.input}
+              text="Password"
+            />
+
           <InputComponent
             value={password}
             onChangeText={val => setPassword(val)}
-            placeholder="Password"
             keyboardType="default"
             secureTextEntry
           />
-        </SectionComponent>
+
+          <TextComponent styles = {styles.input}
+              text="Password Confirmation"
+            />
+
+          <InputComponent
+            value={password}
+            onChangeText={val => setPassword(val)}
+            keyboardType="default"
+            secureTextEntry
+          />
+
+            </View>
+          ) : (
+            // formulario para el trabajador
+            <View>
+         <TextComponent styles = {styles.input}
+            text="First name"
+          />
+          <InputComponent
+            keyboardType="default"
+            value={user.name}
+            onChangeText={val => setUser({...user, name: val})}
+          />
+
+          <TextComponent styles = {styles.input}
+            text="Last name"
+          />
+          <InputComponent
+            keyboardType="default"
+            value={user.name}
+            onChangeText={val => setUser({...user, name: val})}
+          />
+
+          <TextComponent styles = {styles.input}
+              text="Email"
+            />
+
+          <InputComponent
+            value={email}
+            onChangeText={val => setEmail(val)}
+            keyboardType="email-address"
+          />
+
+          <TextComponent styles = {styles.input}
+              text="Password"
+            />
+
+          <InputComponent
+            value={password}
+            onChangeText={val => setPassword(val)}
+            keyboardType="default"
+            secureTextEntry
+          />
+
+          <TextComponent styles = {styles.input}
+              text="Password Confirmation"
+            />
+
+          <InputComponent
+            value={password}
+            onChangeText={val => setPassword(val)}
+            keyboardType="default"
+            secureTextEntry
+          />
+
         <DropdownField title="Gender" user={user} />
+            </View>
+          )}
+        </SectionComponent>
+
         <ButtonComponent title="Sign Up" onPress={signUp} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
-            text="Up with Google"
+            text="Google"
             onPress={handleGoogleSignUp}
-            disabled={changeLoading}
-          />
-          <AuthLogoComponent
-            src={facebookLogo}
-            text="Up with Facebook"
-            onPress={facebook}
             disabled={changeLoading}
           />
         </View>
 
-        <RowComponent styles={{marginTop: 30}}>
-          <TextComponent text="Already have an account? " />
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={{marginLeft: 5}}
-            onPress={() => navigation.navigate('SignIn')}>
-            <TextComponent text="Sign In" font="bold" />
-          </TouchableOpacity>
-        </RowComponent>
+        <TextComponent text="Already have an account? " styles={styles.text} />
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={{marginLeft: 5}}
+          onPress={() => navigation.navigate('SignIn')}>
+          <TextComponent text="Sign In" font="bold" styles={styles.button} />
+        </TouchableOpacity>
       </View>
     </ContainerComponent>
   );
@@ -144,6 +240,46 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },
+  input: {
+    color: '#161616',
+    fontSize: 20,
+    marginBottom: 8,
+  },
+  button: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'black',
+  },
+  worker: {
+    backgroundColor: '#1F1650',
+    height: 40,
+    width: 186,
+    borderRadius: 10,
+  },
+  company: {
+    backgroundColor: '#6C63FF',
+    height: 40,
+    width: 186,
+    borderRadius: 10,
+  },
+  row: {
+    gap: 9,
+    marginTop: 30,
+    marginBottom: 30,
+  },
+  workerInactive: {
+    backgroundColor: '#ccc',
+    height: 40,
+    width: 186,
+    borderRadius: 10,
+  },
+  companyInactive: {
+    backgroundColor: '#ccc',
+    height: 40,
+    width: 186,
+    borderRadius: 10,
+  },
 });
 
 export default SignUpScreen;
+

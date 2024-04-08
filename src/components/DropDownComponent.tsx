@@ -45,13 +45,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: '#161616',
+    marginBottom: 12,
   },
   input: {
     borderBottomWidth: 2,
-    borderBottomColor: '#9F99FF',
-    width: 361,
-    height: 50,
-    padding: 10,
+    borderBottomColor: '#6C63FF',
+    width: 376,
+    height: 41,
+    padding: 5,
+    borderRadius: 3,
+    backgroundColor: '#FFFFFF',
   },
   selectedTextStyle: {
     fontSize: 18,

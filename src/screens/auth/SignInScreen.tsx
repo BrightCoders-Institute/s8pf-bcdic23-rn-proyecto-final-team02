@@ -52,21 +52,38 @@ const SignInScreen = () => {
       <View style={Platform.OS === 'ios' ? {top: top} : {}}>
         <AppLogoComponent />
         <SectionComponent styles={{marginTop: 10}}>
+
+        <TextComponent styles = {styles.input}
+          text="Email"
+        />
           <InputComponent
             value={email}
             onChangeText={val => setEmail(val)}
-            placeholder="Email or Phone"
             keyboardType="default"
           />
+        <TextComponent styles = {styles.input}
+          text="Password"
+        />
           <InputComponent
             value={password}
             onChangeText={val => setPassword(val)}
-            placeholder="Password"
             keyboardType="default"
             secureTextEntry
           />
+
+          <TextComponent styles = {styles.input}
+              text="Password Confirmation"
+            />
+
+          <InputComponent
+            value={password}
+            onChangeText={val => setPassword(val)}
+            keyboardType="default"
+            secureTextEntry
+          />
+
         </SectionComponent>
-        <TextComponent
+        <TextComponent styles = {styles.text}
           text="Forgot password?"
           color="black"
           size={20}
@@ -82,23 +99,16 @@ const SignInScreen = () => {
             onPress={handleGoogleLogin}
             disabled={changeLoading}
           />
-          <AuthLogoComponent
-            src={facebookLogo}
-            text="In with Facebook"
-            onPress={facebook}
-            disabled={changeLoading}
-          />
         </View>
 
-        <RowComponent styles={{marginTop: 30}}>
-          <TextComponent text="Already have an account? " />
+          <TextComponent text="Already have an account? " styles={styles.text}/>
+          
           <TouchableOpacity
             activeOpacity={0.8}
             style={{marginLeft: 5}}
             onPress={() => navigation.navigate('SignUp')}>
-            <TextComponent text="SignUp" font="bold" />
+            <TextComponent text="Sign Up" font="bold" size={20} styles={styles.button}/>
           </TouchableOpacity>
-        </RowComponent>
       </View>
     </ContainerComponent>
   );
@@ -124,6 +134,16 @@ const styles = StyleSheet.create({
   span: {
     fontWeight: 'bold',
     textTransform: 'uppercase',
+  },
+  input:{
+    color:"#161616",
+    fontSize:20,
+    marginBottom:8,
+  },
+  button:{
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'black',
   },
 });
 

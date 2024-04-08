@@ -37,11 +37,13 @@ const InputComponent = (props: TextInputProps) => {
 
 export const stylesInput = StyleSheet.create({
   inputContainer: {
-    backgroundColor: '#fafafa',
-    borderRadius: 10,
-    padding: 10,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 3,
+    padding: 5,
     justifyContent: 'space-between',
     marginBottom: 12,
+    borderBottomWidth: 2,
+    borderBottomColor: '#6C63FF'
   },
   input: {
     flex: 1,
