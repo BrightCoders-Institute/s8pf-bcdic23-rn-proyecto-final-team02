@@ -39,19 +39,25 @@ const useAuth = () => {
   };
 
   const handleCreateUserWithEmail = async () => {
-    if (email.length > 0 && password.length) {
-      setChangeLoading(true);
+    if (email.length > 0 && password.length > 0 && confirmPass.length > 0) {
+      if (password === confirmPass) {
 
-      await auth()
-        .createUserWithEmailAndPassword(email.trim(), password)
-        .then(userCredential => {
-          const user = userCredential.user;
-          setChangeLoading(false);
-        })
-        .catch((err: any) => {
-          Alert.alert(err.message);
-          setChangeLoading(false);
-        });
+        setChangeLoading(true);
+
+        await auth()
+          .createUserWithEmailAndPassword(email.trim(), password)
+          .then(userCredential => {
+            const user = userCredential.user;
+            setChangeLoading(false);
+          })
+          .catch((err: any) => {
+            Alert.alert(err.message);
+            setChangeLoading(false);
+          });
+      } else {
+        Alert.alert('Alerta', 'Las contraseñas no coinciden');
+        setChangeLoading(false);
+      }
     } else {
       Alert.alert('Alerta', 'Debes llenar todos los campos');
     }
