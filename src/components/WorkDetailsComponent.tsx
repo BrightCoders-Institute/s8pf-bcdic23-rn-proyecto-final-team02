@@ -3,15 +3,14 @@ import {View, Image, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {RowComponent, TextComponent, IconComponent, ContainerComponent } from '../components';
-import {globalStyles} from '../theme/globalTheme';
-import { WorkDetails } from '../interface/workdetailsinterface';
+import { CompanyWork } from '../interface/companyworkinterface';
 
 
 interface Props {
-  workdetails: WorkDetails;
+  companyWork: CompanyWork;
 }
 
-const WorkDetailsComponent = ({workdetails}: Props) => {
+const WorkDetailsComponent = ({companyWork}: Props) => {
 
   const {top} = useSafeAreaInsets();
   
@@ -21,9 +20,9 @@ const WorkDetailsComponent = ({workdetails}: Props) => {
     
     <ContainerComponent isScroll styles={styles.card}>
       <RowComponent>
-        <Image style={styles.logo} source={workdetails.logo} />
+        <Image style={styles.logo} source={companyWork.logo} />
         <View style={{paddingHorizontal: 10}}>
-          <TextComponent text={workdetails.company} color="black" font="700" size={16} />
+          <TextComponent text={companyWork.company} color="black" font="700" size={16} />
         </View>
       </RowComponent>
 
@@ -38,35 +37,35 @@ const WorkDetailsComponent = ({workdetails}: Props) => {
         />
       </View>
 
-      <TextComponent text={workdetails.job} color="black" font="600" size={14} />
+      <TextComponent text={companyWork.job} color="black" font="600" size={14} />
         <RowComponent styles={styles.iconRow}>
             <IconComponent name="location-outline" color='black' size={18}/>
-            <TextComponent text={`Location: ${workdetails.location}`} color="black" font="400" size={11} />
+            <TextComponent text={`Location: ${companyWork.branch}`} color="black" font="400" size={11} />
         </RowComponent>
         <RowComponent styles={styles.iconRow}>
             <IconComponent name="briefcase-outline" color='black' size={18}/>
-            <TextComponent text={`Job Type: ${workdetails.jobType}`} color="black" font="400" size={11} />
+            <TextComponent text={`Job Type: ${companyWork.jobtype}`} color="black" font="400" size={11} />
         </RowComponent>
         <RowComponent styles={styles.iconRow}>
           <IconComponent name="cash-outline" color='black' size={18}/>
-          <TextComponent text={`Salary: ${workdetails.salary}`} color="black" font="400" size={11} />
+          <TextComponent text={`Salary: ${companyWork.salarytype}`} color="black" font="400" size={11} />
         </RowComponent>
         <RowComponent styles={styles.iconRowTitle}>
           <TextComponent text="Company Overview" color="black" font="600" size={14} />
           <IconComponent name="business-outline" color='black' size={18}/> 
         </RowComponent>
-        <TextComponent text={workdetails.companyOverview} color="black" font="400" size={11} styles={styles.description} />
+        <TextComponent text={companyWork.companyOverview} color="black" font="400" size={11} styles={styles.description} />
         <RowComponent styles={styles.iconRowTitle}>
             <TextComponent text="Job Description" color="black" font="600" size={14} />
             <IconComponent name="clipboard-outline" color='black' size={18}/>
         </RowComponent>
-        <TextComponent text={workdetails.jobDescription} color="black" font="400" size={11} styles={styles.description}/>
+        <TextComponent text={companyWork.jobDescription} color="black" font="400" size={11} styles={styles.description}/>
         <RowComponent styles={styles.iconRowTitle}>
           <TextComponent text="Key Responsibilities" color="black" font="600" size={14} />
           <IconComponent name="key-outline" color='black' size={18}/>
         </RowComponent>
 
-        {Array.isArray(workdetails.keyResponsibilities) && workdetails.keyResponsibilities.map((responsibility, index) => (
+        {Array.isArray(companyWork.keyResponsibilities) && companyWork.keyResponsibilities.map((responsibility, index) => (
           <TextComponent
             key={index}
             text={`\u2022 ${responsibility.item}`}
@@ -82,7 +81,7 @@ const WorkDetailsComponent = ({workdetails}: Props) => {
             <IconComponent name="trophy-outline" color='black' size={21}/>
         </RowComponent>      
 
-        {Array.isArray(workdetails.qualifications) && workdetails.qualifications.map((qualification, index) => (
+        {Array.isArray(companyWork.qualifications) && companyWork.qualifications.map((qualification, index) => (
           <TextComponent
             key={index}
             text={`\u2022 ${qualification.item}`}
@@ -96,7 +95,7 @@ const WorkDetailsComponent = ({workdetails}: Props) => {
             <TextComponent text="Benefits" color="black" font="600" size={14} />
             <IconComponent name="stats-chart-outline" color='black' size={18}/>
           </RowComponent>
-        {Array.isArray(workdetails.benefits) && workdetails.benefits.map((benefit, index) => (
+        {Array.isArray(companyWork.benefits) && companyWork.benefits.map((benefit, index) => (
           <TextComponent
             key={index}
             text={`\u2022 ${benefit.item}`}

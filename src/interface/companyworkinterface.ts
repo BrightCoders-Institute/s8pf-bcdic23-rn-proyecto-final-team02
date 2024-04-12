@@ -10,9 +10,9 @@ export interface CompanyWork {
     salarytype:string;
     date:string;
     time:string;
-    companyoverview:string;
-    jobdescription:string;
-    keyresponsibilities:string[];
-    qualifications:string[];
-    benefits:string[];
+    companyOverview:string;
+    jobDescription:string;
+    keyResponsibilities:string[any];
+    qualifications:string[any];
+    benefits:string[any];
 }

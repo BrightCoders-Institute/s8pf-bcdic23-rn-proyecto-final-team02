@@ -4,8 +4,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {WorkDetailsComponent} from '../components';
-import { WorkData } from '../data/WorkData';
-import {WorkDetails} from '../data/WorkDetails';
+import {CompanyWorkData} from '../data/CompanyWorkData';
 import {FlatList} from 'react-native-gesture-handler';
 
 const WorkDetailScreen = () => {
@@ -13,9 +12,9 @@ const WorkDetailScreen = () => {
         <View style={styles.container}>
             <View  style={{ marginLeft: 12, marginTop: 30 }}>
              <FlatList
-                data={WorkDetails}
-                keyExtractor={workdetails => workdetails.id}
-                renderItem={({ item }) => <WorkDetailsComponent workdetails={item} />}
+                data={CompanyWorkData}
+                keyExtractor={company => company.id}
+                renderItem={({ item }) => <WorkDetailsComponent companyWork={item} />}
             />
             </View>
         </View>
