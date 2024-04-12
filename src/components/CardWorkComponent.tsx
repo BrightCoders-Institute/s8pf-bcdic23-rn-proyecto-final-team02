@@ -1,16 +1,19 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {RowComponent, TextComponent} from '../components';
 import {Work} from '../interface/workInterface';
 import {globalStyles} from '../theme/globalTheme';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   work: Work;
 }
 
+const navigate = useNavigation()
+
 const CardWorkComponent = ({work}: Props) => {
   return (
-    <View style={[styles.card, globalStyles.shadow]}>
+    <TouchableOpacity style={[styles.card, globalStyles.shadow]} onPress={() => navigate.navigate('WorkDetailScreen')}>
       <Image style={styles.imagen} source={work.picture} />
       <View style={styles.content}>
         <TextComponent text={work.work} color="black" font="500" size={16} />
@@ -35,7 +38,7 @@ const CardWorkComponent = ({work}: Props) => {
           </View>
         </RowComponent>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
