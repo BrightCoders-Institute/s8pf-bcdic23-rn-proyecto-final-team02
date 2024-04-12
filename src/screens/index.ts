@@ -11,6 +11,7 @@ import ProfileScreen from './ProfileScreen';
 import UserAplicationsScreen from './UserAplicationsScreen';
 import CompanyAplicationsScreen from './CompanyAplicationsScreen';
 import MapScreen from './MapScreen';
+import WorkDetailScreen from './WorkDetailScreen';
 
 export {
   HomeScreen,
@@ -25,6 +26,7 @@ export {
   ProfileScreen,
   UserAplicationsScreen,
   CompanyAplicationsScreen,
-  MapScreen
+  MapScreen,
+  WorkDetailScreen,
 }
 
