@@ -13,6 +13,7 @@ import CardUserAplicationComponent from './CardUserAplicationComponent';
 import CardCompanyAplicationComponent from './CardCompanyAplicationComponent';
 import MapComponent from './MapComponent';
 import FabComponent from './FabComponent';
+import WorkDetailsComponent from './WorkDetailsComponent';
 
 
 
@@ -32,5 +33,6 @@ export {
   CardCompanyAplicationComponent,
   MapComponent,
   FabComponent,
+  WorkDetailsComponent,
 };
 

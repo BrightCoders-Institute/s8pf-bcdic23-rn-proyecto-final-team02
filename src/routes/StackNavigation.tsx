@@ -15,6 +15,7 @@ import {
   UserAplicationsScreen,
   CompanyAplicationsScreen,
   MapScreen,
+  WorkDetailScreen
 } from '../screens';
 import {
   BottomTabNavigationConfig,
@@ -88,8 +89,8 @@ const UserBottomTab = () => {
   return (
     <TabButtonUser.Navigator screenOptions={bottomScreenOptions}>
       <TabButtonUser.Screen
-        name="Home"
-        component={HomeScreen}
+        name="routeHome"
+        component={HomeStack}
         options={{
           tabBarIcon: ({focused}) => {
             return (
@@ -167,6 +168,24 @@ const UserBottomTab = () => {
     </TabButtonUser.Navigator>
   );
 };
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+    >
+    <Stack.Screen
+      name="Home"
+      component={HomeScreen}
+      />
+    <Stack.Screen
+      name="WorkDetailScreen"
+      component={WorkDetailScreen} />
+  </Stack.Navigator>
+    )
+}
 
 export const styles = StyleSheet.create({
   iconContainer: {
