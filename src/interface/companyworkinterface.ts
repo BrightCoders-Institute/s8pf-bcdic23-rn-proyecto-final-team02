@@ -5,9 +5,9 @@ export interface CompanyWork {
     branch:string;
     work:any;
     job:string;
-    jobtype:string;
+    jobType:string;
     salary:string;
-    salarytype:string;
+    salaryType:string;
     date:string;
     time:string;
     companyOverview:string;

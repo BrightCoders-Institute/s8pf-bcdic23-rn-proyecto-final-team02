@@ -44,11 +44,11 @@ const WorkDetailsComponent = ({companyWork}: Props) => {
         </RowComponent>
         <RowComponent styles={styles.iconRow}>
             <IconComponent name="briefcase-outline" color='black' size={18}/>
-            <TextComponent text={`Job Type: ${companyWork.jobtype}`} color="black" font="400" size={11} />
+            <TextComponent text={`Job Type: ${companyWork.jobType}`} color="black" font="400" size={11} />
         </RowComponent>
         <RowComponent styles={styles.iconRow}>
           <IconComponent name="cash-outline" color='black' size={18}/>
-          <TextComponent text={`Salary: ${companyWork.salarytype}`} color="black" font="400" size={11} />
+          <TextComponent text={`Salary: ${companyWork.salaryType}`} color="black" font="400" size={11} />
         </RowComponent>
         <RowComponent styles={styles.iconRowTitle}>
           <TextComponent text="Company Overview" color="black" font="600" size={14} />
