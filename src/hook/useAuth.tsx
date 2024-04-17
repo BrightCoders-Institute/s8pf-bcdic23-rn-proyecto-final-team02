@@ -38,30 +38,34 @@ const useAuth = () => {
     }
   };
 
-  const handleCreateUserWithEmail = async () => {
-    if (email.length > 0 && password.length > 0 && confirmPass.length > 0) {
-      if (password === confirmPass) {
-
-        setChangeLoading(true);
-
-        await auth()
-          .createUserWithEmailAndPassword(email.trim(), password)
-          .then(userCredential => {
-            const user = userCredential.user;
-            setChangeLoading(false);
-          })
-          .catch((err: any) => {
-            Alert.alert(err.message);
-            setChangeLoading(false);
-          });
-      } else {
-        Alert.alert('Alerta', 'Las contraseñas no coinciden');
+const handleCreateUserWithEmail = async () => {
+  const trimmedEmail = email.trim();
+  const trimmedPhone = phone.trim();
+  
+  if ((trimmedEmail.length > 0 || trimmedPhone.length > 0) && password.length > 0 && confirmPass.length > 0) {
+    if (password === confirmPass) {
+      setChangeLoading(true);
+      try {
+        if (trimmedEmail.length > 0) {
+          const userCredential = await auth().createUserWithEmailAndPassword(trimmedEmail, password);
+          const { user } = userCredential;
+          setChangeLoading(false);
+        } else if (trimmedPhone.length > 0) {
+          await auth().signInWithPhoneNumber(trimmedPhone);
+          setChangeLoading(false);
+        }
+      } catch (error) {
+        Alert.alert('Error', `${error}`);
         setChangeLoading(false);
       }
     } else {
-      Alert.alert('Alerta', 'Debes llenar todos los campos');
+      Alert.alert('Alerta', 'Las contraseñas no coinciden');
     }
-  };
+  } else {
+    Alert.alert('Alerta', 'Debes llenar todos los campos');
+  }
+};
+  
 
   const handleSignOut = async () => {
     try {

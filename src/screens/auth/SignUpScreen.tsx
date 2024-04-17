@@ -28,6 +28,8 @@ const SignUpScreen = () => {
     setPhone,
     password,
     setPassword,
+    setConfirmPass,
+    confirmPass,
     handleCreateUserWithEmail,
     handleGoogleSignUp,
     changeLoading,
@@ -70,6 +72,15 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
   const {top} = useSafeAreaInsets();
 
+  const handleEmailOrPhoneChange = (val) => {
+    // Check if value is an email address
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      setEmail(val);
+    } else {
+      setPhone(val);
+    }
+  };
+
   return (
     <ContainerComponent isScroll styles={styles.screen}>
       <View style={Platform.OS === 'ios' ? {top: top} : {}}>
@@ -95,102 +106,77 @@ const SignUpScreen = () => {
           {showCompanyForm ? (
             // Aquí va el formulario para la empresa
             <View>
-          <TextComponent styles = {styles.input}
-            text="Name"
-          />
-          <InputComponent
-            keyboardType="default"
-            value={user.name}
-            onChangeText={val => setUser({...user, name: val})}
-          />
+              <TextComponent styles={styles.input} text="Name" />
+              <InputComponent
+                keyboardType="default"
+                value={user.name}
+                onChangeText={(val) => setUser({...user, name: val})}
+              />
 
-          <TextComponent styles = {styles.input}
-              text="Email"
-            />
+              <TextComponent styles={styles.input} text="Email or Phone" />
+              <InputComponent
+                value={email || phone} // Display whichever is not empty
+                onChangeText={handleEmailOrPhoneChange} // Handle email or phone change
+                keyboardType="email-address"
+              />
 
-          <InputComponent
-            value={email}
-            onChangeText={val => setEmail(val)}
-            keyboardType="email-address"
-          />
+              <TextComponent styles={styles.input} text="Password" />
+              <InputComponent
+                value={password}
+                onChangeText={(val) => setPassword(val)}
+                keyboardType="default"
+                secureTextEntry
+              />
 
-          <TextComponent styles = {styles.input}
-              text="Password"
-            />
-
-          <InputComponent
-            value={password}
-            onChangeText={val => setPassword(val)}
-            keyboardType="default"
-            secureTextEntry
-          />
-
-          <TextComponent styles = {styles.input}
-              text="Password Confirmation"
-            />
-
-          <InputComponent
-            value={password}
-            onChangeText={val => setPassword(val)}
-            keyboardType="default"
-            secureTextEntry
-          />
-
+              <TextComponent styles={styles.input} text="Password Confirmation" />
+              <InputComponent
+                value={confirmPass}
+                onChangeText={(val) => setConfirmPass(val)}
+                keyboardType="default"
+                secureTextEntry
+              />
             </View>
           ) : (
             // formulario para el trabajador
             <View>
-         <TextComponent styles = {styles.input}
-            text="First name"
-          />
-          <InputComponent
-            keyboardType="default"
-            value={user.name}
-            onChangeText={val => setUser({...user, name: val})}
-          />
+              <TextComponent styles={styles.input} text="First name" />
+              <InputComponent
+                keyboardType="default"
+                value={user.name}
+                onChangeText={(val) => setUser({...user, name: val})}
+              />
 
-          <TextComponent styles = {styles.input}
-            text="Last name"
-          />
-          <InputComponent
-            keyboardType="default"
-            value={user.name}
-            onChangeText={val => setUser({...user, name: val})}
-          />
+              <TextComponent styles={styles.input} text="Last name" />
+              <InputComponent
+                keyboardType="default"
+                value={user.last_name}
+                onChangeText={(val) => setUser({...user, last_name: val})}
+              />
 
-          <TextComponent styles = {styles.input}
-              text="Email"
-            />
+              <TextComponent styles={styles.input} text="Email or Phone" />
+              <InputComponent
+                value={email || phone} // Display whichever is not empty
+                onChangeText={handleEmailOrPhoneChange} // Handle email or phone change
+                keyboardType="email-address"
+              />
 
-          <InputComponent
-            value={email}
-            onChangeText={val => setEmail(val)}
-            keyboardType="email-address"
-          />
+              <TextComponent styles={styles.input} text="Password" />
+              <InputComponent
+                value={password}
+                onChangeText={(val) => setPassword(val)}
+                keyboardType="default"
+                secureTextEntry
+              />
 
-          <TextComponent styles = {styles.input}
-              text="Password"
-            />
+              <TextComponent styles={styles.input} text="Password Confirmation" />
+              <InputComponent
+                value={confirmPass}
+                onChangeText={(val) => setConfirmPass(val)}
+                keyboardType="default"
+                secureTextEntry
+              />
 
-          <InputComponent
-            value={password}
-            onChangeText={val => setPassword(val)}
-            keyboardType="default"
-            secureTextEntry
-          />
-
-          <TextComponent styles = {styles.input}
-              text="Password Confirmation"
-            />
-
-          <InputComponent
-            value={password}
-            onChangeText={val => setPassword(val)}
-            keyboardType="default"
-            secureTextEntry
-          />
-
-        <DropdownField title="Gender" user={user} />
+              <DropdownField title="Gender" user={user} />
             </View>
           )}
         </SectionComponent>
@@ -282,4 +268,3 @@ const styles = StyleSheet.create({
 });
 
 export default SignUpScreen;
-
