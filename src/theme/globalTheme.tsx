@@ -11,4 +11,9 @@ export const globalStyles = StyleSheet.create({
     shadowRadius: 3.05,
     elevation: 4,
   },
+  input: {
+    color: '#161616',
+    fontSize: 20,
+    marginBottom: 8,
+  },
 });
