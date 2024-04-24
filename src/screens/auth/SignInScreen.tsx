@@ -13,36 +13,31 @@ import {
 } from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {WEBCLIENT_ID} from '@env';
 
 const SignInScreen = () => {
   const {
-    handleSigInWithEmail,
     email,
     setEmail,
     password,
     setPassword,
-    handleGoogleLogin,
     changeLoading,
+    // handleSigInWithEmail,
+    // handleGoogleLogin,
+
+    // Temporal variable
+    logged,
+    setLogged,
   } = useAuth();
 
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId: WEBCLIENT_ID,
-    });
-  }, []);
+  // useEffect(() => {
+  //   GoogleSignin.configure({
+  //     webClientId: WEBCLIENT_ID,
+  //   });
+  // }, []);
 
-  const facebookLogo = require('../../assets/img/facebook.webp');
   const googleLogo = require('../../assets/img/google.webp');
-
-  const facebook = () => {
-    console.log('Facebook');
-  };
 
   const navigation = useNavigation();
   const {top} = useSafeAreaInsets();
@@ -89,14 +84,14 @@ const SignInScreen = () => {
           size={20}
           font="bold"
         />
-        <ButtonComponent title="Sign In" onPress={handleSigInWithEmail} />
+        <ButtonComponent title="Sign In" onPress={() => setLogged(true)} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
             text="In with Google"
-            onPress={handleGoogleLogin}
+            onPress={() => setLogged(true)}
             disabled={changeLoading}
           />
         </View>

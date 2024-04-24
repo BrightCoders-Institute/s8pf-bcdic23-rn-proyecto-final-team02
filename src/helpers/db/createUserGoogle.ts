@@ -1,4 +1,3 @@
-import firestore from '@react-native-firebase/firestore';
 import {User} from '../../interface/db/UserInterface';
 import {Alert} from 'react-native';
 
@@ -25,18 +24,18 @@ let user: User = {
   documents: [],
 };
 
-export const createUserGoogle = async (
-  userGoogle: UserGoogle | any,
-  userId: string | any,
-) => {
-  try {
-    user.name = userGoogle.givenName;
-    user.last_name = userGoogle.familyName;
-    user.email = userGoogle.email;
-    user.photo = userGoogle.photo;
+// export const createUserGoogle = async (
+//   userGoogle: UserGoogle | any,
+//   userId: string | any,
+// ) => {
+//   try {
+//     user.name = userGoogle.givenName;
+//     user.last_name = userGoogle.familyName;
+//     user.email = userGoogle.email;
+//     user.photo = userGoogle.photo;
 
-    await firestore().collection('users_data').doc(userId).set(user);
-  } catch (error) {
-    Alert.alert('Error', `${error}`);
-  }
-};
+//     await firestore().collection('users_data').doc(userId).set(user);
+//   } catch (error) {
+//     Alert.alert('Error', `${error}`);
+//   }
+// };

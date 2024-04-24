@@ -16,24 +16,22 @@ import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {WEBCLIENT_ID} from '@env';
 
 const SignUpScreen = () => {
   const googleLogo = require('../../assets/img/google.webp');
   const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
-  const {signUp} = useAuth();
+
+  const { logged, setLogged } = useAuth();
 
   const [showCompanyForm, setShowCompanyForm] = useState(false);
 
-  const {handleGoogleSignUp, changeLoading} = useAuth();
-
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId: WEBCLIENT_ID,
-    });
-  }, []);
+  // useEffect(() => {
+  //   GoogleSignin.configure({
+  //     webClientId: WEBCLIENT_ID,
+  //   });
+  // }, []);
 
   const toggleForm = () => {
     setShowCompanyForm(!showCompanyForm);
@@ -80,15 +78,15 @@ const SignUpScreen = () => {
           )}
         </SectionComponent>
 
-        <ButtonComponent title="Sign Up" onPress={signUp} />
+        <ButtonComponent title="Sign Up" onPress={() => setLogged(true)} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
             text="Google"
-            onPress={handleGoogleSignUp}
-            disabled={changeLoading}
+            onPress={() => setLogged(true)}
+            disabled={false} // Change this to "changeLoading"
           />
         </View>
 

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   // OnboardingScreen,
@@ -23,27 +22,17 @@ import {
 } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import {Platform, StyleSheet, View} from 'react-native';
 import {IconComponent, TextComponent} from '../components';
+import useAuth from '../hook/useAuth';
 
 const Stack = createStackNavigator();
 const TabButtonUser = createBottomTabNavigator();
 
 const StackNavigation = () => {
-  const [initializing, setInitializing] = useState<Boolean>(true);
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>();
-
-  function onAuthStateChanged(
-    user: React.SetStateAction<FirebaseAuthTypes.User | null | undefined>,
-  ): void {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
-
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
-
-  if (initializing) return null;
+  const { logged } = useAuth();
+  // useEffect(() => {
+  //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber; // unsubscribe on unmount
+  // }, []);
 
   return (
     <NavigationContainer>
@@ -52,7 +41,7 @@ const StackNavigation = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        {user ? (
+        {logged ? (
           <>
             <Stack.Screen name="Inicio" component={UserBottomTab} />
           </>
