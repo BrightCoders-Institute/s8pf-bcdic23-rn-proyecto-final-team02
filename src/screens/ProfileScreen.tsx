@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Platform,
   Image,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
+  Text,
 } from 'react-native';
 import {
   ContainerComponent,
@@ -16,19 +18,62 @@ import {
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {globalStyles} from '../theme/globalTheme';
 import useAuth from '../hook/useAuth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+
+interface UserData {
+  name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  phone:string;
+  gender:string,
+}
 
 const ProfileScreen = () => {
   const {top} = useSafeAreaInsets();
   const photo = require('../assets/user-male-avatar.webp');
   const {handleSignOut} = useAuth();
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId:
-        '456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com',
-    });
-  }, []);
+  async function loadData() {
+    try {
+        const currentUser = auth().currentUser;
+        if (currentUser) {
+            const userDoc = await firestore().collection('users_data').doc(currentUser.uid).get();
+            if (userDoc.exists) {
+                setUserData(userDoc.data() as UserData);
+            } else {
+                setError('User data not found');
+            }
+        } else {
+            setError('User not authenticated');
+        }
+        setLoading(false);
+    } catch (error) {
+        console.log('Error fetching data:', error);
+        setError('Error fetching data. Please try again later.');
+        setLoading(false);
+    }
+}
+
+useEffect(() => {
+    loadData();
+}, []);
+
+if (loading) {
+    return <ActivityIndicator size="large" color="#3825AE" />;
+}
+
+if (error) {
+    return <Text>{error}</Text>;
+}
+
+if (!userData) {
+    return <Text>No user data found</Text>;
+}
 
   return (
     <ContainerComponent isScroll>
@@ -61,7 +106,7 @@ const ProfileScreen = () => {
             <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
               <TextComponent text="Name" color="black" font="bold" size={16} />
               <RowComponent>
-                <TextComponent text="Jonathan P" color="black" size={14} />
+                <TextComponent text={userData.name} color="black" size={14} />
                 <IconComponent name="chevron-forward" color="black" />
               </RowComponent>
             </TouchableOpacity>
@@ -73,7 +118,7 @@ const ProfileScreen = () => {
                 size={16}
               />
               <RowComponent>
-                <TextComponent text="Anderson" color="black" size={14} />
+                <TextComponent text={userData.last_name}color="black" size={14} />
                 <IconComponent name="chevron-forward" color="black" />
               </RowComponent>
             </TouchableOpacity>
@@ -120,7 +165,7 @@ const ProfileScreen = () => {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent color="black" text="Telephone number" font="bold" />
             <RowComponent>
-              <TextComponent text="333****45" color="black" size={14} />
+              <TextComponent text={userData.phone} color="black" size={14} />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>
@@ -128,7 +173,7 @@ const ProfileScreen = () => {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent text="Password" color="black" font="bold" />
             <RowComponent>
-              <TextComponent text="*********" color="black" size={14} />
+              <TextComponent text={userData.password} color="black" size={14} />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>
@@ -136,7 +181,7 @@ const ProfileScreen = () => {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent text="Email" font="bold" color="black" />
             <RowComponent>
-              <TextComponent text="Joan*****" color="black" />
+              <TextComponent text={userData.email} color="black" />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>
