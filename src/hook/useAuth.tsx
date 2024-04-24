@@ -6,12 +6,15 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {createUserGoogle} from '../helpers/db/createUserGoogle';
+import useQuery from './useQuery';
+
 const useAuth = () => {
   // Variables para registrar al usuario
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPass, setConfirmPass] = useState<string>('');
+  const {user, setUser, createUser} = useQuery();
 
   // Estado para dar tiempo a cargar los datos
   const [changeLoading, setChangeLoading] = useState(false);
@@ -38,34 +41,40 @@ const useAuth = () => {
     }
   };
 
-const handleCreateUserWithEmail = async () => {
-  const trimmedEmail = email.trim();
-  const trimmedPhone = phone.trim();
-  
-  if ((trimmedEmail.length > 0 || trimmedPhone.length > 0) && password.length > 0 && confirmPass.length > 0) {
-    if (password === confirmPass) {
-      setChangeLoading(true);
-      try {
-        if (trimmedEmail.length > 0) {
-          const userCredential = await auth().createUserWithEmailAndPassword(trimmedEmail, password);
-          const { user } = userCredential;
-          setChangeLoading(false);
-        } else if (trimmedPhone.length > 0) {
-          await auth().signInWithPhoneNumber(trimmedPhone);
+  const handleCreateUserWithEmail = async () => {
+    const trimmedEmail = email.trim();
+    const trimmedPhone = phone.trim();
+
+    if (
+      (trimmedEmail.length > 0 || trimmedPhone.length > 0) &&
+      password.length > 0 &&
+      confirmPass.length > 0
+    ) {
+      if (password === confirmPass) {
+        setChangeLoading(true);
+        try {
+          if (trimmedEmail.length > 0) {
+            const userCredential = await auth().createUserWithEmailAndPassword(
+              trimmedEmail,
+              password,
+            );
+            const {user} = userCredential;
+            setChangeLoading(false);
+          } else if (trimmedPhone.length > 0) {
+            await auth().signInWithPhoneNumber(trimmedPhone);
+            setChangeLoading(false);
+          }
+        } catch (error) {
+          Alert.alert('Error', `${error}`);
           setChangeLoading(false);
         }
-      } catch (error) {
-        Alert.alert('Error', `${error}`);
-        setChangeLoading(false);
+      } else {
+        Alert.alert('Alerta', 'Las contraseñas no coinciden');
       }
     } else {
-      Alert.alert('Alerta', 'Las contraseñas no coinciden');
+      Alert.alert('Alerta', 'Debes llenar todos los campos');
     }
-  } else {
-    Alert.alert('Alerta', 'Debes llenar todos los campos');
-  }
-};
-  
+  };
 
   const handleSignOut = async () => {
     try {
@@ -148,6 +157,28 @@ const handleCreateUserWithEmail = async () => {
     }
   };
 
+  const handleEmailOrPhoneChange = val => {
+    // Check if value is an email address
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      setEmail(val);
+    } else {
+      setPhone(val);
+    }
+  };
+
+  const signUp = () => {
+    // Create user in firebase
+    handleCreateUserWithEmail().finally(() => {
+      // Save user data in react useState (Object)
+      user.email = email;
+      user.password = password;
+      user.phone = phone;
+
+      // Send user Object to firestore
+      createUser();
+    });
+  };
+
   return {
     email,
     setEmail,
@@ -164,6 +195,8 @@ const handleCreateUserWithEmail = async () => {
     handleGoogleLogin,
     handleGoogleSignUp,
     handleSignOut,
+    signUp,
+    handleEmailOrPhoneChange,
   };
 };
 
