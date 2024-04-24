@@ -3,9 +3,6 @@ import React, {useState} from 'react';
 import useQuery from './useQuery';
 
 const useAuth = () => {
-  // Temporal variable
-  const [logged, setLogged] = useState(false);
-
   // Variables para registrar al usuario
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -186,10 +183,6 @@ const useAuth = () => {
     confirmPass,
     setConfirmPass,
     changeLoading,
-
-    // Temporal variable
-    logged,
-    setLogged,
   };
 };
 

@@ -15,12 +15,16 @@ import {
 } from '../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {globalStyles} from '../theme/globalTheme';
-import useAuth from '../hook/useAuth';
+
+// Temporal navigation import
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
   const {top} = useSafeAreaInsets();
   const photo = require('../assets/user-male-avatar.webp');
-  const { setLogged } = useAuth();
+
+  // Temporal navigation
+  const navigation = useNavigation();
 
   // useEffect(() => {
   //   GoogleSignin.configure({
@@ -146,7 +150,7 @@ const ProfileScreen = () => {
             styles.sections,
             {height: 50, alignContent: 'center', alignItems: 'center'},
           ]}
-          onPress={() => setLogged(false)}>
+          onPress={() => navigation.navigate('SignIn')}>
           <TextComponent
             text="Sign out"
             font="bold"

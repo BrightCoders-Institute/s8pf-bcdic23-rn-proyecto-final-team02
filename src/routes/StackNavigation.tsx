@@ -34,6 +34,10 @@ const StackNavigation = () => {
   //   return subscriber; // unsubscribe on unmount
   // }, []);
 
+  useEffect(() => {
+    console.log(logged);
+  }, [logged]);
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -41,17 +45,9 @@ const StackNavigation = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        {logged ? (
-          <>
-            <Stack.Screen name="Inicio" component={UserBottomTab} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-          </>
-        )}
-
+          <Stack.Screen name="Inicio" component={UserBottomTab} />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
         {/* <Stack.Screen name="Onboarding" component={OnboardingScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>

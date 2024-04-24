@@ -14,7 +14,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {WEBCLIENT_ID} from '@env';
+import { WEBCLIENT_ID } from '@env';
 
 const SignInScreen = () => {
   const {
@@ -25,10 +25,6 @@ const SignInScreen = () => {
     changeLoading,
     // handleSigInWithEmail,
     // handleGoogleLogin,
-
-    // Temporal variable
-    logged,
-    setLogged,
   } = useAuth();
 
   // useEffect(() => {
@@ -84,14 +80,14 @@ const SignInScreen = () => {
           size={20}
           font="bold"
         />
-        <ButtonComponent title="Sign In" onPress={() => setLogged(true)} />
+        <ButtonComponent title="Sign In" onPress={() => navigation.navigate('Inicio')} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
             text="In with Google"
-            onPress={() => setLogged(true)}
+            onPress={() => navigation.navigate('Inicio')}
             disabled={changeLoading}
           />
         </View>

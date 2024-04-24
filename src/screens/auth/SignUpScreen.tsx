@@ -23,8 +23,6 @@ const SignUpScreen = () => {
   const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
 
-  const { logged, setLogged } = useAuth();
-
   const [showCompanyForm, setShowCompanyForm] = useState(false);
 
   // useEffect(() => {
@@ -78,14 +76,14 @@ const SignUpScreen = () => {
           )}
         </SectionComponent>
 
-        <ButtonComponent title="Sign Up" onPress={() => setLogged(true)} />
+        <ButtonComponent title="Sign Up" onPress={() => navigation.navigate('Inicio')} />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
             text="Google"
-            onPress={() => setLogged(true)}
+            onPress={() => navigation.navigate('Inicio')}
             disabled={false} // Change this to "changeLoading"
           />
         </View>
