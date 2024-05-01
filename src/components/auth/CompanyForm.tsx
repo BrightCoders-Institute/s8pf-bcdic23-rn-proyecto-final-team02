@@ -1,26 +1,12 @@
 import {TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import * as Yup from 'yup';
 import {Formik} from 'formik';
+
+import {SigupCompanyScheme} from '../../interface/schemes/SignUpScheme';
 
 import TextComponent from '../TextComponent';
 import InputComponent from '../InputComponent';
 import {globalStyles} from '../../theme/globalTheme';
-
-const SigupCompanyScheme = Yup.object().shape({
-  name: Yup.string()
-    .min(4, 'Too short name')
-    .max(30, 'Too long name')
-    .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string()
-    .min(8, 'Too short password')
-    .max(20, 'Too long password')
-    .required('Required'),
-  confirmPass: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Required'),
-});
 
 const CompanyForm = () => {
   return (
@@ -60,9 +46,10 @@ const CompanyForm = () => {
               keyboardType="default"
               value={values.name}
               onChangeText={handleChange('name')}
+              placeholder="BRIGHTCODERS CONSULTING, S.A. DE C.V."
             />
 
-            <TextComponent styles={globalStyles.input} text="Email or Phone" />
+            <TextComponent styles={globalStyles.input} text="Email" />
             {touched.email && errors.email && (
               <TextComponent
                 text={errors.email}
@@ -75,6 +62,7 @@ const CompanyForm = () => {
               value={values.email}
               onChangeText={handleChange('email')}
               keyboardType="email-address"
+              placeholder="email@email.com"
             />
 
             <TextComponent styles={globalStyles.input} text="Password" />
@@ -91,6 +79,7 @@ const CompanyForm = () => {
               onChangeText={handleChange('password')}
               keyboardType="default"
               secureTextEntry
+              placeholder="********"
             />
 
             <TextComponent
@@ -110,11 +99,13 @@ const CompanyForm = () => {
               onChangeText={handleChange('confirmPass')}
               keyboardType="default"
               secureTextEntry
+              placeholder="********"
             />
           </View>
-          {/* <TouchableOpacity
+
+          <TouchableOpacity
             disabled={!isValid}
-            onPress={() => handleSubmit}
+            onPress={handleSubmit}
             style={globalStyles.primaryBtn}>
             <TextComponent
               text="SIGN UP"
@@ -123,7 +114,7 @@ const CompanyForm = () => {
               color="white"
               styles={{textAlign: 'center'}}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </>
       )}
     </Formik>

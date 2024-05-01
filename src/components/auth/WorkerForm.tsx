@@ -1,32 +1,13 @@
 import {TouchableOpacity, View} from 'react-native';
-import * as Yup from 'yup';
 import {Formik} from 'formik';
+
+import {SignupWorkerSchema} from '../../interface/schemes/SignUpScheme';
 
 import TextComponent from '../TextComponent';
 import InputComponent from '../InputComponent';
 import DropdownField from '../DropDownComponent';
 
 import {globalStyles} from '../../theme/globalTheme';
-
-const SignupWorkerSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(4, 'Too Short!')
-    .max(30, 'Too Long!')
-    .required('Required'),
-  lastName: Yup.string()
-    .min(4, 'Too Short!')
-    .max(30, 'Too Long!')
-    .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
-  // phone: Yup.number().min(10).max(10).required('Required'),
-  password: Yup.string()
-    .min(8, 'Too Short!')
-    .max(20, 'Too Long!')
-    .required('Required'),
-  confirmPass: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Required'),
-});
 
 const WorkerForm = () => {
   return (
@@ -144,7 +125,7 @@ const WorkerForm = () => {
 
           <TouchableOpacity
             disabled={!isValid}
-            onPress={() => handleSubmit}
+            onPress={handleSubmit}
             style={globalStyles.primaryBtn}>
             <TextComponent
               text="SIGN UP"
