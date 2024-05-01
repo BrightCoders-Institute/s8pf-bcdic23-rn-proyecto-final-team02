@@ -16,4 +16,13 @@ export const globalStyles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 8,
   },
+  primaryBtn: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    borderRadius: 20,
+    backgroundColor: '#6C63FF',
+    width: 361,
+    height: 38,
+  },
 });
