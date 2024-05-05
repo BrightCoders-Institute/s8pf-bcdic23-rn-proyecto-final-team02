@@ -14,7 +14,6 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import { WEBCLIENT_ID } from '@env';
 
 const SignInScreen = () => {
   const {
@@ -23,15 +22,7 @@ const SignInScreen = () => {
     password,
     setPassword,
     changeLoading,
-    // handleSigInWithEmail,
-    // handleGoogleLogin,
   } = useAuth();
-
-  // useEffect(() => {
-  //   GoogleSignin.configure({
-  //     webClientId: WEBCLIENT_ID,
-  //   });
-  // }, []);
 
   const googleLogo = require('../../assets/img/google.webp');
 
@@ -80,14 +71,14 @@ const SignInScreen = () => {
           size={20}
           font="bold"
         />
-        <ButtonComponent title="Sign In" onPress={() => navigation.navigate('Inicio')} />
+        <ButtonComponent title="Sign In" onPress={ () => console.log('Loggin') } />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
             text="In with Google"
-            onPress={() => navigation.navigate('Inicio')}
+            onPress={ () => console.log('Loggin google') }
             disabled={changeLoading}
           />
         </View>

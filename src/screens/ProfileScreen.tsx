@@ -26,13 +26,6 @@ const ProfileScreen = () => {
   // Temporal navigation
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   GoogleSignin.configure({
-  //     webClientId:
-  //       '456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com',
-  //   });
-  // }, []);
-
   return (
     <ContainerComponent isScroll>
       <View style={Platform.OS === 'ios' ? {top: top + 15} : {}}>
