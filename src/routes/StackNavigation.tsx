@@ -28,15 +28,6 @@ const Stack = createStackNavigator();
 const TabButtonUser = createBottomTabNavigator();
 
 const StackNavigation = () => {
-  const { logged } = useAuth();
-  // useEffect(() => {
-  //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-  //   return subscriber; // unsubscribe on unmount
-  // }, []);
-
-  useEffect(() => {
-    console.log(logged);
-  }, [logged]);
 
   return (
     <NavigationContainer>
