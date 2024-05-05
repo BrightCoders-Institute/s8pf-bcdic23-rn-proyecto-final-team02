@@ -1,6 +1,7 @@
-import {View, Text, Alert} from 'react-native';
+import {View, Text, Alert, AppState} from 'react-native';
 import React, {useState} from 'react';
 import useQuery from './useQuery';
+import { supabase } from '../lib/supabase';
 
 const useAuth = () => {
   // Variables para registrar al usuario
@@ -13,27 +14,39 @@ const useAuth = () => {
   // Estado para dar tiempo a cargar los datos
   const [changeLoading, setChangeLoading] = useState(false);
 
-  // const handleSigInWithEmail = async () => {
-  //   if (email.length > 0 && password.length > 0) {
-  //     setChangeLoading(true);
+  const handleAutoRefresh = () => {
+    AppState.addEventListener('change', ( state ) => {
+      if ( state === 'active' ) {
+        supabase.auth.startAutoRefresh();
+      } else {
+        supabase.auth.stopAutoRefresh();
+      }
+    });
+  };
 
-  //     await auth()
-  //       .signInWithEmailAndPassword(email.trim(), password)
-  //       .then(userCredential => {
-  //         const user = userCredential.user;
-  //         setChangeLoading(false);
-  //       })
-  //       .catch((err: any) => {
-  //         Alert.alert(err.message);
-  //         setChangeLoading(false);
-  //       });
-  //   } else {
-  //     Alert.alert('Advertencia', 'Debes llenar todos los campos', [
-  //       {text: 'Ok'},
-  //     ]);
-  //     setChangeLoading(false);
-  //   }
-  // };
+  const handleSigInWithEmail = async () => {
+    if (email.length > 0 && password.length > 0) {
+
+      setChangeLoading(true);
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if ( error ) Alert.alert(error.message);
+      setChangeLoading(false);
+
+    } else {
+
+      Alert.alert('Advertencia', 'Debes llenar todos los campos', [
+        {text: 'Ok'},
+      ]);
+
+      setChangeLoading(false);
+
+    }
+  };
 
   // const handleCreateUserWithEmail = async () => {
   //   const trimmedEmail = email.trim();
@@ -183,6 +196,10 @@ const useAuth = () => {
     confirmPass,
     setConfirmPass,
     changeLoading,
+
+    // Methods
+    handleAutoRefresh,
+    handleSigInWithEmail,
   };
 };
 

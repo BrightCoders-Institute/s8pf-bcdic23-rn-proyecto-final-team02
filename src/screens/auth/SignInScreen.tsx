@@ -15,13 +15,18 @@ import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+// Start/stop SupabaseAutoRefresh
+useAuth().handleAutoRefresh();
+
 const SignInScreen = () => {
+
   const {
     email,
     setEmail,
     password,
     setPassword,
     changeLoading,
+    handleSigInWithEmail,
   } = useAuth();
 
   const googleLogo = require('../../assets/img/google.webp');
@@ -71,7 +76,7 @@ const SignInScreen = () => {
           size={20}
           font="bold"
         />
-        <ButtonComponent title="Sign In" onPress={ () => console.log('Loggin') } />
+        <ButtonComponent title="Sign In" onPress={ handleSigInWithEmail } />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
