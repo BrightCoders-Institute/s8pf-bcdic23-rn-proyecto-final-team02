@@ -1,6 +1,5 @@
 import {View, Text, Alert, AppState} from 'react-native';
 import React, {useState} from 'react';
-import useQuery from './useQuery';
 import { supabase } from '../lib/supabase';
 
 const useAuth = () => {
@@ -13,16 +12,6 @@ const useAuth = () => {
 
   // Estado para dar tiempo a cargar los datos
   const [changeLoading, setChangeLoading] = useState(false);
-
-  const handleAutoRefresh = () => {
-    AppState.addEventListener('change', ( state ) => {
-      if ( state === 'active' ) {
-        supabase.auth.startAutoRefresh();
-      } else {
-        supabase.auth.stopAutoRefresh();
-      }
-    });
-  };
 
   const handleSigInWithEmail = async () => {
     if (email.length > 0 && password.length > 0) {
@@ -83,16 +72,17 @@ const useAuth = () => {
   //   }
   // };
 
-  // const handleSignOut = async () => {
-  //   try {
-  //     await GoogleSignin.signOut();
-  //     await auth()
-  //       .signOut()
-  //       .then(() => Alert.alert('Información', 'Se ha cerrado la sesión'));
-  //   } catch (error) {
-  //     Alert.alert('Error', `${error}`);
-  //   }
-  // };
+  const handleSignOut = async () => {
+
+    const { error } = await supabase.auth.signOut();
+
+    if ( error ) {
+      Alert.alert(error.message)
+    } else {
+      Alert.alert('Información', 'Se ha cerrado la sesión');
+    }
+
+  };
 
   // const handleForgetPassword = async () => {
   //   if (email.length > 0) {
@@ -198,8 +188,8 @@ const useAuth = () => {
     changeLoading,
 
     // Methods
-    handleAutoRefresh,
     handleSigInWithEmail,
+    handleSignOut,
   };
 };
 

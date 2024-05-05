@@ -14,9 +14,10 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { authAutoRefresh } from '../../helpers/db/authAutoRefresh';
 
 // Start/stop SupabaseAutoRefresh
-useAuth().handleAutoRefresh();
+authAutoRefresh();
 
 const SignInScreen = () => {
 

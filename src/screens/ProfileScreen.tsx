@@ -18,13 +18,13 @@ import {globalStyles} from '../theme/globalTheme';
 
 // Temporal navigation import
 import { useNavigation } from '@react-navigation/native';
+import useAuth from '../hook/useAuth';
 
 const ProfileScreen = () => {
   const {top} = useSafeAreaInsets();
   const photo = require('../assets/user-male-avatar.webp');
 
-  // Temporal navigation
-  const navigation = useNavigation();
+  const { handleSignOut } = useAuth();
 
   return (
     <ContainerComponent isScroll>
@@ -143,7 +143,7 @@ const ProfileScreen = () => {
             styles.sections,
             {height: 50, alignContent: 'center', alignItems: 'center'},
           ]}
-          onPress={() => navigation.navigate('SignIn')}>
+          onPress={ handleSignOut }>
           <TextComponent
             text="Sign out"
             font="bold"

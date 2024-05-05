@@ -23,11 +23,27 @@ import {
 import {Platform, StyleSheet, View} from 'react-native';
 import {IconComponent, TextComponent} from '../components';
 import useAuth from '../hook/useAuth';
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabase';
 
 const Stack = createStackNavigator();
 const TabButtonUser = createBottomTabNavigator();
 
 const StackNavigation = () => {
+
+  const [ session, setSession ] = useState<Session | null>(null);
+
+  useEffect(() => {
+    
+    supabase.auth.getSession().then(( { data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange(( _event, session ) => {
+      setSession(session);
+    });
+
+  }, [] );
 
   return (
     <NavigationContainer>
@@ -36,9 +52,19 @@ const StackNavigation = () => {
         screenOptions={{
           headerShown: false,
         }}>
-          <Stack.Screen name="Inicio" component={UserBottomTab} />
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          {
+            session && session.user ?
+            (
+              <Stack.Screen name="Inicio" component={UserBottomTab} />
+            )
+            :
+            (
+              <>
+                <Stack.Screen name="SignIn" component={SignInScreen} />
+                <Stack.Screen name="SignUp" component={SignUpScreen} />
+              </>
+            )
+          }
         {/* <Stack.Screen name="Onboarding" component={OnboardingScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
