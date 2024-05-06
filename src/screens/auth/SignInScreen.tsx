@@ -11,9 +11,9 @@ import {
   RowComponent,
   SectionComponent,
 } from '../../components';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hook/useAuth';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { authAutoRefresh } from '../../helpers/db/authAutoRefresh';
 
 // Start/stop SupabaseAutoRefresh
@@ -52,17 +52,6 @@ const SignInScreen = () => {
         <TextComponent styles = {styles.input}
           text="Password"
         />
-          <InputComponent
-            value={password}
-            onChangeText={val => setPassword(val)}
-            keyboardType="default"
-            secureTextEntry
-          />
-
-          <TextComponent styles = {styles.input}
-              text="Password Confirmation"
-            />
-
           <InputComponent
             value={password}
             onChangeText={val => setPassword(val)}
