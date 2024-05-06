@@ -1,5 +1,8 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, TouchableOpacity, Platform} from 'react-native';
+import {Formik} from 'formik';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import {
@@ -8,14 +11,14 @@ import {
   TextComponent,
   AuthLogoComponent,
   ButtonComponent,
-  RowComponent,
   SectionComponent,
 } from '../../components';
-import { useNavigation } from '@react-navigation/native';
-import useAuth from '../../hook/useAuth';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { authAutoRefresh } from '../../helpers/db/authAutoRefresh';
 
+import { authAutoRefresh } from '../../helpers/db/authAutoRefresh';
+import {LogInScheme} from '../../interface/schemes/SignUpScheme';
+import {globalStyles} from '../../theme/globalTheme';
+
+import useAuth from '../../hook/useAuth';
 // Start/stop SupabaseAutoRefresh
 authAutoRefresh();
 
@@ -40,33 +43,85 @@ const SignInScreen = () => {
       <View style={Platform.OS === 'ios' ? {top: top} : {}}>
         <AppLogoComponent />
         <SectionComponent styles={{marginTop: 10}}>
+          <Formik
+            initialValues={{
+              email: '',
+              password: '',
+            }}
+            validationSchema={LogInScheme}
+            onSubmit={values => {
+              console.log(values);
+            }}>
+            {({
+              values,
+              errors,
+              touched,
+              isValid,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              handleReset,
+            }) => (
+              <>
+                <View>
+                  <TextComponent styles={styles.input} text="Email" />
+                  {touched.email && errors.email && (
+                    <TextComponent
+                      text={errors.email}
+                      color="red"
+                      font="bold"
+                      size={16}
+                    />
+                  )}
+                  <InputComponent
+                    value={values.email}
+                    onChangeText={handleChange('email')}
+                    keyboardType="email-address"
+                    placeholder="email@email.com"
+                  />
 
-        <TextComponent styles = {styles.input}
-          text="Email"
-        />
-          <InputComponent
-            value={email}
-            onChangeText={val => setEmail(val)}
-            keyboardType="default"
-          />
-        <TextComponent styles = {styles.input}
-          text="Password"
-        />
-          <InputComponent
-            value={password}
-            onChangeText={val => setPassword(val)}
-            keyboardType="default"
-            secureTextEntry
-          />
+                  <TextComponent styles={styles.input} text="Password" />
+                  {touched.password && errors.password && (
+                    <TextComponent
+                      text={errors.password}
+                      color="red"
+                      font="bold"
+                      size={16}
+                    />
+                  )}
+                  <InputComponent
+                    value={values.password}
+                    onChangeText={handleChange('password')}
+                    keyboardType="default"
+                    secureTextEntry
+                    placeholder="********"
+                  />
+                </View>
 
+                <TextComponent
+                  styles={styles.text}
+                  text="Forgot password?"
+                  color="black"
+                  size={20}
+                  font="bold"
+                />
+                <TouchableOpacity
+                  disabled={!isValid}
+                  onPress={handleSubmit}
+                  style={globalStyles.primaryBtn}>
+                  <TextComponent
+                    text="SIGN IN"
+                    font="bold"
+                    color="white"
+                    size={24}
+                    styles={{textAlign: 'center'}}
+                  />
+                </TouchableOpacity>
+              </>
+            )}
+          </Formik>
         </SectionComponent>
-        <TextComponent styles = {styles.text}
-          text="Forgot password?"
-          color="black"
-          size={20}
-          font="bold"
-        />
-        <ButtonComponent title="Sign In" onPress={ handleSigInWithEmail } />
+        
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
@@ -76,16 +131,22 @@ const SignInScreen = () => {
             onPress={ () => console.log('Loggin google') }
             disabled={changeLoading}
           />
+          
         </View>
 
-          <TextComponent text="Already have an account? " styles={styles.text}/>
-          
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={{marginLeft: 5}}
-            onPress={() => navigation.navigate('SignUp')}>
-            <TextComponent text="Sign Up" font="bold" size={20} styles={styles.button}/>
-          </TouchableOpacity>
+        <TextComponent text="Already have an account? " styles={styles.text} />
+
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={{marginLeft: 5}}
+          onPress={() => navigation.navigate('SignUp')}>
+          <TextComponent
+            text="Sign Up"
+            font="bold"
+            size={20}
+            styles={styles.button}
+          />
+        </TouchableOpacity>
       </View>
     </ContainerComponent>
   );
@@ -112,12 +173,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },
-  input:{
-    color:"#161616",
-    fontSize:20,
-    marginBottom:8,
+  input: {
+    color: '#161616',
+    fontSize: 20,
+    marginBottom: 8,
   },
-  button:{
+  button: {
     fontSize: 20,
     textAlign: 'center',
     color: 'black',

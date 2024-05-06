@@ -89,8 +89,6 @@ const SignUpScreen = () => {
             />
           )}
         </SectionComponent>
-
-        <ButtonComponent title="Sign Up" onPress={ handleCreateUserWithEmail } />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
@@ -109,6 +107,7 @@ const SignUpScreen = () => {
           onPress={() => navigation.navigate('SignIn')}>
           <TextComponent text="Sign In" font="bold" styles={styles.button} />
         </TouchableOpacity>
+        <View style={{height: 50}} />
       </View>
     </ContainerComponent>
   );
