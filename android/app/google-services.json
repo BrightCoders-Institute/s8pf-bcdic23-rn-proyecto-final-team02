@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "456361211536",
+    "project_id": "workmatch-68206",
+    "storage_bucket": "workmatch-68206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456361211536:android:169e1fb7805be0796cca15",
+        "android_client_info": {
+          "package_name": "com.workmatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456361211536-papp67l3fi3hcjp1rpipefqhr2fsgp7a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.workmatch",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-gq7dtTx4PfbxrYgqLsrI52SmDfF-w4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456361211536-7fggplvdl9li5mht1pqcfldejvn24i6m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456361211536-qbdn4lifsuo20o9lp7rf05i6qeoarr1g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.visosodev.WorkMatch"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
