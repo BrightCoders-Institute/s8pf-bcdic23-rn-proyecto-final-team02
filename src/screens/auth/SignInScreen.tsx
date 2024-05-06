@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, TouchableOpacity, Platform} from 'react-native';
 import {Formik} from 'formik';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 import AppLogoComponent from '../../components/AppLogoComponent';
 import {
@@ -11,12 +13,26 @@ import {
   ButtonComponent,
   SectionComponent,
 } from '../../components';
-import {useNavigation} from '@react-navigation/native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
+import { authAutoRefresh } from '../../helpers/db/authAutoRefresh';
 import {LogInScheme} from '../../interface/schemes/SignUpScheme';
 import {globalStyles} from '../../theme/globalTheme';
 
+import useAuth from '../../hook/useAuth';
+// Start/stop SupabaseAutoRefresh
+authAutoRefresh();
+
 const SignInScreen = () => {
+
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    changeLoading,
+    handleSigInWithEmail,
+  } = useAuth();
+
   const googleLogo = require('../../assets/img/google.webp');
 
   const navigation = useNavigation();
@@ -105,16 +121,17 @@ const SignInScreen = () => {
             )}
           </Formik>
         </SectionComponent>
-
+        
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
             text="In with Google"
-            onPress={() => {}}
-            // disabled={}
+            onPress={ () => console.log('Loggin google') }
+            disabled={changeLoading}
           />
+          
         </View>
 
         <TextComponent text="Already have an account? " styles={styles.text} />

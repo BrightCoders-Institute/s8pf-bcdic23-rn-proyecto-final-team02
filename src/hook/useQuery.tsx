@@ -1,7 +1,5 @@
 import {View, Text, Alert} from 'react-native';
 import React, {useState} from 'react';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 import {User} from '../interface/db/UserInterface';
 
 const useQuery = () => {
@@ -24,19 +22,19 @@ const useQuery = () => {
   // Loading state
   // const [changeLoading, setChangeLoading] = useState(false);
 
-  const createUser = async () => {
-    try {
-      const userId = auth().currentUser?.uid;
-      await firestore().collection('users_data').doc(userId).set(user);
-    } catch (error) {
-      Alert.alert('Error', `${error}`);
-    }
-  };
+  // const createUser = async () => {
+  //   try {
+  //     const userId = auth().currentUser?.uid;
+  //     await firestore().collection('users_data').doc(userId).set(user);
+  //   } catch (error) {
+  //     Alert.alert('Error', `${error}`);
+  //   }
+  // };
 
   return {
     user,
     setUser,
-    createUser,
+    // createUser
   };
 };
 

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   // OnboardingScreen,
@@ -23,27 +22,28 @@ import {
 } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import {Platform, StyleSheet, View} from 'react-native';
 import {IconComponent, TextComponent} from '../components';
+import useAuth from '../hook/useAuth';
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabase';
 
 const Stack = createStackNavigator();
 const TabButtonUser = createBottomTabNavigator();
 
 const StackNavigation = () => {
-  const [initializing, setInitializing] = useState<Boolean>(true);
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>();
 
-  function onAuthStateChanged(
-    user: React.SetStateAction<FirebaseAuthTypes.User | null | undefined>,
-  ): void {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
+  const [ session, setSession ] = useState<Session | null>(null);
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
+    
+    supabase.auth.getSession().then(( { data: { session } }) => {
+      setSession(session);
+    });
 
-  if (initializing) return null;
+    supabase.auth.onAuthStateChange(( _event, session ) => {
+      setSession(session);
+    });
+
+  }, [] );
 
   return (
     <NavigationContainer>
@@ -52,17 +52,19 @@ const StackNavigation = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        {user ? (
-          <>
-            <Stack.Screen name="Inicio" component={UserBottomTab} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-          </>
-        )}
-
+          {
+            session && session.user ?
+            (
+              <Stack.Screen name="Inicio" component={UserBottomTab} />
+            )
+            :
+            (
+              <>
+                <Stack.Screen name="SignIn" component={SignInScreen} />
+                <Stack.Screen name="SignUp" component={SignUpScreen} />
+              </>
+            )
+          }
         {/* <Stack.Screen name="Onboarding" component={OnboardingScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>

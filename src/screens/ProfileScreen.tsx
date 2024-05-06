@@ -17,9 +17,10 @@ import {
 } from '../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {globalStyles} from '../theme/globalTheme';
+
+// Temporal navigation import
+import { useNavigation } from '@react-navigation/native';
 import useAuth from '../hook/useAuth';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
 
 interface UserData {
   name: string;
@@ -33,7 +34,10 @@ interface UserData {
 const ProfileScreen = () => {
   const {top} = useSafeAreaInsets();
   const photo = require('../assets/user-male-avatar.webp');
-  const {handleSignOut} = useAuth();
+
+
+  const { handleSignOut } = useAuth();
+        
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -192,7 +196,7 @@ if (!userData) {
             styles.sections,
             {height: 50, alignContent: 'center', alignItems: 'center'},
           ]}
-          onPress={handleSignOut}>
+          onPress={ handleSignOut }>
           <TextComponent
             text="Sign out"
             font="bold"

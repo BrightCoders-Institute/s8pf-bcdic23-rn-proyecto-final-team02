@@ -14,26 +14,27 @@ import {
 } from '../../components';
 import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
-import useAuth from '../../hook/useAuth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {WEBCLIENT_ID} from '@env';
+import useAuth from '../../hook/useAuth';
 
 const SignUpScreen = () => {
   const googleLogo = require('../../assets/img/google.webp');
-  const {top} = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
   const navigation = useNavigation();
-  const {signUp} = useAuth();
 
-  const [showCompanyForm, setShowCompanyForm] = useState(false);
+  const {
+    email,
+    setEmail,
+    phone,
+    setPhone,
+    password,
+    setPassword,
+    confirmPass,
+    setConfirmPass,
+    handleCreateUserWithEmail,
+  } = useAuth();
 
-  const {handleGoogleSignUp, changeLoading} = useAuth();
-
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId: WEBCLIENT_ID,
-    });
-  }, []);
+  const [ showCompanyForm, setShowCompanyForm ] = useState(false);
 
   const toggleForm = () => {
     setShowCompanyForm(!showCompanyForm);
@@ -76,18 +77,26 @@ const SignUpScreen = () => {
             <CompanyForm />
           ) : (
             // formulario para el trabajador
-            <WorkerForm />
+            <WorkerForm
+              email={email}
+              setEmail={setEmail}
+              phone={phone}
+              setPhone={setPhone}
+              password={password}
+              setPassword={setPassword}
+              confirmPass={confirmPass}
+              setConfirmPass={setConfirmPass}
+            />
           )}
         </SectionComponent>
-
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>
           <AuthLogoComponent
             src={googleLogo}
             text="Google"
-            onPress={handleGoogleSignUp}
-            disabled={changeLoading}
+            onPress={ () => console.log('Sign Up google') }
+            disabled={false} // Change this to "changeLoading"
           />
         </View>
 

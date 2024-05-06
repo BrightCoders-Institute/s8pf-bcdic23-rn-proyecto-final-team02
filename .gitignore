@@ -65,9 +65,5 @@ yarn-error.log
 # testing
 /coverage
 
-# Google Services (ex. APIs and Firebase)
-google-services.json
-GoogleService-Info.plist
-
 # Env file
 .env
