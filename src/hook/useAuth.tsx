@@ -8,7 +8,6 @@ const useAuth = () => {
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPass, setConfirmPass] = useState<string>('');
-  // const {user, setUser, createUser} = useQuery();
 
   // Estado para dar tiempo a cargar los datos
   const [changeLoading, setChangeLoading] = useState(false);
@@ -37,40 +36,16 @@ const useAuth = () => {
     }
   };
 
-  // const handleCreateUserWithEmail = async () => {
-  //   const trimmedEmail = email.trim();
-  //   const trimmedPhone = phone.trim();
+  const handleCreateUserWithEmail = async () => {
+    console.log(email, password)
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
 
-  //   if (
-  //     (trimmedEmail.length > 0 || trimmedPhone.length > 0) &&
-  //     password.length > 0 &&
-  //     confirmPass.length > 0
-  //   ) {
-  //     if (password === confirmPass) {
-  //       setChangeLoading(true);
-  //       try {
-  //         if (trimmedEmail.length > 0) {
-  //           const userCredential = await auth().createUserWithEmailAndPassword(
-  //             trimmedEmail,
-  //             password,
-  //           );
-  //           const {user} = userCredential;
-  //           setChangeLoading(false);
-  //         } else if (trimmedPhone.length > 0) {
-  //           await auth().signInWithPhoneNumber(trimmedPhone);
-  //           setChangeLoading(false);
-  //         }
-  //       } catch (error) {
-  //         Alert.alert('Error', `${error}`);
-  //         setChangeLoading(false);
-  //       }
-  //     } else {
-  //       Alert.alert('Alerta', 'Las contraseñas no coinciden');
-  //     }
-  //   } else {
-  //     Alert.alert('Alerta', 'Debes llenar todos los campos');
-  //   }
-  // };
+    if ( error ) Alert.alert(error.message);
+
+  };
 
   const handleSignOut = async () => {
 
@@ -154,14 +129,14 @@ const useAuth = () => {
   //   }
   // };
 
-  // const handleEmailOrPhoneChange = val => {
-  //   // Check if value is an email address
-  //   if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-  //     setEmail(val);
-  //   } else {
-  //     setPhone(val);
-  //   }
-  // };
+  const handleEmailOrPhoneChange = ( val: string ) => {
+    // Check if value is an email address
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      setEmail(val);
+    } else {
+      setPhone(val);
+    }
+  };
 
   // const signUp = () => {
   //   // Create user in firebase
@@ -189,7 +164,9 @@ const useAuth = () => {
 
     // Methods
     handleSigInWithEmail,
+    handleCreateUserWithEmail,
     handleSignOut,
+    handleEmailOrPhoneChange,
   };
 };
 

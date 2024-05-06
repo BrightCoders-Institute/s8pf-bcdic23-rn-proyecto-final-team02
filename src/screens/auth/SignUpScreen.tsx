@@ -15,13 +15,26 @@ import {
 import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import useAuth from '../../hook/useAuth';
 
 const SignUpScreen = () => {
   const googleLogo = require('../../assets/img/google.webp');
-  const {top} = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
   const navigation = useNavigation();
 
-  const [showCompanyForm, setShowCompanyForm] = useState(false);
+  const {
+    email,
+    setEmail,
+    phone,
+    setPhone,
+    password,
+    setPassword,
+    confirmPass,
+    setConfirmPass,
+    handleCreateUserWithEmail,
+  } = useAuth();
+
+  const [ showCompanyForm, setShowCompanyForm ] = useState(false);
 
   const toggleForm = () => {
     setShowCompanyForm(!showCompanyForm);
@@ -64,11 +77,20 @@ const SignUpScreen = () => {
             <CompanyForm />
           ) : (
             // formulario para el trabajador
-            <WorkerForm />
+            <WorkerForm
+              email={email}
+              setEmail={setEmail}
+              phone={phone}
+              setPhone={setPhone}
+              password={password}
+              setPassword={setPassword}
+              confirmPass={confirmPass}
+              setConfirmPass={setConfirmPass}
+            />
           )}
         </SectionComponent>
 
-        <ButtonComponent title="Sign Up" onPress={ () => console.log('Sign Up') } />
+        <ButtonComponent title="Sign Up" onPress={ handleCreateUserWithEmail } />
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>

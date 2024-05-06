@@ -10,18 +10,31 @@ import useQuery from '../../hook/useQuery';
 
 import {globalStyles} from '../../theme/globalTheme';
 
-const WorkerForm = () => {
-  const {user, setUser} = useQuery();
+interface Props {
+  email: string,
+  setEmail: React.Dispatch<React.SetStateAction<string>>,
+  phone: string,
+  setPhone: React.Dispatch<React.SetStateAction<string>>,
+  password: string,
+  setPassword: React.Dispatch<React.SetStateAction<string>>,
+  confirmPass: string,
+  setConfirmPass: React.Dispatch<React.SetStateAction<string>>,
+}
 
-  const {
+const WorkerForm = (
+  {
     email,
+    setEmail,
     phone,
+    setPhone,
     password,
     setPassword,
-    setConfirmPass,
     confirmPass,
-    handleEmailOrPhoneChange,
-  } = useAuth();
+    setConfirmPass,
+  } : Props
+) => {
+
+  const {user, setUser} = useQuery();
 
   return (
     <View>
@@ -41,8 +54,8 @@ const WorkerForm = () => {
 
       <TextComponent styles={globalStyles.input} text="Email or Phone" />
       <InputComponent
-        value={email || phone} // Display whichever is not empty
-        onChangeText={handleEmailOrPhoneChange} // Handle email or phone change
+        value={email} // Display whichever is not empty
+        onChangeText={( val ) => setEmail(val)} // Handle email or phone change
         keyboardType="email-address"
       />
 
