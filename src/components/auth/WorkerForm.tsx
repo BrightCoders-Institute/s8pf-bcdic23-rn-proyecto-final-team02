@@ -9,6 +9,7 @@ import DropdownField from '../DropDownComponent';
 
 import {globalStyles} from '../../theme/globalTheme';
 import useQuery from '../../hook/useQuery';
+import useAuth from '../../hook/useAuth';
 
 interface Props {
   email: string;
@@ -31,7 +32,10 @@ const WorkerForm = ({
   confirmPass,
   setConfirmPass,
 }: Props) => {
+
   const {user, setUser} = useQuery();
+
+  const { handleCreateUserWithEmail } = useAuth();
 
   return (
     <Formik
@@ -44,6 +48,7 @@ const WorkerForm = ({
       }}
       validationSchema={SignupWorkerSchema}
       onSubmit={values => {
+        handleCreateUserWithEmail(values.email, values.password);
         console.log(values);
       }}>
       {({

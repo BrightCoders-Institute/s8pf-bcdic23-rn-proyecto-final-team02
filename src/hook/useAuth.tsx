@@ -36,14 +36,18 @@ const useAuth = () => {
     }
   };
 
-  const handleCreateUserWithEmail = async () => {
+  const handleCreateUserWithEmail = async ( email: string, password: string ) => {
     console.log(email, password)
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
 
-    if ( error ) Alert.alert(error.message);
+    if ( error ) {
+      Alert.alert(error.message)
+    } else {
+      Alert.alert('Advice', 'Te hemos enviado un correo para realizar la validación');
+    }
 
   };
 
