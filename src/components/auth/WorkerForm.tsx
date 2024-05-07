@@ -8,32 +8,29 @@ import InputComponent from '../InputComponent';
 import DropdownField from '../DropDownComponent';
 
 import {globalStyles} from '../../theme/globalTheme';
-
+import useQuery from '../../hook/useQuery';
 
 interface Props {
-  email: string,
-  setEmail: React.Dispatch<React.SetStateAction<string>>,
-  phone: string,
-  setPhone: React.Dispatch<React.SetStateAction<string>>,
-  password: string,
-  setPassword: React.Dispatch<React.SetStateAction<string>>,
-  confirmPass: string,
-  setConfirmPass: React.Dispatch<React.SetStateAction<string>>,
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  phone: string;
+  setPhone: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  confirmPass: string;
+  setConfirmPass: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const WorkerForm = (
-  {
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    password,
-    setPassword,
-    confirmPass,
-    setConfirmPass,
-  } : Props
-) => {
-
+const WorkerForm = ({
+  email,
+  setEmail,
+  phone,
+  setPhone,
+  password,
+  setPassword,
+  confirmPass,
+  setConfirmPass,
+}: Props) => {
   const {user, setUser} = useQuery();
 
   return (
@@ -108,7 +105,7 @@ const WorkerForm = (
               keyboardType="email-address"
               placeholder="email@email.com"
             />
-            
+
             <TextComponent styles={globalStyles.input} text="Password" />
             {touched.password && errors.password && (
               <TextComponent
