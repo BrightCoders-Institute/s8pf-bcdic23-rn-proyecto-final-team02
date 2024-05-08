@@ -11,31 +11,27 @@ import {globalStyles} from '../../theme/globalTheme';
 import useQuery from '../../hook/useQuery';
 import useAuth from '../../hook/useAuth';
 
-interface Props {
+interface Values {
+  firstName: string;
+  lastName: string;
   email: string;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
-  phone: string;
-  setPhone: React.Dispatch<React.SetStateAction<string>>;
   password: string;
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
   confirmPass: string;
-  setConfirmPass: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const WorkerForm = ({
-  email,
-  setEmail,
-  phone,
-  setPhone,
-  password,
-  setPassword,
-  confirmPass,
-  setConfirmPass,
-}: Props) => {
+const WorkerForm = () => {
 
   const {user, setUser} = useQuery();
 
   const { handleCreateUserWithEmail } = useAuth();
+
+  const cleanValues = ( values: Values ) => {
+    values.firstName = '';
+    values.lastName = '';
+    values.email = '';
+    values.password = '';
+    values.confirmPass = '';
+  };
 
   return (
     <Formik
@@ -49,7 +45,7 @@ const WorkerForm = ({
       validationSchema={SignupWorkerSchema}
       onSubmit={values => {
         handleCreateUserWithEmail(values.email, values.password);
-        console.log(values);
+        cleanValues();
       }}>
       {({
         values,
