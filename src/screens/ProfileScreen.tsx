@@ -42,43 +42,6 @@ const ProfileScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  async function loadData() {
-    try {
-        const currentUser = auth().currentUser;
-        if (currentUser) {
-            const userDoc = await firestore().collection('users_data').doc(currentUser.uid).get();
-            if (userDoc.exists) {
-                setUserData(userDoc.data() as UserData);
-            } else {
-                setError('User data not found');
-            }
-        } else {
-            setError('User not authenticated');
-        }
-        setLoading(false);
-    } catch (error) {
-        console.log('Error fetching data:', error);
-        setError('Error fetching data. Please try again later.');
-        setLoading(false);
-    }
-}
-
-useEffect(() => {
-    loadData();
-}, []);
-
-if (loading) {
-    return <ActivityIndicator size="large" color="#3825AE" />;
-}
-
-if (error) {
-    return <Text>{error}</Text>;
-}
-
-if (!userData) {
-    return <Text>No user data found</Text>;
-}
-
   return (
     <ContainerComponent isScroll>
       <View style={Platform.OS === 'ios' ? {top: top + 15} : {}}>
@@ -110,7 +73,7 @@ if (!userData) {
             <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
               <TextComponent text="Name" color="black" font="bold" size={16} />
               <RowComponent>
-                <TextComponent text={userData.name} color="black" size={14} />
+                <TextComponent text="Undefined" color="black" size={14} />
                 <IconComponent name="chevron-forward" color="black" />
               </RowComponent>
             </TouchableOpacity>
@@ -122,7 +85,7 @@ if (!userData) {
                 size={16}
               />
               <RowComponent>
-                <TextComponent text={userData.last_name}color="black" size={14} />
+                <TextComponent text="Undefined"color="black" size={14} />
                 <IconComponent name="chevron-forward" color="black" />
               </RowComponent>
             </TouchableOpacity>
@@ -169,7 +132,7 @@ if (!userData) {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent color="black" text="Telephone number" font="bold" />
             <RowComponent>
-              <TextComponent text={userData.phone} color="black" size={14} />
+              <TextComponent text="Undefined" color="black" size={14} />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>
@@ -177,7 +140,7 @@ if (!userData) {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent text="Password" color="black" font="bold" />
             <RowComponent>
-              <TextComponent text={userData.password} color="black" size={14} />
+              <TextComponent text="Undefined" color="black" size={14} />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>
@@ -185,7 +148,7 @@ if (!userData) {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent text="Email" font="bold" color="black" />
             <RowComponent>
-              <TextComponent text={userData.email} color="black" />
+              <TextComponent text="Undefined" color="black" />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>

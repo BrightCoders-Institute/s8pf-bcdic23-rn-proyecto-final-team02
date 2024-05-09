@@ -19,16 +19,18 @@ import {LogInScheme} from '../../interface/schemes/SignUpScheme';
 import {globalStyles} from '../../theme/globalTheme';
 
 import useAuth from '../../hook/useAuth';
+import { ActivityIndicator } from 'react-native';
 // Start/stop SupabaseAutoRefresh
 authAutoRefresh();
+
+interface Values {
+  email: string;
+  password: string;
+};
 
 const SignInScreen = () => {
 
   const {
-    email,
-    setEmail,
-    password,
-    setPassword,
     changeLoading,
     handleSigInWithEmail,
   } = useAuth();
@@ -37,6 +39,11 @@ const SignInScreen = () => {
 
   const navigation = useNavigation();
   const {top} = useSafeAreaInsets();
+
+  const cleanValues = ( values: Values ) => {
+    values.email = '';
+    values.password = '';
+  };
 
   return (
     <ContainerComponent styles={styles.screen}>
@@ -50,7 +57,8 @@ const SignInScreen = () => {
             }}
             validationSchema={LogInScheme}
             onSubmit={values => {
-              console.log(values);
+              handleSigInWithEmail( values.email, values.password );
+              cleanValues( values );
             }}>
             {({
               values,
@@ -105,18 +113,32 @@ const SignInScreen = () => {
                   size={20}
                   font="bold"
                 />
-                <TouchableOpacity
-                  disabled={!isValid}
-                  onPress={handleSubmit}
-                  style={globalStyles.primaryBtn}>
-                  <TextComponent
-                    text="SIGN IN"
-                    font="bold"
-                    color="white"
-                    size={24}
-                    styles={{textAlign: 'center'}}
-                  />
-                </TouchableOpacity>
+                {
+                  changeLoading ?
+                    (
+                      <>
+                        <ActivityIndicator
+                          size={'large'}
+                          style={{ marginTop: 25 }}
+                        />
+                      </>
+                    )
+                    :
+                    (
+                      <TouchableOpacity
+                        disabled={!isValid || changeLoading}
+                        onPress={ handleSubmit }
+                        style={globalStyles.primaryBtn}>
+                        <TextComponent
+                          text="SIGN IN"
+                          font="bold"
+                          color="white"
+                          size={24}
+                          styles={{textAlign: 'center'}}
+                        />
+                      </TouchableOpacity>
+                    )
+                }
               </>
             )}
           </Formik>
@@ -129,17 +151,19 @@ const SignInScreen = () => {
             src={googleLogo}
             text="In with Google"
             onPress={ () => console.log('Loggin google') }
-            disabled={changeLoading}
+            disabled={ changeLoading }
           />
           
         </View>
 
-        <TextComponent text="Already have an account? " styles={styles.text} />
+        <TextComponent text="Don't have an account? " styles={styles.text} />
 
         <TouchableOpacity
           activeOpacity={0.8}
           style={{marginLeft: 5}}
-          onPress={() => navigation.navigate('SignUp')}>
+          onPress={() => navigation.navigate('SignUp')}
+          disabled={ changeLoading }
+        >
           <TextComponent
             text="Sign Up"
             font="bold"
