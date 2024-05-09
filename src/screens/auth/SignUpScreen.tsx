@@ -77,16 +77,7 @@ const SignUpScreen = () => {
             <CompanyForm />
           ) : (
             // formulario para el trabajador
-            <WorkerForm
-              email={email}
-              setEmail={setEmail}
-              phone={phone}
-              setPhone={setPhone}
-              password={password}
-              setPassword={setPassword}
-              confirmPass={confirmPass}
-              setConfirmPass={setConfirmPass}
-            />
+            <WorkerForm />
           )}
         </SectionComponent>
         <TextComponent text="Or continue with" styles={styles.text} />

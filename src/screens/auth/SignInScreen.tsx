@@ -22,13 +22,14 @@ import useAuth from '../../hook/useAuth';
 // Start/stop SupabaseAutoRefresh
 authAutoRefresh();
 
+interface Values {
+  email: string;
+  password: string;
+};
+
 const SignInScreen = () => {
 
   const {
-    email,
-    setEmail,
-    password,
-    setPassword,
     changeLoading,
     handleSigInWithEmail,
   } = useAuth();
@@ -37,6 +38,11 @@ const SignInScreen = () => {
 
   const navigation = useNavigation();
   const {top} = useSafeAreaInsets();
+
+  const cleanValues = ( values: Values ) => {
+    values.email = '';
+    values.password = '';
+  };
 
   return (
     <ContainerComponent styles={styles.screen}>
@@ -50,7 +56,8 @@ const SignInScreen = () => {
             }}
             validationSchema={LogInScheme}
             onSubmit={values => {
-              console.log(values);
+              handleSigInWithEmail( values.email, values.password );
+              cleanValues( values );
             }}>
             {({
               values,

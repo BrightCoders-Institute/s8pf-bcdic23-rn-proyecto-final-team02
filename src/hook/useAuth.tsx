@@ -12,7 +12,7 @@ const useAuth = () => {
   // Estado para dar tiempo a cargar los datos
   const [changeLoading, setChangeLoading] = useState(false);
 
-  const handleSigInWithEmail = async () => {
+  const handleSigInWithEmail = async ( email: string, password: string ) => {
     if (email.length > 0 && password.length > 0) {
 
       setChangeLoading(true);
@@ -46,7 +46,7 @@ const useAuth = () => {
     if ( error ) {
       Alert.alert(error.message)
     } else {
-      Alert.alert('Advice', 'Te hemos enviado un correo para realizar la validación');
+      Alert.alert('Información', 'Se ha enviado un correo para realizar la validación');
     }
 
   };

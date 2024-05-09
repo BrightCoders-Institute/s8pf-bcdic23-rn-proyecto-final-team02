@@ -45,7 +45,7 @@ const WorkerForm = () => {
       validationSchema={SignupWorkerSchema}
       onSubmit={values => {
         handleCreateUserWithEmail(values.email, values.password);
-        cleanValues();
+        cleanValues( values );
       }}>
       {({
         values,
