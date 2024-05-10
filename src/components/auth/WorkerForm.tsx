@@ -1,4 +1,4 @@
-import {TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, TouchableOpacity, View} from 'react-native';
 import {Formik} from 'formik';
 
 import {SignupWorkerSchema} from '../../interface/schemes/SignUpScheme';
@@ -144,21 +144,32 @@ const WorkerForm = () => {
               placeholder="********"
             />
 
-            {/* <DropdownField title="Gender" user={User} /> */}
           </View>
 
-          <TouchableOpacity
-            disabled={ !isValid || changeLoading }
-            onPress={ handleSubmit }
-            style={globalStyles.primaryBtn}>
-            <TextComponent
-              text="SIGN UP"
-              font="bold"
-              size={24}
-              color="white"
-              styles={{textAlign: 'center'}}
-            />
-          </TouchableOpacity>
+          {
+            changeLoading ?
+              (
+                <ActivityIndicator
+                  size='large'
+                  style={{ marginTop: 25 }}
+                />
+              )
+              :
+              (
+                <TouchableOpacity
+                  disabled={ !isValid || changeLoading }
+                  onPress={ handleSubmit }
+                  style={globalStyles.primaryBtn}>
+                  <TextComponent
+                    text="SIGN UP"
+                    font="bold"
+                    size={24}
+                    color="white"
+                    styles={{textAlign: 'center'}}
+                  />
+                </TouchableOpacity>
+              )
+          }
         </>
       )}
     </Formik>

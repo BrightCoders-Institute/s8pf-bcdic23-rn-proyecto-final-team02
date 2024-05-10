@@ -116,12 +116,10 @@ const SignInScreen = () => {
                 {
                   changeLoading ?
                     (
-                      <>
-                        <ActivityIndicator
-                          size={'large'}
-                          style={{ marginTop: 25 }}
-                        />
-                      </>
+                      <ActivityIndicator
+                        size={'large'}
+                        style={{ marginTop: 25 }}
+                      />
                     )
                     :
                     (

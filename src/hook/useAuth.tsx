@@ -15,7 +15,7 @@ const useAuth = () => {
   const handleSigInWithEmail = async ( email: string, password: string ) => {
     if (email.length > 0 && password.length > 0) {
 
-      setChangeLoading(true);
+      setChangeLoading( true );
 
       const { error } = await supabase.auth.signInWithPassword({
         email: email,
@@ -23,7 +23,7 @@ const useAuth = () => {
       });
 
       if ( error ) Alert.alert(error.message);
-      setChangeLoading(false);
+      setChangeLoading( false );
 
     } else {
 
@@ -37,7 +37,9 @@ const useAuth = () => {
   };
 
   const handleCreateUserWithEmail = async ( email: string, password: string ) => {
-    console.log(email, password)
+
+    setChangeLoading( true );
+
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -48,6 +50,8 @@ const useAuth = () => {
     } else {
       Alert.alert('Información', 'Se ha enviado un correo para realizar la validación');
     }
+
+    setChangeLoading( false );
 
   };
 

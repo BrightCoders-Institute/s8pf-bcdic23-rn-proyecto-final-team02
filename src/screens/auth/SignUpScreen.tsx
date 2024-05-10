@@ -77,7 +77,7 @@ const SignUpScreen = () => {
             src={googleLogo}
             text="Google"
             onPress={ () => console.log(changeLoading) }
-            disabled={ changeLoading } // Change this to "changeLoading"
+            disabled={ changeLoading }
           />
         </View>
 
