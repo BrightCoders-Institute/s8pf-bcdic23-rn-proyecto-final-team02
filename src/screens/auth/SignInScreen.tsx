@@ -116,17 +116,15 @@ const SignInScreen = () => {
                 {
                   changeLoading ?
                     (
-                      <>
-                        <ActivityIndicator
-                          size={'large'}
-                          style={{ marginTop: 25 }}
-                        />
-                      </>
+                      <ActivityIndicator
+                        size={'large'}
+                        style={{ marginTop: 25 }}
+                      />
                     )
                     :
                     (
                       <TouchableOpacity
-                        disabled={!isValid || changeLoading}
+                        disabled={ !isValid || changeLoading }
                         onPress={ handleSubmit }
                         style={globalStyles.primaryBtn}>
                         <TextComponent
