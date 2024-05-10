@@ -126,7 +126,7 @@ const SignInScreen = () => {
                     :
                     (
                       <TouchableOpacity
-                        disabled={!isValid || changeLoading}
+                        disabled={ !isValid || changeLoading }
                         onPress={ handleSubmit }
                         style={globalStyles.primaryBtn}>
                         <TextComponent

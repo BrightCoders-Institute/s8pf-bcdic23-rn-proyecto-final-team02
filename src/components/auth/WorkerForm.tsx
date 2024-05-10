@@ -23,7 +23,7 @@ const WorkerForm = () => {
 
   const {user, setUser} = useQuery();
 
-  const { handleCreateUserWithEmail } = useAuth();
+  const { handleCreateUserWithEmail, changeLoading } = useAuth();
 
   const cleanValues = ( values: Values ) => {
     values.firstName = '';
@@ -148,8 +148,8 @@ const WorkerForm = () => {
           </View>
 
           <TouchableOpacity
-            disabled={!isValid}
-            onPress={handleSubmit}
+            disabled={ !isValid || changeLoading }
+            onPress={ handleSubmit }
             style={globalStyles.primaryBtn}>
             <TextComponent
               text="SIGN UP"

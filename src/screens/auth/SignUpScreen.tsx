@@ -22,17 +22,7 @@ const SignUpScreen = () => {
   const { top } = useSafeAreaInsets();
   const navigation = useNavigation();
 
-  const {
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    password,
-    setPassword,
-    confirmPass,
-    setConfirmPass,
-    handleCreateUserWithEmail,
-  } = useAuth();
+  const { changeLoading } = useAuth();
 
   const [ showCompanyForm, setShowCompanyForm ] = useState(false);
 
@@ -86,8 +76,8 @@ const SignUpScreen = () => {
           <AuthLogoComponent
             src={googleLogo}
             text="Google"
-            onPress={ () => console.log('Sign Up google') }
-            disabled={false} // Change this to "changeLoading"
+            onPress={ () => console.log(changeLoading) }
+            disabled={ changeLoading } // Change this to "changeLoading"
           />
         </View>
 
@@ -95,7 +85,9 @@ const SignUpScreen = () => {
         <TouchableOpacity
           activeOpacity={0.8}
           style={{marginLeft: 5}}
-          onPress={() => navigation.navigate('SignIn')}>
+          onPress={ () => navigation.navigate('SignIn') }
+          disabled={ changeLoading }
+        >
           <TextComponent text="Sign In" font="bold" styles={styles.button} />
         </TouchableOpacity>
         <View style={{height: 50}} />
