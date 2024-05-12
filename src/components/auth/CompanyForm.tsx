@@ -1,4 +1,4 @@
-import {TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
 
@@ -38,6 +38,7 @@ const CompanyForm = () => {
       validationSchema={SigupCompanyScheme}
       onSubmit={values => {
         handleCreateUserWithEmail( values.email, values.password )
+        cleanValues( values );
       }}>
       {({
         values,
@@ -121,18 +122,31 @@ const CompanyForm = () => {
             />
           </View>
 
-          <TouchableOpacity
-            disabled={!isValid}
-            onPress={handleSubmit}
-            style={globalStyles.primaryBtn}>
-            <TextComponent
-              text="SIGN UP"
-              font="bold"
-              size={24}
-              color="white"
-              styles={{textAlign: 'center'}}
-            />
-          </TouchableOpacity>
+          {
+            changeLoading ?
+              (
+                <ActivityIndicator
+                size='large'
+                style={{ marginTop: 25 }}
+                />
+              )
+              :
+              (
+                <TouchableOpacity
+                  disabled={ !isValid }
+                  onPress={ handleSubmit }
+                  style={ globalStyles.primaryBtn }
+                >
+                  <TextComponent
+                    text="SIGN UP"
+                    font="bold"
+                    size={24}
+                    color="white"
+                    styles={{textAlign: 'center'}}
+                  />
+                </TouchableOpacity>
+              )
+          }
         </>
       )}
     </Formik>
