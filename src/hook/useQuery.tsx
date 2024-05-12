@@ -67,7 +67,7 @@ const useQuery = ( ) => {
 
   return {
     createCompany,
-    getCompany
+    getCompany,
   };
 };
 
