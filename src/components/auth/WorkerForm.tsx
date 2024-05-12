@@ -157,9 +157,9 @@ const WorkerForm = () => {
               :
               (
                 <TouchableOpacity
-                  disabled={ !isValid || changeLoading }
+                  disabled={ !isValid }
                   onPress={ handleSubmit }
-                  style={globalStyles.primaryBtn}>
+                  style={ globalStyles.primaryBtn }>
                   <TextComponent
                     text="SIGN UP"
                     font="bold"
