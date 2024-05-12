@@ -2,8 +2,9 @@ import {View, Text, Alert} from 'react-native';
 import React, {useState} from 'react';
 import { User } from '../interface/db/UserInterface';
 import { Company } from '../interface/db/CompanyInterface';
+import { supabase } from '../lib/supabase';
 
-const useQuery = ( { isWorker } : { worker: boolean } ) => {
+const useQuery = ( ) => {
 
   // Worker data
   const [worker, setWorker] = useState<User>({
@@ -22,7 +23,7 @@ const useQuery = ( { isWorker } : { worker: boolean } ) => {
 
   // Company data
   const [ company, setCompany ] = useState<Company>({
-    id: 0,
+    id: undefined,
     name: '',
     address: '',
     password: '',
@@ -36,10 +37,22 @@ const useQuery = ( { isWorker } : { worker: boolean } ) => {
   const [changeLoading, setChangeLoading] = useState(false);
 
   const createCompany = async () => {
-    
+
+    const { error } = await supabase
+      .from('company')
+      .insert(company);
+
+    if ( error ) {
+      Alert.alert('Error', 'Error al crear la compañia');
+    } else {
+      Alert.alert('Aviso', 'Compañia creada correctamente');
+    }
+
   };
 
-  return {};
+  return {
+    createCompany
+  };
 };
 
 export default useQuery;
