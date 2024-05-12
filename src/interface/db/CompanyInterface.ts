@@ -1,44 +1,38 @@
 export interface Company {
+  id: number;
   name: string;
-  phone: string;
   address: string;
+  password: string;
+  rating: number;
+  photo: string;
+  phone: string;
   webSite: string;
-
-  branch: Branch;
-  jobs: Job;
 }
 
 export interface Branch {
+  id: string;
   name: string;
+
+  // Foreign Key
+  idCompany: string;
 }
 
 export interface Job {
-  job: string;
-  active: boolean;
-  paymentFrequency: string;
+  id: string;
+  name: string;
+  state: boolean;
   salary: string;
-  temporary: boolean;
-  working_day: string[];
-  daysOff: string[];
+  description: string;
+  requirements: string;
 
-  applications: Application[];
-  benefits: Benefit[];
-  requeriments: Requeriment[];
+  // Foreign Key
+  idBranch: string;
 }
 
 export interface Application {
-  applicant: string;
-  puntuation: number;
-}
+  state: 'accepted' | 'pending' | 'rejected';
 
-export interface Benefit {
-  name: string;
-  description: string;
-}
-
-export interface Requeriment {
-  name: string;
-  description: string;
-  mandatory: boolean;
-  puntuation: number;
+  // Foreign Key
+  userId: string;
+  companyId: string;
 }
