@@ -1,12 +1,12 @@
 export interface Company {
-  id?: number;
+  id_company?: number;
   name: string;
   address: string;
   password: string;
   rating: number;
   photo: string;
   phone: string;
-  webSite: string;
+  web_site: string;
 }
 
 export interface Branch {

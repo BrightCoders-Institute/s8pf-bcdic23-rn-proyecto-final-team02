@@ -9,7 +9,7 @@ const useQuery = ( ) => {
   // Worker data
   const [worker, setWorker] = useState<User>({
     first_name: '',
-    address: '',
+    address: 'hola',
     applications: [],
     documents: [],
     email: '',
@@ -23,14 +23,13 @@ const useQuery = ( ) => {
 
   // Company data
   const [ company, setCompany ] = useState<Company>({
-    id: undefined,
     name: '',
     address: '',
     password: '',
     rating: 0,
     photo: '',
     phone: '',
-    webSite: ''
+    web_site: ''
   });
 
   // Loading state
@@ -38,20 +37,37 @@ const useQuery = ( ) => {
 
   const createCompany = async () => {
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('company')
-      .insert(company);
+      .insert(company)
+      .select();
 
     if ( error ) {
-      Alert.alert('Error', 'Error al crear la compañia');
-    } else {
-      Alert.alert('Aviso', 'Compañia creada correctamente');
+      Alert.alert(error.message);
+      return null;
     }
+
+    data.map( ( info: Company ) => {
+      console.log(info.id_company);
+    });
+
+    Alert.alert('Aviso', 'Compañia creada correctamente');
 
   };
 
+  const getCompany = async () => {
+
+    const { data, error } = await supabase
+      .from('company')
+      .select()
+      .eq('id_company', 1);
+
+    if ( error ) Alert.alert(error.message);
+  };
+
   return {
-    createCompany
+    createCompany,
+    getCompany
   };
 };
 
