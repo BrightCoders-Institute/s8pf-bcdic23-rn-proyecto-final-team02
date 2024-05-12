@@ -7,8 +7,26 @@ import {SigupCompanyScheme} from '../../interface/schemes/SignUpScheme';
 import TextComponent from '../TextComponent';
 import InputComponent from '../InputComponent';
 import {globalStyles} from '../../theme/globalTheme';
+import useAuth from '../../hook/useAuth';
+
+interface Values {
+  name: string,
+  email: string,
+  password: string,
+  confirmPass: string,
+}
 
 const CompanyForm = () => {
+
+  const { handleCreateUserWithEmail, changeLoading } = useAuth();
+
+  const cleanValues = ( values: Values ) => {
+    values.name = '';
+    values.email = '';
+    values.password = '';
+    values.confirmPass = '';
+  };
+
   return (
     <Formik
       initialValues={{
@@ -19,7 +37,7 @@ const CompanyForm = () => {
       }}
       validationSchema={SigupCompanyScheme}
       onSubmit={values => {
-        console.log(values);
+        handleCreateUserWithEmail( values.email, values.password )
       }}>
       {({
         values,
