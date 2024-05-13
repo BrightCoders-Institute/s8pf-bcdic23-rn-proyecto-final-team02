@@ -16,6 +16,7 @@ import FabComponent from './FabComponent';
 import WorkDetailsComponent from './WorkDetailsComponent';
 import CompanyForm from './auth/CompanyForm';
 import WorkerForm from './auth/WorkerForm';
+import JobForm from './auth/JobForm';
 
 
 export {
@@ -36,6 +37,7 @@ export {
   FabComponent,
   WorkDetailsComponent,
   CompanyForm,
-  WorkerForm
+  WorkerForm,
+  JobForm,
 };
 

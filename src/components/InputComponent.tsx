@@ -43,7 +43,7 @@ export const stylesInput = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 12,
     borderBottomWidth: 2,
-    borderBottomColor: '#6C63FF'
+    borderBottomColor: '#6C63FF',
   },
   input: {
     flex: 1,
