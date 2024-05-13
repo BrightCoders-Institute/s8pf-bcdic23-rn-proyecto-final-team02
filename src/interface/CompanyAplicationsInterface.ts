@@ -1,6 +1,7 @@
 export interface aplications {
     id:string,
     name:string,
+    photo: any,
     job:string,
     stars:number,
     dateApplied:string,

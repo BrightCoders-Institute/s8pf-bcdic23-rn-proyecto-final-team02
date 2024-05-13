@@ -2,23 +2,43 @@ import React from 'react';
 import {
   View,
   StyleSheet,
+  FlatList,
+  Platform,
 } from 'react-native';
-import { ApplicationDetails } from '../components';
-import {FlatList} from 'react-native-gesture-handler';
+import { 
+    ApplicationDetails, 
+    ContainerComponent,
+    SectionComponent,
+    TextComponent, 
+} from '../components';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CompanyAplicationsData } from '../data/CompanyAplicationsData';
 
 const ApplicationDetailsScreen = () => {
+    const {top} = useSafeAreaInsets();
+
     return (
-        <View style={styles.container}>
-            <View>
-             <FlatList
+        <ContainerComponent>
+            <View style={Platform.OS === 'ios' ? {top: top + 15} : {}}>
+                <SectionComponent styles={{alignItems: 'center'}}>
+                    <TextComponent
+                        text="Application"
+                        font="bold"
+                        color="black"
+                        size={24}
+                    />
+                </SectionComponent>
+                
+                <FlatList
                 data={CompanyAplicationsData}
                 keyExtractor={company => company.id}
-                renderItem={({ item }) => <ApplicationDetails Aplications={item} />}
-            />
+                renderItem={({ item }) => (
+                <ApplicationDetails Aplications={item} />
+                )}
+                />
             </View>
-        </View>
-        );
+    </ContainerComponent>
+    );
 };
 
 const styles = StyleSheet.create({
