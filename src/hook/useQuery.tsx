@@ -1,5 +1,5 @@
 import {View, Text, Alert} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { User } from '../interface/db/UserInterface';
 import { Company } from '../interface/db/CompanyInterface';
 import { supabase } from '../lib/supabase';
@@ -33,6 +33,13 @@ const useQuery = () => {
     phone: '',
     web_site: ''
   });
+
+  ( async function () {
+
+    const { data, error } = await supabase.auth.getUser();
+    console.log(data);
+
+  } )
 
   // Loading state
   const [ queryLoading, setQueryLoading ] = useState(false);
