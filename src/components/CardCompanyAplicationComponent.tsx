@@ -67,20 +67,20 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container: {
-    flexDirection: 'row', // Align items in a row
-    alignItems: 'center', // Align items vertically in the center
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 15,
   },
   container2: {
-    flexDirection: 'row', // Align items in a row
-    alignItems: 'center', // Align items vertically in the center
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     padding: 10,
   },
   logo: {
     width: 43,
     height: 43,
-    marginRight: 10, // Add some margin between logo and text
+    marginRight: 10,
   },
   text: {
     fontSize: 16,
