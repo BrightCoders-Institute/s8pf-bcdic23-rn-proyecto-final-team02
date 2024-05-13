@@ -58,11 +58,11 @@ const ProfileScreen = () => {
         <SectionComponent styles={[styles.sections, globalStyles.shadow]}>
           <SectionComponent styles={{alignItems: 'center'}}>
             <Image source={photo} style={styles.image} />
-            <RowComponent styles={styles.buttonStar} isCenter>
-              <IconComponent name="star" color="white" />
+            <RowComponent isCenter>
+              <IconComponent name="star" color="#F0AE02" />
               <TextComponent
                 text="4.85"
-                color="white"
+                font="bold"
                 styles={{marginLeft: 16}}
               />
             </RowComponent>
