@@ -4,12 +4,14 @@ import { User } from '../interface/db/UserInterface';
 import { Company } from '../interface/db/CompanyInterface';
 import { supabase } from '../lib/supabase';
 
-const useQuery = ( ) => {
+type CompanyField = 'name' | 'address' | 'password' | 'photo' | 'phone' | 'web_site';
+
+const useQuery = () => {
 
   // Worker data
   const [worker, setWorker] = useState<User>({
     first_name: '',
-    address: 'hola',
+    address: '',
     applications: [],
     documents: [],
     email: '',
@@ -33,9 +35,11 @@ const useQuery = ( ) => {
   });
 
   // Loading state
-  const [changeLoading, setChangeLoading] = useState(false);
+  const [ queryLoading, setQueryLoading ] = useState(false);
 
   const createCompany = async () => {
+
+    setQueryLoading(true);
 
     const { data, error } = await supabase
       .from('company')
@@ -44,13 +48,14 @@ const useQuery = ( ) => {
 
     if ( error ) {
       Alert.alert(error.message);
-      return null;
+    } else {
+      // Map data and give the information to company (useState);
+      data.map( ( info: Company ) => setCompany( info ) );
+  
+      Alert.alert('Aviso', 'Compañia creada correctamente');
     }
 
-    // Map data and give the information to company (useState);
-    data.map( ( info: Company ) => setCompany( info ) );
-
-    Alert.alert('Aviso', 'Compañia creada correctamente');
+    setQueryLoading(false);
 
   };
 
@@ -62,7 +67,13 @@ const useQuery = ( ) => {
       .eq('id_company', company.id_company);
 
     if ( error ) Alert.alert(error.message);
+
   };
+  
+
+  const editCompany = async (  field: CompanyField ) => {
+
+  }
 
   return {
     createCompany,

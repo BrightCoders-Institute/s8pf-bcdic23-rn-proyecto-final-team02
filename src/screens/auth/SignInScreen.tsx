@@ -20,6 +20,7 @@ import {globalStyles} from '../../theme/globalTheme';
 
 import useAuth from '../../hook/useAuth';
 import { ActivityIndicator } from 'react-native';
+
 // Start/stop SupabaseAutoRefresh
 authAutoRefresh();
 
@@ -208,3 +209,8 @@ const styles = StyleSheet.create({
 });
 
 export default SignInScreen;
+
+(()=>{
+
+})();
+
