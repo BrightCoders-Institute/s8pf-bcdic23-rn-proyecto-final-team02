@@ -47,9 +47,8 @@ const useQuery = ( ) => {
       return null;
     }
 
-    data.map( ( info: Company ) => {
-      console.log(info.id_company);
-    });
+    // Map data and give the information to company (useState);
+    data.map( ( info: Company ) => setCompany( info ) );
 
     Alert.alert('Aviso', 'Compañia creada correctamente');
 
@@ -60,7 +59,7 @@ const useQuery = ( ) => {
     const { data, error } = await supabase
       .from('company')
       .select()
-      .eq('id_company', 1);
+      .eq('id_company', company.id_company);
 
     if ( error ) Alert.alert(error.message);
   };
