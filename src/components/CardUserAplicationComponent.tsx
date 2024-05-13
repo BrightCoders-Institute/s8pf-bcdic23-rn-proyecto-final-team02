@@ -21,8 +21,22 @@ const CardWorkComponent = ({ companyWork }: Props) => {
 
       <View style={styles.container2}>
         <TextComponent styles={styles.text} text={companyWork.job}  />
-        <RowComponent styles={styles.accept} onPress={() => {}}>
-          <TextComponent   text='Accept' color='white' size={16} font='bold'/>
+        <RowComponent styles={styles.accepted} onPress={() => {}}>
+          <TextComponent   text='Accepted' color='white' size={16} font='bold'/>
+        </RowComponent>
+      </View>
+
+      <View style={styles.container2}>
+        <TextComponent styles={styles.text} text={companyWork.job}  />
+        <RowComponent styles={styles.pending} onPress={() => {}}>
+          <TextComponent   text='Pending' color='white' size={16} font='bold'/>
+        </RowComponent>
+      </View>
+
+      <View style={styles.container2}>
+        <TextComponent styles={styles.text} text={companyWork.job}  />
+        <RowComponent styles={styles.rejected} onPress={() => {}}>
+          <TextComponent   text='Rejected' color='white' size={16} font='bold'/>
         </RowComponent>
       </View>
 
@@ -62,7 +76,7 @@ const styles = StyleSheet.create({
     fontSize:16,
     fontWeight:'500',
   },
-  accept:{
+  accepted:{
     backgroundColor:'#406405',
     width:124,
     height:31,
@@ -72,7 +86,7 @@ const styles = StyleSheet.create({
   },
 
   pending:{
-    backgroundColor:'#406405',
+    backgroundColor:'#997006',
     width:124,
     height:31,
     borderRadius:10,
@@ -81,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   rejected:{
-    backgroundColor:'#406405',
+    backgroundColor:'#8A2B2B',
     width:124,
     height:31,
     borderRadius:10,

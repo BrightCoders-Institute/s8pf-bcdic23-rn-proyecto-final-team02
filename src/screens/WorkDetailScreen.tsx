@@ -10,7 +10,7 @@ import {FlatList} from 'react-native-gesture-handler';
 const WorkDetailScreen = () => {
     return (
         <View style={styles.container}>
-            <View  style={{ marginLeft: 12, marginTop: 30 }}>
+            <View  style={{ marginLeft: 12, marginTop: 12 }}>
              <FlatList
                 data={CompanyWorkData}
                 keyExtractor={company => company.id}

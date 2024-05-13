@@ -7,7 +7,7 @@ import {CompanyWorkData} from '../data/CompanyWorkData';
 const CompanyJobsScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={{marginLeft: 12, marginTop: 30}}>
+      <View style={{marginLeft: 12, marginTop: 12}}>
         <FlatList
           data={CompanyWorkData}
           keyExtractor={company => company.id}
