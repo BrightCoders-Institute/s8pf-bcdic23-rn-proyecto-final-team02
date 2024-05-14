@@ -1,40 +1,82 @@
 import {View, Text, Alert} from 'react-native';
-import React, {useState} from 'react';
-import {User} from '../interface/db/UserInterface';
+import React, {useEffect, useState} from 'react';
+import { User } from '../interface/db/UserInterface';
+import { supabase } from '../lib/supabase';
+
+type UserField = 'name' | 'address' | 'password' | 'photo' | 'phone' | 'web_site';
 
 const useQuery = () => {
-  // User data
-  const [user, setUser] = useState<User>({
-    name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    phone: '',
-    gender: '',
-    address: '',
-    photo: '',
-    working: false,
 
+  // Worker data
+  const [user, setUser] = useState<User>({
+    first_name: '',
+    address: '',
     applications: [],
     documents: [],
+    email: '',
+    gender: '',
+    last_name: '',
+    password: '',
+    phone: '',
+    photo: '',
+    working: false
   });
 
   // Loading state
-  // const [changeLoading, setChangeLoading] = useState(false);
+  const [ queryLoading, setQueryLoading ] = useState(false);
 
-  // const createUser = async () => {
-  //   try {
-  //     const userId = auth().currentUser?.uid;
-  //     await firestore().collection('users_data').doc(userId).set(user);
-  //   } catch (error) {
-  //     Alert.alert('Error', `${error}`);
-  //   }
-  // };
+  const createUser = async () => {
+
+    setQueryLoading(true);
+
+    const { data, error } = await supabase
+      .from('users')
+      .insert(user)
+      .select();
+
+    if ( error ) {
+      Alert.alert(error.message);
+    } else {
+      // Map data and give the information to company (useState);
+      data.map( ( info: User ) => setUser( info ) );
+  
+      Alert.alert('Aviso', 'Compañia creada correctamente');
+    }
+
+    setQueryLoading(false);
+
+  };
+
+  const getUser = async () => {
+
+    const { data, error } = await supabase
+      .from('user')
+      .select()
+      .eq('id_user', user.id_user)
+    ;
+
+    if ( error ) {
+
+      Alert.alert(error.message);
+
+    } else {
+
+      // Map data and give the information to company (useState);
+      data.map( ( info: User ) => setUser( info ) );
+  
+      Alert.alert('Aviso', 'Compañia creada correctamente');
+
+    }
+
+  };
+  
+
+  const editUser = async (  field: UserField ) => {
+
+  }
 
   return {
-    user,
-    setUser,
-    // createUser
+    createUser,
   };
 };
 

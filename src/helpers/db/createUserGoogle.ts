@@ -10,7 +10,7 @@ interface UserGoogle {
 }
 
 let user: User = {
-  name: '',
+  first_name: '',
   last_name: '',
   email: '',
   gender: '',
