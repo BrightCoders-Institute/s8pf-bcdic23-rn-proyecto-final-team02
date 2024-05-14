@@ -15,12 +15,13 @@ import MapComponent from './MapComponent';
 import FabComponent from './FabComponent';
 import WorkDetailsComponent from './WorkDetailsComponent';
 import UserForm from './auth/UserForm';
-import WorkerForm from './auth/WorkerForm';
 import JobForm from './auth/JobForm';
+import ApplicationDetails from './ApplicationDetailsComponent';
 
 
 export {
   TextComponent,
+  ApplicationDetails,
   ContainerComponent,
   InputComponent,
   AuthLogoComponent,
@@ -34,8 +35,9 @@ export {
   CardCompanyAplicationComponent,
   MapComponent,
   FabComponent,
-  UserForm
-  WorkerForm,
+  UserForm,
+  CardWorkComponent,
+  WorkDetailsComponent,
   JobForm,
 };
 
