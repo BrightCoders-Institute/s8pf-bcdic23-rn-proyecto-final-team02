@@ -11,8 +11,8 @@ import ProfileScreen from './ProfileScreen';
 import UserAplicationsScreen from './UserAplicationsScreen';
 import CompanyAplicationsScreen from './CompanyAplicationsScreen';
 import MapScreen from './MapScreen';
-import WorkDetailScreen from './WorkDetailScreen';
 import FormScreen from './FormScreen';
+import WorkDetailScreen from './WorkDetailScreen';
 
 export {
   HomeScreen,

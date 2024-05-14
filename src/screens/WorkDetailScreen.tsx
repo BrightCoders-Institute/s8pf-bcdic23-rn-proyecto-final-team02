@@ -1,30 +1,32 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import {WorkDetailsComponent} from '../components';
+import {View, FlatList, Platform} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
+import {FabComponent, WorkDetailsComponent} from '../components';
 import {CompanyWorkData} from '../data/CompanyWorkData';
-import {FlatList} from 'react-native-gesture-handler';
 
 const WorkDetailScreen = () => {
-    return (
-        <View style={styles.container}>
-            <View  style={{ marginLeft: 12, marginTop: 12 }}>
-             <FlatList
-                data={CompanyWorkData}
-                keyExtractor={company => company.id}
-                renderItem={({ item }) => <WorkDetailsComponent companyWork={item} />}
-            />
-            </View>
-        </View>
-        );
-};
+  const {top} = useSafeAreaInsets();
+  const navigation = useNavigation();
 
-const styles = StyleSheet.create({
-    container: {
-        margin:16
-    },
-});
+  return (
+    <View style={{flex: 1}}>
+      <FabComponent
+        iconName="arrow-back-outline"
+        onPress={() => navigation.goBack()}
+        styles={
+          Platform.OS === 'ios' ? {top: 60, left: 16} : {top: 20, left: 16}
+        }
+      />
+      <FlatList
+        data={CompanyWorkData}
+        keyExtractor={company => company.id}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => <WorkDetailsComponent companyWork={item} />}
+      />
+    </View>
+  );
+};
 
 export default WorkDetailScreen;
