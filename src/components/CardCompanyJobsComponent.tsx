@@ -1,45 +1,52 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-import { RowComponent, TextComponent } from '../components';
-import { CompanyWork } from '../interface/companyworkinterface';
+import {View, Image, StyleSheet} from 'react-native';
+import {RowComponent, TextComponent} from '../components';
+import {CompanyWork} from '../interface/companyworkinterface';
 
 interface Props {
   companyWork: CompanyWork;
 }
 
-const CardWorkComponent = ({ companyWork }: Props) => {
+const CardCompanyJobsComponent = ({companyWork}: Props) => {
   return (
     <View style={styles.card}>
       <View style={styles.headerContainer}>
         <Image style={styles.logo} source={companyWork.logo} />
-        <TextComponent styles={styles.branch} text={companyWork.branch} color="black" />
+        <TextComponent
+          styles={styles.branch}
+          text={companyWork.branch}
+          color="black"
+        />
       </View>
 
       <View style={styles.separator} />
 
-      <View style={styles.contentContainer}> 
-      <Image style={styles.work} source={companyWork.work} />
-      <View style={styles.content}>
-        <TextComponent styles={styles.textContent} text={companyWork.job} />
-        <TextComponent styles={styles.textContent} text={companyWork.salary} />
-        <TextComponent styles={styles.textContent} text={companyWork.date} />
-        <TextComponent styles={styles.textContent} text={companyWork.time} />
-        <RowComponent styles={styles.button} onPress={() => {}}>
-          <TextComponent   text='See more >' color='white' size={10} font='bold'/>
-        </RowComponent>
-
+      <View style={styles.contentContainer}>
+        <Image style={styles.work} source={companyWork.work} />
+        <View style={styles.content}>
+          <TextComponent styles={styles.textContent} text={companyWork.job} />
+          <TextComponent
+            styles={styles.textContent}
+            text={companyWork.salary}
+          />
+          <TextComponent styles={styles.textContent} text={companyWork.date} />
+          <TextComponent styles={styles.textContent} text={companyWork.time} />
+          <RowComponent styles={styles.button} onPress={() => {}}>
+            <TextComponent
+              text="See more >"
+              color="white"
+              size={10}
+              font="bold"
+            />
+          </RowComponent>
+        </View>
       </View>
-
-      </View>
-
-
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-
- card: {
+  card: {
     backgroundColor: '#ffff',
     borderRadius: 10,
     shadowColor: '#000',
@@ -49,15 +56,15 @@ const styles = StyleSheet.create({
     height: 205,
     padding: 16,
   },
-  headerContainer:{
+  headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap:5,
+    gap: 5,
   },
   contentContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap:15
+    gap: 15,
   },
   logo: {
     width: 43,
@@ -95,7 +102,6 @@ const styles = StyleSheet.create({
     height: 16,
     borderRadius: 5,
   },
-
 });
 
-export default CardWorkComponent;
+export default CardCompanyJobsComponent;

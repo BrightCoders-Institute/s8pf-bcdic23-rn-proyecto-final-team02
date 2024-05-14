@@ -3,14 +3,19 @@ import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {TextComponent} from '../components';
 import {Company} from '../interface/companyinterface';
 import {globalStyles} from '../theme/globalTheme';
+import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   company: Company;
 }
 
 const CardCompanyComponent = ({company}: Props) => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={[styles.card, globalStyles.shadow]}>
+    <TouchableOpacity
+      style={[styles.card, globalStyles.shadow]}
+      activeOpacity={0.8}>
       <Image style={styles.imagen} source={company.picture} />
 
       <View style={styles.content}>
