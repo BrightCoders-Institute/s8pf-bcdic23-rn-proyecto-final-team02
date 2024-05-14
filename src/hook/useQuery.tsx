@@ -52,9 +52,21 @@ const useQuery = () => {
     const { data, error } = await supabase
       .from('user')
       .select()
-      .eq('id_user', user.id_user);
+      .eq('id_user', user.id_user)
+    ;
 
-    if ( error ) Alert.alert(error.message);
+    if ( error ) {
+
+      Alert.alert(error.message);
+
+    } else {
+
+      // Map data and give the information to company (useState);
+      data.map( ( info: User ) => setUser( info ) );
+  
+      Alert.alert('Aviso', 'Compañia creada correctamente');
+
+    }
 
   };
   
