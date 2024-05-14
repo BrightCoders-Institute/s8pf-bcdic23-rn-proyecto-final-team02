@@ -129,7 +129,7 @@ const SignInScreen = () => {
                     (
                       <TouchableOpacity
                         disabled={ !isValid || changeLoading }
-                        onPress={ createUser }
+                        onPress={ handleSubmit }
                         style={globalStyles.primaryBtn}>
                         <TextComponent
                           text="SIGN IN"

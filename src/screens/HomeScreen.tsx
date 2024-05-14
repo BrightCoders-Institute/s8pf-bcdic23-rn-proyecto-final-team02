@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Image, FlatList} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -12,8 +12,28 @@ import {
 
 import {WorkData} from '../data/WorkData';
 import {CompanyData} from '../data/CompanyData';
+import { supabase } from '../lib/supabase';
+import useQuery from '../hook/useQuery';
 
 const HomeScreen = () => {
+
+  const { user, setUser } = useQuery();
+
+  const getCurrentUser = async () => {
+
+    const { data } = await supabase.auth.getUser();
+
+    setUser({
+      ...user,
+      id: data.user?.id
+    });
+
+  };
+
+  useEffect( () => {
+    getCurrentUser();
+  }, [ ] )
+
   const user_male = require('../assets/user-male-avatar.webp');
   const {top} = useSafeAreaInsets();
 

@@ -9,7 +9,7 @@ const useQuery = () => {
 
   // Worker data
   const [user, setUser] = useState<User>({
-    id: 0,
+    id: '',
     first_name: 'Felix',
     last_name: '',
     phone: '',
@@ -34,10 +34,7 @@ const useQuery = () => {
       Alert.alert(error.message);
     } else {
       // Map data and give the information to company (useState);
-      data.map( ( info: User ) => {
-        setUser( info );
-        console.log(user);
-      });
+      data.map( ( info: User ) => setUser( info ) );
   
       Alert.alert('Aviso', 'Usuario creado correctamente');
     }
@@ -75,6 +72,11 @@ const useQuery = () => {
   }
 
   return {
+    // Props
+    user,
+    setUser,
+
+    // Methods
     createUser,
   };
 };
