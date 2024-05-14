@@ -2,7 +2,7 @@ import {
   MaterialTopTabNavigationOptions,
   createMaterialTopTabNavigator,
 } from '@react-navigation/material-top-tabs';
-import {UserAplicationsScreen} from '../screens';
+import {FormScreen, UserAplicationsScreen} from '../screens';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Platform} from 'react-native';
 
@@ -19,7 +19,8 @@ export const MaterialTab = () => {
 
   return (
     <Tab.Navigator screenOptions={materialTabScreenOptions}>
-      <Tab.Screen name="Applications" component={UserAplicationsScreen} />
+      <Tab.Screen name="My Applications" component={UserAplicationsScreen} />
+      <Tab.Screen name="Add Job" component={FormScreen} />
     </Tab.Navigator>
   );
 };

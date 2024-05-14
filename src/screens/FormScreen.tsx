@@ -12,10 +12,10 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import useAuth from '.././hook/useAuth';
 
 const SignUpScreen = () => {
-  const { top } = useSafeAreaInsets();
-  const { changeLoading } = useAuth();
+  const {top} = useSafeAreaInsets();
+  const {changeLoading} = useAuth();
 
-  const [ showCompanyForm, setShowCompanyForm ] = useState(false);
+  const [showCompanyForm, setShowCompanyForm] = useState(false);
 
   const toggleForm = () => {
     setShowCompanyForm(!showCompanyForm);
@@ -24,16 +24,14 @@ const SignUpScreen = () => {
   return (
     <ContainerComponent isScroll styles={styles.screen}>
       <View style={Platform.OS === 'ios' ? {top: top} : {}}>
-
-        <TextComponent 
+        {/* <TextComponent 
         text={"Register New Job"}                     
         font="bold"
         size={30}
-        styles={{textAlign: 'center'}}/>
+        styles={{textAlign: 'center'}}/> */}
 
         <SectionComponent>
-            <JobForm />
-
+          <JobForm />
         </SectionComponent>
       </View>
     </ContainerComponent>
