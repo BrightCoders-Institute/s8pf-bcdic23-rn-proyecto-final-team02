@@ -69,6 +69,8 @@ const useQuery = () => {
 
   const editUser = async (  field: UserField ) => {
 
+    
+
   }
 
   return {
@@ -78,6 +80,7 @@ const useQuery = () => {
 
     // Methods
     createUser,
+    getUser,
   };
 };
 

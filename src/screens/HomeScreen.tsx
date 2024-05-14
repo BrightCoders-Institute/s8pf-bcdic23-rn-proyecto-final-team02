@@ -23,10 +23,7 @@ const HomeScreen = () => {
 
     const { data } = await supabase.auth.getUser();
 
-    setUser({
-      ...user,
-      id: data.user?.id
-    });
+    user.id = data.user?.id;
 
   };
 
