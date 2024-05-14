@@ -2,22 +2,17 @@ import React from 'react';
 import {
   View,
   Platform,
-  Image,
   StyleSheet,
-  TouchableOpacity,
   FlatList,
 } from 'react-native';
 import {
   ContainerComponent,
-  IconComponent,
-  RowComponent,
   SectionComponent,
   TextComponent,
   CardUserAplicationComponent,
 } from '../components';
 import {CompanyWorkData} from '../data/CompanyWorkData';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {globalStyles} from '../theme/globalTheme';
 
 const UserAplicationsScreen = () => {
   const {top} = useSafeAreaInsets();
@@ -27,7 +22,7 @@ const UserAplicationsScreen = () => {
       <View style={Platform.OS === 'ios' ? {top: top + 15} : {}}>
         <SectionComponent styles={{alignItems: 'center'}}>
           <TextComponent
-            text="My aplications"
+            text="My applications"
             font="bold"
             color="black"
             size={22}

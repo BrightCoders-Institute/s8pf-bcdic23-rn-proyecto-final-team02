@@ -18,11 +18,24 @@ const CardWorkComponent = ({ companyWork }: Props) => {
         <TextComponent styles={styles.text} text={companyWork.branch}  />
       </View>
 
+      <View style={styles.container2}>
+        <TextComponent styles={styles.text} text={companyWork.job}  />
+        <RowComponent styles={styles.accepted} onPress={() => {}}>
+          <TextComponent text='Accepted' color='white' size={16} font='bold'/>
+        </RowComponent>
+      </View>
 
       <View style={styles.container2}>
         <TextComponent styles={styles.text} text={companyWork.job}  />
-        <RowComponent styles={styles.accept} onPress={() => {}}>
-          <TextComponent   text='Accept' color='white' size={16} font='bold'/>
+        <RowComponent styles={styles.pending} onPress={() => {}}>
+          <TextComponent text='Pending' color='white' size={16} font='bold'/>
+        </RowComponent>
+      </View>
+
+      <View style={styles.container2}>
+        <TextComponent styles={styles.text} text={companyWork.job}  />
+        <RowComponent styles={styles.rejected} onPress={() => {}}>
+          <TextComponent text='Rejected' color='white' size={16} font='bold'/>
         </RowComponent>
       </View>
 
@@ -43,26 +56,26 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   container: {
-    flexDirection: 'row', // Align items in a row
-    alignItems: 'center', // Align items vertically in the center
+    flexDirection: 'row',
+    alignItems: 'center',
     gap:5,
   },
   container2:{
-    flexDirection: 'row', // Align items in a row
-    alignItems: 'center', // Align items vertically in the center
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     padding:10
   },
   logo: {
     width: 43,
     height: 43,
-    marginRight: 10, // Add some margin between logo and text
+    marginRight: 10,
   },
   text:{
     fontSize:16,
     fontWeight:'500',
   },
-  accept:{
+  accepted:{
     backgroundColor:'#406405',
     width:124,
     height:31,
@@ -72,7 +85,7 @@ const styles = StyleSheet.create({
   },
 
   pending:{
-    backgroundColor:'#406405',
+    backgroundColor:'#997006',
     width:124,
     height:31,
     borderRadius:10,
@@ -81,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   rejected:{
-    backgroundColor:'#406405',
+    backgroundColor:'#8A2B2B',
     width:124,
     height:31,
     borderRadius:10,

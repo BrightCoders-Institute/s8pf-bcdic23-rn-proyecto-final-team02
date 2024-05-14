@@ -15,6 +15,8 @@ import MapComponent from './MapComponent';
 import FabComponent from './FabComponent';
 import WorkDetailsComponent from './WorkDetailsComponent';
 import UserForm from './auth/UserForm';
+import WorkerForm from './auth/WorkerForm';
+import JobForm from './auth/JobForm';
 
 
 export {
@@ -26,14 +28,14 @@ export {
   IconComponent,
   RowComponent,
   CardCompanyJobsComponent,
-  CardWorkComponent,
   CardCompanyComponent,
   SectionComponent,
   CardUserAplicationComponent,
   CardCompanyAplicationComponent,
   MapComponent,
   FabComponent,
-  WorkDetailsComponent,
   UserForm
+  WorkerForm,
+  JobForm,
 };
 

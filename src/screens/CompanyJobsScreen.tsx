@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, Image, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import {CardCompanyJobsComponent} from '../components';
-
 import {CompanyWorkData} from '../data/CompanyWorkData';
 
 const CompanyJobsScreen = () => {

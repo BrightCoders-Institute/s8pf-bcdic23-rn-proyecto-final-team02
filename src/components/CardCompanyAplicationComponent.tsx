@@ -21,7 +21,7 @@ const CardWorkComponent = ({CompanyAplications}: Props) => {
 
         <View style={styles.container}>
           <View>
-            <IconComponent name="star" color="#3526a7" />
+            <IconComponent name="star" color="#F0AE02" />
           </View>
           <TextComponent
             styles={[styles.text, styles.start]}
@@ -32,8 +32,23 @@ const CardWorkComponent = ({CompanyAplications}: Props) => {
 
       <View style={styles.container2}>
         <TextComponent styles={styles.text} text={CompanyAplications.job} />
-        <RowComponent styles={styles.accept} onPress={() => {}}>
-          <TextComponent text="Accept" color="white" size={16} font="bold" />
+        <RowComponent styles={styles.accepted} onPress={() => {}}>
+          <TextComponent text="Accepted" color="white" size={16} font="bold" />
+        </RowComponent>
+      </View>
+      
+      <View style={styles.container2}>
+        <TextComponent styles={styles.text} text={CompanyAplications.job} />
+        <RowComponent styles={styles.pending} onPress={() => {}}>
+          <TextComponent text="Pending" color="white" size={16} font="bold" />
+        </RowComponent>
+      </View>
+
+      
+      <View style={styles.container2}>
+        <TextComponent styles={styles.text} text={CompanyAplications.job} />
+        <RowComponent styles={styles.rejected} onPress={() => {}}>
+          <TextComponent text="Rejected" color="white" size={16} font="bold" />
         </RowComponent>
       </View>
     </View>
@@ -52,20 +67,20 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container: {
-    flexDirection: 'row', // Align items in a row
-    alignItems: 'center', // Align items vertically in the center
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 15,
   },
   container2: {
-    flexDirection: 'row', // Align items in a row
-    alignItems: 'center', // Align items vertically in the center
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     padding: 10,
   },
   logo: {
     width: 43,
     height: 43,
-    marginRight: 10, // Add some margin between logo and text
+    marginRight: 10,
   },
   text: {
     fontSize: 16,
@@ -74,33 +89,33 @@ const styles = StyleSheet.create({
   start: {
     color: '#3526a7',
     fontWeight: '900',
-  },
-  accept: {
-    backgroundColor: '#406405',
-    width: 124,
-    height: 31,
-    borderRadius: 10,
+  },  
+  accepted:{
+    backgroundColor:'#406405',
+    width:124,
+    height:31,
+    borderRadius:10,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  pending: {
-    backgroundColor: '#406405',
-    width: 124,
-    height: 31,
-    borderRadius: 10,
+  pending:{
+    backgroundColor:'#997006',
+    width:124,
+    height:31,
+    borderRadius:10,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  rejected: {
-    backgroundColor: '#406405',
-    width: 124,
-    height: 31,
-    borderRadius: 10,
+  rejected:{
+    backgroundColor:'#8A2B2B',
+    width:124,
+    height:31,
+    borderRadius:10,
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
 
 export default CardWorkComponent;
