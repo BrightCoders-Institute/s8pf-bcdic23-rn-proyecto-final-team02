@@ -9,17 +9,13 @@ const useQuery = () => {
 
   // Worker data
   const [user, setUser] = useState<User>({
+    id: 0,
     first_name: '',
-    address: '',
-    applications: [],
-    documents: [],
-    email: '',
-    gender: '',
     last_name: '',
-    password: '',
     phone: '',
+    address: '',
     photo: '',
-    working: false
+    working: 'notworking'
   });
 
   // Loading state
@@ -52,7 +48,7 @@ const useQuery = () => {
     const { data, error } = await supabase
       .from('user')
       .select()
-      .eq('id_user', user.id_user)
+      .eq('id_user', user.id)
     ;
 
     if ( error ) {
