@@ -20,6 +20,7 @@ import {globalStyles} from '../../theme/globalTheme';
 
 import useAuth from '../../hook/useAuth';
 import { ActivityIndicator } from 'react-native';
+import useQuery from '../../hook/useQuery';
 
 // Start/stop SupabaseAutoRefresh
 authAutoRefresh();
@@ -35,6 +36,8 @@ const SignInScreen = () => {
     changeLoading,
     handleSigInWithEmail,
   } = useAuth();
+
+  const { createUser } = useQuery();
 
   const googleLogo = require('../../assets/img/google.webp');
 
@@ -126,7 +129,7 @@ const SignInScreen = () => {
                     (
                       <TouchableOpacity
                         disabled={ !isValid || changeLoading }
-                        onPress={ handleSubmit }
+                        onPress={ createUser }
                         style={globalStyles.primaryBtn}>
                         <TextComponent
                           text="SIGN IN"
