@@ -9,7 +9,6 @@ import {
   ContainerComponent,
 } from '../components';
 import {CompanyWork} from '../interface/companyworkinterface';
-import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   companyWork: CompanyWork;
