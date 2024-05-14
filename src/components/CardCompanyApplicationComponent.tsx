@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {TextComponent, RowComponent, IconComponent} from '../components';
+import {TextComponent, RowComponent, IconComponent} from '.';
 import {aplications} from '../interface/CompanyAplicationsInterface';
 import {globalStyles} from '../theme/globalTheme';
 
@@ -8,7 +8,7 @@ interface Props {
   CompanyAplications: aplications;
 }
 
-const CardWorkComponent = ({CompanyAplications}: Props) => {
+const CardCompanyApplicationComponent = ({CompanyAplications}: Props) => {
   return (
     <View style={[styles.card, globalStyles.shadow]}>
       <View style={styles.container2}>
@@ -36,7 +36,7 @@ const CardWorkComponent = ({CompanyAplications}: Props) => {
           <TextComponent text="Accepted" color="white" size={16} font="bold" />
         </RowComponent>
       </View>
-      
+
       <View style={styles.container2}>
         <TextComponent styles={styles.text} text={CompanyAplications.job} />
         <RowComponent styles={styles.pending} onPress={() => {}}>
@@ -44,7 +44,6 @@ const CardWorkComponent = ({CompanyAplications}: Props) => {
         </RowComponent>
       </View>
 
-      
       <View style={styles.container2}>
         <TextComponent styles={styles.text} text={CompanyAplications.job} />
         <RowComponent styles={styles.rejected} onPress={() => {}}>
@@ -89,33 +88,33 @@ const styles = StyleSheet.create({
   start: {
     color: '#3526a7',
     fontWeight: '900',
-  },  
-  accepted:{
-    backgroundColor:'#406405',
-    width:124,
-    height:31,
-    borderRadius:10,
+  },
+  accepted: {
+    backgroundColor: '#406405',
+    width: 124,
+    height: 31,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  pending:{
-    backgroundColor:'#997006',
-    width:124,
-    height:31,
-    borderRadius:10,
+  pending: {
+    backgroundColor: '#997006',
+    width: 124,
+    height: 31,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  rejected:{
-    backgroundColor:'#8A2B2B',
-    width:124,
-    height:31,
-    borderRadius:10,
+  rejected: {
+    backgroundColor: '#8A2B2B',
+    width: 124,
+    height: 31,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });
 
-export default CardWorkComponent;
+export default CardCompanyApplicationComponent;
