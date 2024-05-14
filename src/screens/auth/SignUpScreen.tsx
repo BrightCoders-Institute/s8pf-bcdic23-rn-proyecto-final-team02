@@ -5,12 +5,11 @@ import AppLogoComponent from '../../components/AppLogoComponent';
 import ButtonComponent from '../../components/ButtonComponent';
 
 import {
-  CompanyForm,
   ContainerComponent,
   RowComponent,
   SectionComponent,
   TextComponent,
-  WorkerForm,
+  UserForm,
 } from '../../components';
 import AuthLogoComponent from '../../components/AuthLogoComponent';
 import {useNavigation} from '@react-navigation/native';
@@ -33,43 +32,11 @@ const SignUpScreen = () => {
   return (
     <ContainerComponent isScroll styles={styles.screen}>
       <View style={Platform.OS === 'ios' ? {top: top} : {}}>
+
         <AppLogoComponent />
 
-        <SectionComponent>
-          <RowComponent styles={styles.row}>
-            <RowComponent
-              styles={showCompanyForm ? styles.workerInactive : styles.worker}
-              onPress={toggleForm}
-              isCenter>
-              <TextComponent
-                text="Worker"
-                color="white"
-                size={24}
-                font="bold"
-              />
-            </RowComponent>
+        <UserForm />
 
-            <RowComponent
-              styles={showCompanyForm ? styles.company : styles.companyInactive}
-              onPress={toggleForm}
-              isCenter>
-              <TextComponent
-                text="Company"
-                color="white"
-                size={24}
-                font="bold"
-              />
-            </RowComponent>
-          </RowComponent>
-
-          {showCompanyForm ? (
-            // Aquí va el formulario para la empresa
-            <CompanyForm />
-          ) : (
-            // formulario para el trabajador
-            <WorkerForm />
-          )}
-        </SectionComponent>
         <TextComponent text="Or continue with" styles={styles.text} />
 
         <View style={styles.iconGroup}>

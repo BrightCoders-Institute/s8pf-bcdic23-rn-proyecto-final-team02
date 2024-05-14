@@ -19,9 +19,7 @@ interface Values {
   confirmPass: string;
 }
 
-const WorkerForm = () => {
-
-  const {user, setUser} = useQuery();
+const UserForm = () => {
 
   const { handleCreateUserWithEmail, changeLoading } = useAuth();
 
@@ -176,4 +174,4 @@ const WorkerForm = () => {
   );
 };
 
-export default WorkerForm;
+export default UserForm;

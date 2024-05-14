@@ -14,8 +14,7 @@ import CardCompanyAplicationComponent from './CardCompanyAplicationComponent';
 import MapComponent from './MapComponent';
 import FabComponent from './FabComponent';
 import WorkDetailsComponent from './WorkDetailsComponent';
-import CompanyForm from './auth/CompanyForm';
-import WorkerForm from './auth/UserForm';
+import UserForm from './auth/UserForm';
 
 
 export {
@@ -35,7 +34,6 @@ export {
   MapComponent,
   FabComponent,
   WorkDetailsComponent,
-  CompanyForm,
-  WorkerForm
+  UserForm
 };
 
