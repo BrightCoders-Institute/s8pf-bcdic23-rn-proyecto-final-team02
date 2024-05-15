@@ -16,10 +16,11 @@ interface Values {
   salary: string;
   description: string;
   requirements: string;
+  img:string;
 }
 
 const JobForm = () => {
-  const { user, setUser, registerJob } = useQuery(); // Obtiene la función registerJob de useQuery
+  const { registerJob } = useQuery(); // Obtiene la función registerJob de useQuery
 
   const { changeLoading } = useAuth();
 
@@ -29,6 +30,7 @@ const JobForm = () => {
     values.salary = '';
     values.description = '';
     values.requirements = '';
+    values.img =  '';
   };
 
   return (
@@ -39,6 +41,7 @@ const JobForm = () => {
         salary: '',
         description: '',
         requirements: '',
+        img:'',
       }}
       validationSchema={RegisterJobScheme}
       onSubmit={async (values) => {
@@ -128,6 +131,25 @@ const JobForm = () => {
               placeholder='Ideal candidates should have at least [number] years of experience in [related field], along with demonstrated skills in [specific skills]. The ability to [additional skills] is valued. Additionally, a solid understanding of [relevant concepts] and the ability to [additional actions] are essential'
               multiline={true}
               numberOfLines={10} // Puedes ajustar el número de líneas visibles según tus necesidades
+            />
+
+            <TextComponent
+              styles={globalStyles.input}
+              text='Imagen'
+            />
+            {touched.img && errors.img && (
+              <TextComponent
+                text={errors.img}
+                color='red'
+                font='bold'
+                size={16}
+              />
+            )}
+            <InputComponent
+              value={values.img}
+              onChangeText={handleChange('img')}
+              keyboardType='default'
+              placeholder=''
             />
           </View>
 
