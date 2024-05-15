@@ -8,6 +8,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import {
   CompanyJobsScreen,
+  FormEditScreen,
   FormScreen,
   UserApplicationsScreen,
 } from '../screens';
@@ -27,7 +28,7 @@ export const MaterialTab = () => {
   return (
     <Tab.Navigator screenOptions={materialTabScreenOptions}>
       <Tab.Screen name="My Applications" component={UserApplicationsScreen} />
-      <Tab.Screen name="CrudStack" component={CrudStack} />
+      <Tab.Screen name="My Jobs" component={CrudStack} />
     </Tab.Navigator>
   );
 };
@@ -38,8 +39,9 @@ const CrudStack = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="My Jobs" component={CompanyJobsScreen} />
+      <Stack.Screen name="Jobs" component={CompanyJobsScreen} />
       <Stack.Screen name="FormScreen" component={FormScreen} />
+      <Stack.Screen name="FormEditScreen" component={FormEditScreen} />
     </Stack.Navigator>
   );
 };

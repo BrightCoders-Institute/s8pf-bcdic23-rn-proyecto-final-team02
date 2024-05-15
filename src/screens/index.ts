@@ -13,6 +13,7 @@ import MapScreen from './MapScreen';
 import FormScreen from './FormScreen';
 import WorkDetailScreen from './WorkDetailScreen';
 import UserApplicationsScreen from './UserApplicationsScreen';
+import FormEditScreen from './FormEditScreen';
 
 export {
   HomeScreen,
@@ -30,5 +31,6 @@ export {
   MapScreen,
   WorkDetailScreen,
   FormScreen,
+  FormEditScreen,
 }
 

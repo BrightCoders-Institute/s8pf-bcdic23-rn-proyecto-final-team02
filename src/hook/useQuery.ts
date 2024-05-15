@@ -150,6 +150,17 @@ const useQuery = () => {
     }
   };
 
+  // const AlertDeleteJob = () => {
+  //   Alert.alert('Delete', 'Are you sure you want to delete this post?', [
+  //     {
+  //       text: 'Cancel',
+  //       onPress: () => console.log('Cancel Pressed'),
+  //       style: 'cancel',
+  //     },
+  //     {text: 'OK', onPress: () => deleteJob(jobId)},
+  //   ] )
+  // }
+
 
   return {
     // Props

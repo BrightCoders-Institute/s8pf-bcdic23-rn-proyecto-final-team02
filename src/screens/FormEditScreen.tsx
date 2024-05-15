@@ -32,7 +32,7 @@ interface Values {
   img: string;
 }
 
-const SignUpScreen = () => {
+const FormEditScreen = () => {
   const {top} = useSafeAreaInsets();
   const {registerJob} = useQuery(); // Obtiene la función registerJob de useQuery
   const {changeLoading} = useAuth();
@@ -267,4 +267,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpScreen;
+export default FormEditScreen;
