@@ -11,6 +11,7 @@ import {
   ProfileScreen,
 } from '../screens';
 import {HomeStack} from './HomeStack';
+import {MaterialTab} from './MaterialTab';
 
 const TabButtonUser = createBottomTabNavigator();
 
@@ -48,15 +49,12 @@ export const UserBottomTab = () => {
       />
       <TabButtonUser.Screen
         name="Notification"
-        component={NotificationScreen}
+        component={MaterialTab}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <View style={styles.iconContainer}>
-                <IconComponent
-                  name="notifications"
-                  color={focused ? 'red' : 'white'}
-                />
+                <IconComponent name="send" color={focused ? 'red' : 'white'} />
               </View>
             );
           },

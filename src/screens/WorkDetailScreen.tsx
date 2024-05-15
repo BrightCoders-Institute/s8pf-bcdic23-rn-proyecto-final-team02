@@ -1,13 +1,11 @@
 import React from 'react';
 import {View, FlatList, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {FabComponent, WorkDetailsComponent} from '../components';
 import {CompanyWorkData} from '../data/CompanyWorkData';
 
 const WorkDetailScreen = () => {
-  const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
 
   return (
