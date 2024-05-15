@@ -10,7 +10,7 @@ const useQuery = () => {
   // Worker data
   const [user, setUser] = useState<User>({
     id: '',
-    first_name: 'Felix',
+    first_name: '',
     last_name: '',
     phone: '',
     address: '',
@@ -28,10 +28,10 @@ const useQuery = () => {
     const { data, error } = await supabase
       .from('users')
       .insert(user)
-      .select();
+      .select();  
 
     if ( error ) {
-      Alert.alert(error.message);
+      Alert.alert('error',error.message);
     } else {
       // Map data and give the information to company (useState);
       data.map( ( info: User ) => setUser( info ) );
@@ -40,6 +40,14 @@ const useQuery = () => {
     }
 
     setQueryLoading(false);
+
+  };
+
+  const getUserId = async () => {
+
+    const { data } = await supabase.auth.getUser();
+
+    user.id = data.user?.id;
 
   };
 
@@ -52,13 +60,25 @@ const useQuery = () => {
     ;
 
     if ( error ) {
-
       Alert.alert(error.message);
+    }
+
+    if ( data && data.length !== 0 ) {
+
+      // Map data and give the information to company (useState);
+      data.map( ( info: User ) => {
+        user.address = info.address;
+        user.first_name = info.first_name;
+        user.id = info.id;
+        user.last_name = info.last_name;
+        user.phone = info.phone;
+        user.photo = info.photo;
+        user.working = info.working;
+      });
 
     } else {
 
-      // Map data and give the information to company (useState);
-      data.map( ( info: User ) => setUser( info ) );
+      createUser();
 
     }
 
@@ -88,6 +108,7 @@ const useQuery = () => {
     // Methods
     createUser,
     getUser,
+    getUserId,
     editUser,
   };
 };

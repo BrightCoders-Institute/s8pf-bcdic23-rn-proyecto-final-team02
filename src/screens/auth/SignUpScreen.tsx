@@ -38,7 +38,7 @@ const SignUpScreen = () => {
 
   const {handleCreateUserWithEmail, changeLoading} = useAuth();
 
-  const cleanValues = (values: Values) => {
+  const cleanValues = ( values: Values ) => {
     values.firstName = '';
     values.lastName = '';
     values.email = '';
@@ -69,7 +69,7 @@ const SignUpScreen = () => {
           }}
           validationSchema={SignupWorkerSchema}
           onSubmit={values => {
-            handleCreateUserWithEmail(values.email, values.password);
+            handleCreateUserWithEmail( values.email, values.password );
             cleanValues(values);
           }}>
           {({

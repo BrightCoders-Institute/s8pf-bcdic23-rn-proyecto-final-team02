@@ -12,7 +12,6 @@ import {
 
 import {WorkData} from '../data/WorkData';
 import {CompanyData} from '../data/CompanyData';
-import { supabase } from '../lib/supabase';
 import useQuery from '../hook/useQuery';
 
 const HomeScreen = () => {
@@ -20,17 +19,11 @@ const HomeScreen = () => {
   const {
     user,
     setUser,
+    createUser,
     getUser,
+    getUserId,
   } = useQuery();
 
-  const getUserId = async () => {
-
-    const { data } = await supabase.auth.getUser();
-
-    user.id = data.user?.id;
-
-  };
-  
   useEffect( () => {
 
     getUserId().finally( () => getUser() );
