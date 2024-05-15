@@ -47,15 +47,13 @@ const NormalProfileScreen = () => {
             />
           </SectionComponent>
   
-          {/* Imagen y calificación */}
           <SectionComponent styles={[styles.sections, globalStyles.shadow]}>
             <SectionComponent styles={{
                 alignItems: 'flex-start',
                 marginLeft: 16
             }}>
               <Image source={photo} style={styles.image}/>
-  
-            {/* Nombre y apellido */}
+
             <RowComponent>
                 <TextComponent text="Name" font="600" size={22} />
                 <TextComponent text="Last name" font="600" size={22} styles={{
