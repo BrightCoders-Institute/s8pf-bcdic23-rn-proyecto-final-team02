@@ -23,7 +23,7 @@ const CardWorkComponent = () => {
           activeOpacity={0.8}>
           <Image style={styles.image} source={{ uri: job.img }} />
           <View style={styles.content}>
-            <TextComponent text={job.name} color="black" font="500" size={16} />
+            <TextComponent text={job.position} color="black" font="500" size={16} />
             <TextComponent text={`Salary: $${job.salary}`} color="black" font="500" size={14} />
             <RowComponent styles={styles.bottom}>
               <View style={styles.apply}>

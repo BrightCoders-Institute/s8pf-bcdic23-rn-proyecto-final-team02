@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const RegisterJobScheme = Yup.object().shape({
-    name: Yup.string()
+    position: Yup.string()
       .min(2, 'The name is too short')
       .required('Required!'),
     salary: Yup.string()

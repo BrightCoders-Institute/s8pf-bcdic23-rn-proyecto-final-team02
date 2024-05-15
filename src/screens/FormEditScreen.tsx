@@ -22,7 +22,6 @@ import {globalStyles} from '../theme/globalTheme';
 import useQuery from '../hook/useQuery';
 import useAuth from '../hook/useAuth';
 import {RegisterJobScheme} from '../interface/schemes/RegisterJobScheme';
-import {navigatorLock} from '@supabase/supabase-js';
 
 interface Values {
   position: string;
