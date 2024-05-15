@@ -15,9 +15,6 @@ import {
 } from '../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {globalStyles} from '../theme/globalTheme';
-import { Text } from 'react-native-elements';
-import useAuth from '../hook/useAuth';
-import { FlatList } from 'react-native-gesture-handler';
 
 interface UserData {
   name: string;
