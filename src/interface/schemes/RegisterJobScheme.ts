@@ -13,4 +13,7 @@ export const RegisterJobScheme = Yup.object().shape({
     requirements: Yup.string()
       .min(2, 'The description is too short')
       .required('Required!'),
+    img: Yup.string()
+    .min(2, 'The img is too short')
+    .required('Required!'),
 });
