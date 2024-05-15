@@ -3,9 +3,9 @@ import React, {useEffect, useState} from 'react';
 import { User } from '../interface/db/UserInterface';
 import { supabase } from '../lib/supabase';
 
-type UserField = 'name' | 'address' | 'password' | 'photo' | 'phone' | 'web_site';
+type UserField = 'id' | 'name' | 'address' | 'password' | 'photo' | 'phone' | 'web_site';
 
-interface JobData {
+interface JobData { 
   id_job: number;
   position: string;
   state: string;
@@ -14,6 +14,15 @@ interface JobData {
   requirements: string;
   img:string;
   date:string;
+}
+
+interface Values {
+  position: string;
+  state: boolean;
+  salary: string;
+  description: string;
+  requirements: string;
+  img: string;
 }
 
 const useQuery = () => {
@@ -25,71 +34,71 @@ const useQuery = () => {
 
   // Worker data
   const [user, setUser] = useState<User>({
+    id: '',
     first_name: '',
-    address: '',
-    applications: [],
-    documents: [],
-    email: '',
-    gender: '',
     last_name: '',
-    password: '',
     phone: '',
+    address: '',
     photo: '',
-    working: false
+    working: 'notworking',
   });
 
   // Loading state
   const [ queryLoading, setQueryLoading ] = useState(false);
 
-  const createUser = async () => {
+  const createUser = async ( email: string ) => {
 
-    setQueryLoading(true);
+
+    // setQueryLoading(true);
 
     const { data, error } = await supabase
       .from('users')
       .insert(user)
-      .select();
+    ;
 
-    if ( error ) {
-      Alert.alert(error.message);
+    if (error) Alert.alert( error.message );
+
+    // setQueryLoading(false);
+
+  };
+
+  const getUserId = async () => {
+
+    const { data, error } = await supabase.auth.getUser();
+
+    if (error) {
+      console.log(error);
     } else {
-      // Map data and give the information to company (useState);
-      data.map( ( info: User ) => setUser( info ) );
-  
-      Alert.alert('Aviso', 'Compañia creada correctamente');
+      user.id = data.user?.email;
     }
-
-    setQueryLoading(false);
 
   };
 
   const getUser = async () => {
+    console.log('before', user)
 
     const { data, error } = await supabase
-      .from('user')
+      .from('users')
       .select()
-      .eq('id_user', user.id_user)
+      .eq('id', user.id)
     ;
 
     if ( error ) {
-
       Alert.alert(error.message);
-
     } else {
+      data.map( ( info: User ) => {
+        user.address = info.address;
+        user.first_name = info.first_name;
+        user.last_name = info.last_name;
+        user.phone = info.phone;
+        user.photo = info.photo;
+        user.working = info.working;
 
-      // Map data and give the information to company (useState);
-      data.map( ( info: User ) => setUser( info ) );
-  
-      Alert.alert('Aviso', 'Compañia creada correctamente');
-
+        console.log('After I think', user)
+      });
     }
 
   };
-  
-
-  const editUser = async (  field: UserField ) => {
-
-  }
 
   const registerJob = async (jobData: Values) => {
     try {
@@ -143,7 +152,14 @@ const useQuery = () => {
 
 
   return {
+    // Props
+    user,
+    setUser,
+
+    // Methods
     createUser,
+    getUser,
+    getUserId,
     registerJob,
     getJobs,
     deleteJob,

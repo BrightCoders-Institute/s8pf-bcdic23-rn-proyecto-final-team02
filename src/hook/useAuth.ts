@@ -1,8 +1,14 @@
 import {View, Text, Alert, AppState} from 'react-native';
 import React, {useState} from 'react';
 import { supabase } from '../lib/supabase';
+import { isEmptyArray } from 'formik';
+
+import useQuery from './useQuery';
 
 const useAuth = () => {
+
+  const { createUser, getUser } = useQuery();
+
   // Variables para registrar al usuario
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -39,15 +45,18 @@ const useAuth = () => {
   const handleCreateUserWithEmail = async ( email: string, password: string ) => {
 
     setChangeLoading( true );
+    
 
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
 
+    
     if ( error ) {
       Alert.alert(error.message)
     } else {
+      console.log(data)
       Alert.alert('Información', 'Se ha enviado un correo para realizar la validación');
     }
 
@@ -73,15 +82,6 @@ const useAuth = () => {
   //   } else Alert.alert('Alerta', 'Ingresa tu correo electrónico');
   // };
 
-  const handleEmailOrPhoneChange = ( val: string ) => {
-    // Check if value is an email address
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-      setEmail(val);
-    } else {
-      setPhone(val);
-    }
-  };
-
   return {
     email,
     setEmail,
@@ -97,7 +97,6 @@ const useAuth = () => {
     handleSigInWithEmail,
     handleCreateUserWithEmail,
     handleSignOut,
-    handleEmailOrPhoneChange,
   };
 };
 

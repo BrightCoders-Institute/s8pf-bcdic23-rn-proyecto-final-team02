@@ -18,7 +18,8 @@ import {LogInScheme} from '../../interface/schemes/SignUpScheme';
 import {globalStyles} from '../../theme/globalTheme';
 
 import useAuth from '../../hook/useAuth';
-import {ActivityIndicator} from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import useQuery from '../../hook/useQuery';
 
 // Start/stop SupabaseAutoRefresh
 authAutoRefresh();
@@ -29,7 +30,13 @@ interface Values {
 }
 
 const SignInScreen = () => {
-  const {changeLoading, handleSigInWithEmail} = useAuth();
+
+  const {
+    changeLoading,
+    handleSigInWithEmail,
+  } = useAuth();
+
+  const { createUser } = useQuery();
 
   const googleLogo = require('../../assets/img/google.webp');
 

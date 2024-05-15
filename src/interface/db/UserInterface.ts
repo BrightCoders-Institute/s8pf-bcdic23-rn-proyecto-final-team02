@@ -1,17 +1,11 @@
 export interface User {
-  id_user?: string;
+  id: string | undefined;
   first_name: string;
   last_name: string;
-  email: string;
-  gender: string;
-  password: string;
   phone: string;
   address: string;
   photo: string;
-  working: boolean;
-
-  applications: Application[];
-  documents: Document[];
+  working: 'working' | 'notworking' | 'searching' | 'available';
 }
 
 export interface Application {

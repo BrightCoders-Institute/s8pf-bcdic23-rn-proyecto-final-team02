@@ -15,6 +15,21 @@ import { CompanyData } from '../data/CompanyData';
 import useQuery from '../hook/useQuery';
 
 const HomeScreen = () => {
+
+  const {
+    user,
+    setUser,
+    createUser,
+    getUser,
+    getUserId,
+  } = useQuery();
+
+  useEffect( () => {
+
+    getUserId().finally( () => getUser());
+
+  }, [ ] )
+
   const user_male = require('../assets/user-male-avatar.webp');
   const { top } = useSafeAreaInsets();
 
