@@ -25,7 +25,7 @@ import {RegisterJobScheme} from '../interface/schemes/RegisterJobScheme';
 import {navigatorLock} from '@supabase/supabase-js';
 
 interface Values {
-  name: string;
+  position: string;
   state: boolean;
   salary: string;
   description: string;
@@ -40,7 +40,7 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
 
   const cleanValues = (values: Values) => {
-    values.name = '';
+    values.position = '';
     values.state = true;
     values.salary = '';
     values.description = '';
@@ -95,7 +95,7 @@ const SignUpScreen = () => {
             }) => (
               <>
                 <View>
-                  <TextComponent styles={globalStyles.input} text="Name" />
+                  <TextComponent styles={globalStyles.input} text="Position" />
                   {touched.position && errors.position && (
                     <TextComponent
                       text={errors.position}
@@ -107,7 +107,7 @@ const SignUpScreen = () => {
                   <InputComponent
                     keyboardType="default"
                     value={values.position}
-                    onChangeText={handleChange('name')}
+                    onChangeText={handleChange('position')}
                     placeholder="Marketing Assistant"
                   />
 
@@ -182,7 +182,7 @@ const SignUpScreen = () => {
                     value={values.img}
                     onChangeText={handleChange('img')}
                     keyboardType="default"
-                    placeholder=""
+                    placeholder="https://via.placeholder.com/500x300"
                   />
                 </View>
 
