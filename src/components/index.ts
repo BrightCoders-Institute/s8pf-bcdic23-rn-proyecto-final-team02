@@ -11,7 +11,6 @@ import CardCompanyComponent from './CardCompanyComponent';
 import SectionComponent from './SectionComponent';
 import MapComponent from './MapComponent';
 import FabComponent from './FabComponent';
-import JobForm from './auth/JobForm';
 import ApplicationDetails from './ApplicationDetailsComponent';
 import CardUserApplicationComponent from './CardUserApplicationComponent';
 import CardCompanyApplicationComponent from './CardCompanyApplicationComponent';
@@ -35,7 +34,6 @@ export {
   MapComponent,
   FabComponent,
   CardWorkComponent,
-  JobForm,
   WorkDetailsComponent
 };
 

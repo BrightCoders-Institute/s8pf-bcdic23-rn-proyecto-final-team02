@@ -8,11 +8,11 @@ import CompanyJobsScreen from './CompanyJobsScreen';
 import NotificationScreen from './NotificationScreen';
 import MessagesScreen from './MessagesScreen';
 import ProfileScreen from './ProfileScreen';
-import UserAplicationsScreen from './UserAplicationsScreen';
 import CompanyAplicationsScreen from './CompanyAplicationsScreen';
 import MapScreen from './MapScreen';
 import FormScreen from './FormScreen';
 import WorkDetailScreen from './WorkDetailScreen';
+import UserApplicationsScreen from './UserApplicationsScreen';
 
 export {
   HomeScreen,
@@ -25,7 +25,7 @@ export {
   NotificationScreen,
   MessagesScreen,
   ProfileScreen,
-  UserAplicationsScreen,
+  UserApplicationsScreen,
   CompanyAplicationsScreen,
   MapScreen,
   WorkDetailScreen,
