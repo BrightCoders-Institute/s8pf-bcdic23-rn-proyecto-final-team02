@@ -1,47 +1,44 @@
-import React from 'react';
-import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {RowComponent, TextComponent} from '../components';
-import {Work} from '../interface/workInterface';
-import {globalStyles} from '../theme/globalTheme';
-import {useNavigation} from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { RowComponent, TextComponent } from '../components';
+import { useNavigation } from '@react-navigation/native';
+import useQuery from '../hook/useQuery'; // Import the JobData interface from useQuery
+import { globalStyles } from '../theme/globalTheme';
 
-interface Props {
-  work: Work;
-}
+const CardWorkComponent = () => {
+  const { jobs, loading, getJobs } = useQuery();
+  const navigate = useNavigation();
 
-const navigate = useNavigation();
+  useEffect(() => {
+    getJobs(); // Call the function to get jobs when the component mounts
+  }, []);
 
-const CardWorkComponent = ({work}: Props) => {
   return (
-    <TouchableOpacity
-      style={[styles.card, globalStyles.shadow]}
-      onPress={() => navigate.navigate('WorkDetailScreen')}
-      activeOpacity={0.8}>
-      <Image style={styles.imagen} source={work.picture} />
-      <View style={styles.content}>
-        <TextComponent text={work.work} color="black" font="500" size={16} />
-        <TextComponent text={work.salary} color="black" font="500" size={14} />
-        <RowComponent>
-          <View style={styles.apply}>
-            <TextComponent
-              color="white"
-              text="apply to"
-              font="bold"
-              size={10}
-            />
+    <>
+      {jobs.map((job, index) => (
+        <TouchableOpacity
+          key={index}
+          style={[styles.card, globalStyles.shadow]}
+          onPress={() => navigate.navigate('WorkDetailScreen', { jobId: job.id_job })}
+          activeOpacity={0.8}>
+          <Image style={styles.image} source={{ uri: job.img }} />
+          <View style={styles.content}>
+            <TextComponent text={job.name} color="black" font="500" size={16} />
+            <TextComponent text={`Salary: $${job.salary}`} color="black" font="500" size={14} />
+            <RowComponent styles={styles.bottom}>
+              <View style={styles.apply}>
+                <TextComponent
+                  color="white"
+                  text="Apply Now"
+                  font="bold"
+                  size={10}
+                />
+              </View>
+            </RowComponent>
           </View>
-
-          <View style={styles.apply}>
-            <TextComponent
-              color="white"
-              text="apply to"
-              font="bold"
-              size={10}
-            />
-          </View>
-        </RowComponent>
-      </View>
-    </TouchableOpacity>
+        </TouchableOpacity>
+      ))}
+    </>
   );
 };
 
@@ -51,11 +48,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 16,
     width: 150,
-    height: 182,
+    height: 200,
   },
-  imagen: {
-    width: 152,
-    height: 98,
+  image: {
+    width: '100%',
+    height: 100,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -67,11 +64,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
-    marginHorizontal: 5,
   },
   content: {
     marginHorizontal: 10,
     paddingTop: 4,
+  },
+  bottom: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

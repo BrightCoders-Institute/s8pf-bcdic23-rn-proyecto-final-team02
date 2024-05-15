@@ -1,46 +1,68 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
-import {RowComponent, TextComponent} from '../components';
+import {View, StyleSheet, TouchableOpacity, Platform} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
 import {CompanyWork} from '../interface/companyworkinterface';
+import {
+  ContainerComponent,
+  IconComponent,
+  RowComponent,
+  TextComponent,
+} from '../components';
+import {globalStyles} from '../theme/globalTheme';
 
 interface Props {
   companyWork: CompanyWork;
 }
 
 const CardCompanyJobsComponent = ({companyWork}: Props) => {
+  const {top} = useSafeAreaInsets();
+
   return (
-    <View style={styles.card}>
-      <View style={styles.headerContainer}>
-        <Image style={styles.logo} source={companyWork.logo} />
-        <TextComponent
-          styles={styles.branch}
-          text={companyWork.branch}
-          color="black"
-        />
-      </View>
-
-      <View style={styles.separator} />
-
-      <View style={styles.contentContainer}>
-        <Image style={styles.work} source={companyWork.work} />
-        <View style={styles.content}>
-          <TextComponent styles={styles.textContent} text={companyWork.job} />
-          <TextComponent
-            styles={styles.textContent}
-            text={companyWork.salary}
-          />
-          <TextComponent styles={styles.textContent} text={companyWork.date} />
-          <TextComponent styles={styles.textContent} text={companyWork.time} />
-          <RowComponent styles={styles.button} onPress={() => {}}>
-            <TextComponent
-              text="See more >"
-              color="white"
-              size={10}
-              font="bold"
-            />
-          </RowComponent>
+    <View style={{flex: 1}}>
+      <ContainerComponent
+        styles={Platform.OS === 'ios' ? {top: top} : {top: top + 20}}>
+        <View style={[styles.card, globalStyles.shadow]}>
+          <View style={styles.contentContainer}>
+            <RowComponent
+              styles={{
+                flex: 1,
+                justifyContent: 'space-between',
+              }}
+              isCenter>
+              <View style={styles.info}>
+                <TextComponent text={companyWork.job} font="bold" />
+                <TextComponent
+                  text={companyWork.jobDescription}
+                  styles={{marginVertical: 5}}
+                />
+                {/* Cambiar a la fecha de creación */}
+                <TextComponent text={companyWork.date} font="300" />
+              </View>
+              <RowComponent>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => console.log('edit')}>
+                  <IconComponent
+                    name="create-outline"
+                    size={30}
+                    styles={{marginHorizontal: 10}}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => console.log('delete')}>
+                  <IconComponent
+                    name="trash-outline"
+                    size={30}
+                    styles={{marginHorizontal: 10}}
+                  />
+                </TouchableOpacity>
+              </RowComponent>
+            </RowComponent>
+          </View>
         </View>
-      </View>
+      </ContainerComponent>
     </View>
   );
 };
@@ -49,58 +71,17 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffff',
     borderRadius: 10,
-    shadowColor: '#000',
     marginBottom: 25,
-    marginLeft: 11,
-    width: 338,
-    height: 205,
+    width: '100%',
     padding: 16,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
   },
   contentContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
   },
-  logo: {
-    width: 43,
-    height: 43,
-    marginRight: 10,
-  },
-  work: {
-    width: 153,
-    height: 104,
-    borderRadius: 10,
-  },
-  branch: {
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  separator: {
-    backgroundColor: '#3825AE',
-    marginTop: 8,
-    marginBottom: 14,
-    width: 296,
-    height: 3.5,
-    borderRadius: 10,
-  },
-  content: {
-    width: 158,
-  },
-  textContent: {
-    color: 'black',
-    fontSize: 14,
-    fontWeight: '400',
-  },
-  button: {
-    backgroundColor: '#3825AE',
-    width: 134,
-    height: 16,
-    borderRadius: 5,
+  info: {
+    width: 250,
   },
 });
 

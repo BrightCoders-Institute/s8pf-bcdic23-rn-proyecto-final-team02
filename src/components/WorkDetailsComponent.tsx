@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet, Platform} from 'react-native';
+import {View, Image, StyleSheet, Platform, SafeAreaView} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {
@@ -9,6 +9,7 @@ import {
   ContainerComponent,
 } from '../components';
 import {CompanyWork} from '../interface/companyworkinterface';
+import {globalStyles} from '../theme/globalTheme';
 
 interface Props {
   companyWork: CompanyWork;
@@ -18,11 +19,11 @@ const WorkDetailsComponent = ({companyWork}: Props) => {
   const {top} = useSafeAreaInsets();
 
   return (
-    <View style={{flex: 1}}>
+    <SafeAreaView>
       <ContainerComponent
         isScroll
-        styles={Platform.OS === 'ios' ? {top: top} : {top: top + 20}}>
-        <View style={styles.card}>
+        styles={Platform.OS === 'ios' ? {} : {top: top + 20}}>
+        <View style={[styles.card, globalStyles.shadow]}>
           <RowComponent>
             <Image style={styles.logo} source={companyWork.logo} />
             <View style={{paddingHorizontal: 10}}>
@@ -179,24 +180,22 @@ const WorkDetailsComponent = ({companyWork}: Props) => {
                 />
               ))}
           </View>
-
           <RowComponent
             onPress={() => {}}
-            styles={{marginVertical: 20}}
+            styles={[globalStyles.primaryBtn, globalStyles.shadow]}
             isCenter>
-            <View style={styles.apply}>
-              <TextComponent
-                color="white"
-                text="Apply Here"
-                font="bold"
-                size={15}
-              />
-            </View>
+            <TextComponent
+              color="white"
+              text="Apply Here"
+              font="bold"
+              size={15}
+            />
           </RowComponent>
+          <View style={{height: 10}} />
         </View>
       </ContainerComponent>
-      <View style={Platform.OS === 'ios' ? {height: 100} : {height: 60}} />
-    </View>
+      <View style={Platform.OS === 'ios' ? {height: 50} : {height: 60}} />
+    </SafeAreaView>
   );
 };
 
@@ -212,16 +211,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     marginVertical: 10,
-  },
-  apply: {
-    backgroundColor: '#3825AE',
-    width: 295,
-    height: 30,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    marginHorizontal: 5,
   },
   content: {
     marginHorizontal: 10,

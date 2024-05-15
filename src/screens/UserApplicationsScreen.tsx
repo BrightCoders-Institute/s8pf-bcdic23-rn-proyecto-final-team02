@@ -9,7 +9,7 @@ import {
 import {CompanyWorkData} from '../data/CompanyWorkData';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-const UserAplicationsScreen = () => {
+const UserApplicationsScreen = () => {
   const {top} = useSafeAreaInsets();
 
   return (
@@ -35,4 +35,4 @@ const UserAplicationsScreen = () => {
   );
 };
 
-export default UserAplicationsScreen;
+export default UserApplicationsScreen;
