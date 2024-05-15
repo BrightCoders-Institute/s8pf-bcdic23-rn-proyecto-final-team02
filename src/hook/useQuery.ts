@@ -16,6 +16,15 @@ interface JobData {
   date:string;
 }
 
+interface Values {
+  position: string;
+  state: boolean;
+  salary: string;
+  description: string;
+  requirements: string;
+  img: string;
+}
+
 const useQuery = () => {
 
     // Estado para almacenar los datos de trabajo
