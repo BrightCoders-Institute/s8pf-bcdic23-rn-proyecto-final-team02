@@ -1,69 +1,65 @@
-import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Platform} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, Platform, Alert } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ContainerComponent, IconComponent, RowComponent, TextComponent } from '../components';
+import { globalStyles } from '../theme/globalTheme';
+import useQuery from '../hook/useQuery'; 
+import { useNavigation } from '@react-navigation/native';
 
-import {CompanyWork} from '../interface/companyworkinterface';
-import {
-  ContainerComponent,
-  IconComponent,
-  RowComponent,
-  TextComponent,
-} from '../components';
-import {globalStyles} from '../theme/globalTheme';
+const CardCompanyJobsComponent = () => {
+  const { jobs, loading, getJobs,deleteJob } = useQuery(); // Agrega deleteJob aquí
+  const navigate = useNavigation();
 
-interface Props {
-  companyWork: CompanyWork;
-}
+  useEffect(() => {
+    getJobs(); // Call the function to get jobs when the component mounts
+  }, []);
 
-const CardCompanyJobsComponent = ({companyWork}: Props) => {
-  const {top} = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
+
+  const handleDeleteJob = async (jobId) => {
+    try {
+      await deleteJob(jobId);
+      // If deletion is successful, refresh the job list
+      getJobs();
+    } catch (error) {
+      Alert.alert('Error', 'Failed to delete job: ' + error.message);
+    }
+  };
+
+
 
   return (
-    <View style={{flex: 1}}>
-      <ContainerComponent
-        styles={Platform.OS === 'ios' ? {top: top} : {top: top + 20}}>
-        <View style={[styles.card, globalStyles.shadow]}>
-          <View style={styles.contentContainer}>
-            <RowComponent
-              styles={{
-                flex: 1,
-                justifyContent: 'space-between',
-              }}
-              isCenter>
-              <View style={styles.info}>
-                <TextComponent text={companyWork.job} font="bold" />
-                <TextComponent
-                  text={companyWork.jobDescription}
-                  styles={{marginVertical: 5}}
-                />
-                {/* Cambiar a la fecha de creación */}
-                <TextComponent text={companyWork.date} font="300" />
+    <>
+      {jobs.map((job, index) => (
+        <View key={index} style={{ flex: 1 }}>
+          <ContainerComponent styles={Platform.OS === 'ios' ? { top: top } : { top: top + 20 }}>
+            <View style={[styles.card, globalStyles.shadow]}>
+              <View style={styles.contentContainer}>
+                <RowComponent styles={{ flex: 1, justifyContent: 'space-between' }} isCenter>
+                  <View style={styles.info}>
+                    <TextComponent text={job.position} font="bold" />
+                    <TextComponent text={job.description} styles={{ marginVertical: 5 }} />
+                    <TextComponent text={job.date} font="300" />
+                  </View>
+                  <RowComponent>
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      onPress={() => console.log('edit')}>
+                      <IconComponent name="create-outline" size={30} styles={{ marginHorizontal: 10 }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      onPress={() => handleDeleteJob(job.id_job)}>
+                      <IconComponent name="trash-outline" size={30} styles={{ marginHorizontal: 10 }} />
+                    </TouchableOpacity>
+                  </RowComponent>
+                </RowComponent>
               </View>
-              <RowComponent>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => console.log('edit')}>
-                  <IconComponent
-                    name="create-outline"
-                    size={30}
-                    styles={{marginHorizontal: 10}}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => console.log('delete')}>
-                  <IconComponent
-                    name="trash-outline"
-                    size={30}
-                    styles={{marginHorizontal: 10}}
-                  />
-                </TouchableOpacity>
-              </RowComponent>
-            </RowComponent>
-          </View>
+            </View>
+          </ContainerComponent>
         </View>
-      </ContainerComponent>
-    </View>
+      ))}
+    </>
   );
 };
 
