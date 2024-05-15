@@ -5,7 +5,22 @@ import { supabase } from '../lib/supabase';
 
 type UserField = 'name' | 'address' | 'password' | 'photo' | 'phone' | 'web_site';
 
+interface JobData {
+  id_job: number;
+  name: string;
+  state: string;
+  salary: number;
+  description: string;
+  requirements: string;
+  img:string;
+}
+
 const useQuery = () => {
+
+    // Estado para almacenar los datos de trabajo
+    const [jobs, setJobs] = useState<JobData[]>([]);
+    // Estado para indicar si la consulta está en curso
+    const [loading, setLoading] = useState<boolean>(false);
 
   // Worker data
   const [user, setUser] = useState<User>({
@@ -75,8 +90,47 @@ const useQuery = () => {
 
   }
 
+  const registerJob = async (jobData: Values) => {
+    try {
+      const { data, error } = await supabase
+        .from('jobs')
+        .insert([jobData]);
+  
+      if (error) {
+        throw error;
+      } else {
+        Alert.alert('Success', 'Job registered successfully!');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to register job: ' + error.message);
+    }
+  };
+
+  // Función para obtener los trabajos
+  const getJobs = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase.from('jobs').select('*');
+      if (error) {
+        throw error;
+      } else {
+        // Actualizar el estado con los datos de trabajo obtenidos
+        setJobs(data as JobData[]);
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Error al obtener trabajos: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return {
     createUser,
+    registerJob,
+    getJobs,
+    jobs,
+    loading,
   };
 };
 
