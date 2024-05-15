@@ -75,7 +75,6 @@ const useQuery = () => {
   };
 
   const getUser = async () => {
-    console.log('before', user)
 
     const { data, error } = await supabase
       .from('users')
@@ -87,14 +86,7 @@ const useQuery = () => {
       Alert.alert(error.message);
     } else {
       data.map( ( info: User ) => {
-        user.address = info.address;
-        user.first_name = info.first_name;
-        user.last_name = info.last_name;
-        user.phone = info.phone;
-        user.photo = info.photo;
-        user.working = info.working;
-
-        console.log('After I think', user)
+        setUser(info)
       });
     }
 

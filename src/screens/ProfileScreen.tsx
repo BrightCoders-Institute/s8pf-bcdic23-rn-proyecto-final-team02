@@ -21,6 +21,7 @@ import {globalStyles} from '../theme/globalTheme';
 // Temporal navigation import
 import {useNavigation} from '@react-navigation/native';
 import useAuth from '../hook/useAuth';
+import useQuery from '../hook/useQuery';
 
 interface UserData {
   name: string;
@@ -36,10 +37,17 @@ const ProfileScreen = () => {
   const photo = require('../assets/user-male-avatar.webp');
 
   const {handleSignOut} = useAuth();
+  const { user, getUser, getUserId } = useQuery();
 
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getUserId().finally( () => {
+      getUser();
+    });
+  }, [])
 
   return (
     <ContainerComponent isScroll>
@@ -72,7 +80,7 @@ const ProfileScreen = () => {
             <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
               <TextComponent text="Name" color="black" font="bold" size={16} />
               <RowComponent>
-                <TextComponent text="Undefined" color="black" size={14} />
+                <TextComponent text={`${ user.first_name }`} color="black" size={14} />
                 <IconComponent name="chevron-forward" color="black" />
               </RowComponent>
             </TouchableOpacity>
@@ -84,7 +92,7 @@ const ProfileScreen = () => {
                 size={16}
               />
               <RowComponent>
-                <TextComponent text="Undefined" color="black" size={14} />
+                <TextComponent text={`${ user.last_name }`} color="black" size={14} />
                 <IconComponent name="chevron-forward" color="black" />
               </RowComponent>
             </TouchableOpacity>
@@ -131,7 +139,7 @@ const ProfileScreen = () => {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent color="black" text="Telephone number" font="bold" />
             <RowComponent>
-              <TextComponent text="Undefined" color="black" size={14} />
+              <TextComponent text={`${ user.phone.length === 0 ? 'Add phone' : user.phone }`} color="black" size={14} />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>
@@ -139,7 +147,7 @@ const ProfileScreen = () => {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent text="Password" color="black" font="bold" />
             <RowComponent>
-              <TextComponent text="Undefined" color="black" size={14} />
+              <TextComponent text='*******' color="black" size={14} />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>
@@ -147,7 +155,7 @@ const ProfileScreen = () => {
           <TouchableOpacity style={styles.buttons} activeOpacity={0.8}>
             <TextComponent text="Email" font="bold" color="black" />
             <RowComponent>
-              <TextComponent text="Undefined" color="black" />
+              <TextComponent text={ user.id } color="black" />
               <IconComponent name="chevron-forward" color="black" />
             </RowComponent>
           </TouchableOpacity>

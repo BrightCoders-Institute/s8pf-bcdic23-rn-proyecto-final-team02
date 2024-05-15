@@ -16,6 +16,9 @@ import useQuery from '../hook/useQuery';
 
 const HomeScreen = () => {
 
+  // Estado para indicar si está pidiendo el usuario
+  const [fetching, setFetching] = useState<boolean>(false);
+
   const {
     user,
     setUser,
@@ -26,7 +29,9 @@ const HomeScreen = () => {
 
   useEffect( () => {
 
-    getUserId().finally( () => getUser());
+    getUserId().finally( () => {
+      getUser();
+    });
 
   }, [ ] )
 
@@ -39,7 +44,7 @@ const HomeScreen = () => {
         <View style={styles.header}>
           <SectionComponent>
             <TextComponent
-              text="Hello Jonathan,"
+              text={`Hello ${ user.first_name },`}
               font="bold"
               color="black"
               size={22}
