@@ -26,7 +26,7 @@ const HomeScreen = () => {
 
   useEffect( () => {
 
-    getUserId().finally( () => getUser() );
+    getUserId().finally( () => getUser());
 
   }, [ ] )
 

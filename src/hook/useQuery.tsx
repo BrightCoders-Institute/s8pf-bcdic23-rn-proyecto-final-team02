@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import { User } from '../interface/db/UserInterface';
 import { supabase } from '../lib/supabase';
 
-type UserField = 'name' | 'address' | 'password' | 'photo' | 'phone' | 'web_site';
+type UserField = 'id' | 'name' | 'address' | 'password' | 'photo' | 'phone' | 'web_site';
 
 const useQuery = () => {
 
@@ -15,43 +15,42 @@ const useQuery = () => {
     phone: '',
     address: '',
     photo: '',
-    working: 'notworking'
+    working: 'notworking',
   });
 
   // Loading state
   const [ queryLoading, setQueryLoading ] = useState(false);
 
-  const createUser = async () => {
+  const createUser = async ( email: string ) => {
 
-    setQueryLoading(true);
+
+    // setQueryLoading(true);
 
     const { data, error } = await supabase
       .from('users')
       .insert(user)
-      .select();  
+    ;
 
-    if ( error ) {
-      Alert.alert('error',error.message);
-    } else {
-      // Map data and give the information to company (useState);
-      data.map( ( info: User ) => setUser( info ) );
-  
-      Alert.alert('Aviso', 'Usuario creado correctamente');
-    }
+    if (error) Alert.alert( error.message );
 
-    setQueryLoading(false);
+    // setQueryLoading(false);
 
   };
 
   const getUserId = async () => {
 
-    const { data } = await supabase.auth.getUser();
+    const { data, error } = await supabase.auth.getUser();
 
-    user.id = data.user?.id;
+    if (error) {
+      console.log(error);
+    } else {
+      user.id = data.user?.email;
+    }
 
   };
 
   const getUser = async () => {
+    console.log('before', user)
 
     const { data, error } = await supabase
       .from('users')
@@ -61,41 +60,17 @@ const useQuery = () => {
 
     if ( error ) {
       Alert.alert(error.message);
-    }
-
-    if ( data && data.length !== 0 ) {
-
-      // Map data and give the information to company (useState);
+    } else {
       data.map( ( info: User ) => {
         user.address = info.address;
         user.first_name = info.first_name;
-        user.id = info.id;
         user.last_name = info.last_name;
         user.phone = info.phone;
         user.photo = info.photo;
         user.working = info.working;
+
+        console.log('After I think', user)
       });
-
-    } else {
-
-      createUser();
-
-    }
-
-  };
-  
-  const editUser = async ( field: UserField ) => {
-
-    const { data, error } = await supabase
-      .from('users')
-      .update(user)
-      .eq('id', user.id)
-    ;
-
-    if ( error ) {
-      Alert.alert(error.message);
-    } else {
-      Alert.alert( 'Aviso', `${field} actualizado correctamente` );
     }
 
   };
@@ -109,7 +84,6 @@ const useQuery = () => {
     createUser,
     getUser,
     getUserId,
-    editUser,
   };
 };
 

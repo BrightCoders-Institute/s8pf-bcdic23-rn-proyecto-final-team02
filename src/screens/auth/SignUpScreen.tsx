@@ -23,6 +23,8 @@ import useAuth from '../../hook/useAuth';
 import {globalStyles} from '../../theme/globalTheme';
 import {SignupWorkerSchema} from '../../interface/schemes/SignUpScheme';
 
+import useQuery from '../../hook/useQuery';
+
 interface Values {
   firstName: string;
   lastName: string;
@@ -36,7 +38,14 @@ const SignUpScreen = () => {
   const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
 
-  const {handleCreateUserWithEmail, changeLoading} = useAuth();
+  const { handleCreateUserWithEmail, changeLoading } = useAuth();
+  const { user, createUser } = useQuery();
+
+  const saveUserValues = ( values: Values ) => {
+    user.id = values.email;
+    user.first_name = values.firstName;
+    user.last_name = values.lastName;
+  }
 
   const cleanValues = ( values: Values ) => {
     values.firstName = '';
@@ -70,7 +79,10 @@ const SignUpScreen = () => {
           validationSchema={SignupWorkerSchema}
           onSubmit={values => {
             handleCreateUserWithEmail( values.email, values.password );
-            cleanValues(values);
+            
+            saveUserValues( values );
+            createUser( values.email );
+
           }}>
           {({
             values,
