@@ -17,18 +17,24 @@ import useQuery from '../hook/useQuery';
 
 const HomeScreen = () => {
 
-  const { user, setUser } = useQuery();
+  const {
+    user,
+    setUser,
+    getUser,
+  } = useQuery();
 
-  const getCurrentUser = async () => {
+  const getUserId = async () => {
 
     const { data } = await supabase.auth.getUser();
 
     user.id = data.user?.id;
 
   };
-
+  
   useEffect( () => {
-    getCurrentUser();
+
+    getUserId().finally( () => getUser() );
+
   }, [ ] )
 
   const user_male = require('../assets/user-male-avatar.webp');

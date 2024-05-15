@@ -46,9 +46,9 @@ const useQuery = () => {
   const getUser = async () => {
 
     const { data, error } = await supabase
-      .from('user')
+      .from('users')
       .select()
-      .eq('id_user', user.id)
+      .eq('id', user.id)
     ;
 
     if ( error ) {
@@ -59,19 +59,26 @@ const useQuery = () => {
 
       // Map data and give the information to company (useState);
       data.map( ( info: User ) => setUser( info ) );
-  
-      Alert.alert('Aviso', 'Compañia creada correctamente');
 
     }
 
   };
   
+  const editUser = async ( field: UserField ) => {
 
-  const editUser = async (  field: UserField ) => {
+    const { data, error } = await supabase
+      .from('users')
+      .update(user)
+      .eq('id', user.id)
+    ;
 
-    
+    if ( error ) {
+      Alert.alert(error.message);
+    } else {
+      Alert.alert( 'Aviso', `${field} actualizado correctamente` );
+    }
 
-  }
+  };
 
   return {
     // Props
@@ -81,6 +88,7 @@ const useQuery = () => {
     // Methods
     createUser,
     getUser,
+    editUser,
   };
 };
 
