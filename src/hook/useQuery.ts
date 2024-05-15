@@ -7,12 +7,13 @@ type UserField = 'name' | 'address' | 'password' | 'photo' | 'phone' | 'web_site
 
 interface JobData {
   id_job: number;
-  name: string;
+  position: string;
   state: string;
   salary: number;
   description: string;
   requirements: string;
   img:string;
+  date:string;
 }
 
 const useQuery = () => {
@@ -124,11 +125,28 @@ const useQuery = () => {
     }
   };
 
+  const deleteJob = async (jobId: number) => {
+    try {
+      const { error } = await supabase
+        .from('jobs')
+        .delete()
+        .eq('id_job', jobId);
+  
+      if (error) {
+        throw error;
+      } else {
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
 
   return {
     createUser,
     registerJob,
     getJobs,
+    deleteJob,
     jobs,
     loading,
   };
