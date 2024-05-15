@@ -20,11 +20,11 @@ const FabComponent = (props: Props) => {
       style={[
         {
           ...stylesFab.fabButton,
-          backgroundColor: backgroundColor ?? 'red',
+          backgroundColor: backgroundColor ?? 'white',
         },
         styles,
       ]}>
-      <IconComponent name={iconName} size={iconSize} color="red" />
+      <IconComponent name={iconName} size={iconSize} color="black" />
     </TouchableOpacity>
   );
 };

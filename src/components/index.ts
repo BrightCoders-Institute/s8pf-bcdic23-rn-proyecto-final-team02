@@ -9,14 +9,13 @@ import CardCompanyJobsComponent from './CardCompanyJobsComponent';
 import CardWorkComponent from './CardWorkComponent';
 import CardCompanyComponent from './CardCompanyComponent';
 import SectionComponent from './SectionComponent';
-import CardUserAplicationComponent from './CardUserAplicationComponent';
-import CardCompanyAplicationComponent from './CardCompanyAplicationComponent';
 import MapComponent from './MapComponent';
 import FabComponent from './FabComponent';
-import WorkDetailsComponent from './WorkDetailsComponent';
-import UserForm from './auth/UserForm';
 import JobForm from './auth/JobForm';
 import ApplicationDetails from './ApplicationDetailsComponent';
+import CardUserApplicationComponent from './CardUserApplicationComponent';
+import CardCompanyApplicationComponent from './CardCompanyApplicationComponent';
+import WorkDetailsComponent from './WorkDetailsComponent';
 
 
 export {
@@ -31,13 +30,12 @@ export {
   CardCompanyJobsComponent,
   CardCompanyComponent,
   SectionComponent,
-  CardUserAplicationComponent,
-  CardCompanyAplicationComponent,
+  CardUserApplicationComponent,
+  CardCompanyApplicationComponent,
   MapComponent,
   FabComponent,
-  UserForm,
   CardWorkComponent,
-  WorkDetailsComponent,
   JobForm,
+  WorkDetailsComponent
 };
 

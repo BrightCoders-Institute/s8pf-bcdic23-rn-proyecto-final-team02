@@ -1,15 +1,10 @@
 import React from 'react';
+import {View, Platform, StyleSheet, FlatList} from 'react-native';
 import {
-  View,
-  Platform,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
-import {
+  CardUserApplicationComponent,
   ContainerComponent,
   SectionComponent,
   TextComponent,
-  CardUserAplicationComponent,
 } from '../components';
 import {CompanyWorkData} from '../data/CompanyWorkData';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -18,60 +13,26 @@ const UserAplicationsScreen = () => {
   const {top} = useSafeAreaInsets();
 
   return (
-    <ContainerComponent >
-      <View style={Platform.OS === 'ios' ? {top: top + 15} : {}}>
-        <SectionComponent styles={{alignItems: 'center'}}>
-          <TextComponent
-            text="My applications"
-            font="bold"
-            color="black"
-            size={22}
-          />
-        </SectionComponent>
-
-          <FlatList 
-          data={CompanyWorkData}
-          keyExtractor={company => company.id}
-          renderItem={({item}) => (
-            <CardUserAplicationComponent companyWork={item} />
-          )}
+    <View style={{flex: 1}}>
+      {/* <SectionComponent styles={{alignItems: 'center'}}>
+        <TextComponent
+          text="My applications"
+          font="bold"
+          color="black"
+          size={22}
         />
+      </SectionComponent> */}
 
-      </View>
-    </ContainerComponent>
+      <FlatList
+        data={CompanyWorkData}
+        keyExtractor={company => company.id}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => (
+          <CardUserApplicationComponent companyWork={item} />
+        )}
+      />
+    </View>
   );
 };
-
-export const styles = StyleSheet.create({
-  sections: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    marginBottom: 20,
-  },
-  image: {
-    width: 50,
-    height: 50,
-    marginBottom: 10,
-    borderRadius: 100,
-  },
-  buttonStar: {
-    backgroundColor: '#3526a7',
-    borderRadius: 10,
-    width: 80,
-    height: 30,
-  },
-  sectionName: {
-    alignSelf: 'flex-start',
-    marginHorizontal: 16,
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginHorizontal: 16,
-    marginVertical: 10,
-    borderBottomWidth: 0.2,
-  },
-});
 
 export default UserAplicationsScreen;

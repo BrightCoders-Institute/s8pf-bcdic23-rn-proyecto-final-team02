@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Platform,
@@ -19,7 +19,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {globalStyles} from '../theme/globalTheme';
 
 // Temporal navigation import
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import useAuth from '../hook/useAuth';
 
 interface UserData {
@@ -27,17 +27,16 @@ interface UserData {
   last_name: string;
   email: string;
   password: string;
-  phone:string;
-  gender:string,
+  phone: string;
+  gender: string;
 }
 
 const ProfileScreen = () => {
   const {top} = useSafeAreaInsets();
   const photo = require('../assets/user-male-avatar.webp');
 
+  const {handleSignOut} = useAuth();
 
-  const { handleSignOut } = useAuth();
-        
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -85,7 +84,7 @@ const ProfileScreen = () => {
                 size={16}
               />
               <RowComponent>
-                <TextComponent text="Undefined"color="black" size={14} />
+                <TextComponent text="Undefined" color="black" size={14} />
                 <IconComponent name="chevron-forward" color="black" />
               </RowComponent>
             </TouchableOpacity>
@@ -159,7 +158,7 @@ const ProfileScreen = () => {
             styles.sections,
             {height: 50, alignContent: 'center', alignItems: 'center'},
           ]}
-          onPress={ handleSignOut }>
+          onPress={handleSignOut}>
           <TextComponent
             text="Sign out"
             font="bold"
@@ -192,6 +191,7 @@ const ProfileScreen = () => {
           />
         </RowComponent>
       </View>
+      <View style={Platform.OS === 'ios' ? {height: 90} : {height: 50}} />
     </ContainerComponent>
   );
 };

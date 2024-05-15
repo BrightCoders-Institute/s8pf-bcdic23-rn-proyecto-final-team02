@@ -3,17 +3,20 @@ import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {RowComponent, TextComponent} from '../components';
 import {Work} from '../interface/workInterface';
 import {globalStyles} from '../theme/globalTheme';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   work: Work;
 }
 
-const navigate = useNavigation()
+const navigate = useNavigation();
 
 const CardWorkComponent = ({work}: Props) => {
   return (
-    <TouchableOpacity style={[styles.card, globalStyles.shadow]} onPress={() => navigate.navigate('WorkDetailScreen')}>
+    <TouchableOpacity
+      style={[styles.card, globalStyles.shadow]}
+      onPress={() => navigate.navigate('WorkDetailScreen')}
+      activeOpacity={0.8}>
       <Image style={styles.imagen} source={work.picture} />
       <View style={styles.content}>
         <TextComponent text={work.work} color="black" font="500" size={16} />

@@ -1,15 +1,10 @@
 import React from 'react';
+import {View, Platform, StyleSheet, FlatList} from 'react-native';
 import {
-  View,
-  Platform,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
-import {
+  CardCompanyApplicationComponent,
   ContainerComponent,
   SectionComponent,
   TextComponent,
-  CardCompanyAplicationComponent,
 } from '../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CompanyAplicationsData} from '../data/CompanyAplicationsData';
@@ -33,7 +28,7 @@ const UserAplicationsScreen = () => {
           data={CompanyAplicationsData}
           keyExtractor={company => company.id}
           renderItem={({item}) => (
-            <CardCompanyAplicationComponent CompanyAplications={item} />
+            <CardCompanyApplicationComponent CompanyAplications={item} />
           )}
         />
       </View>
